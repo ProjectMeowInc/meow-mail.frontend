@@ -7,7 +7,7 @@ interface ICustomButtonProps {
     styles?: StyleProp<any>
 }
 
-const CustomButton: FC<PropsWithChildren<ICustomButtonProps>> = ({onPress, styles, children}) => {
+const CustomButton: FC<PropsWithChildren<ICustomButtonProps>> = ({styles, children}) => {
     return (
         <TouchableOpacity style={{...lStyles.button, ...styles}}>
             <Text style={lStyles.text}>
