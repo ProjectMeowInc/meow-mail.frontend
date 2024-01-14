@@ -12,7 +12,7 @@ export const useServerStatus = () => {
     useFirstLoadingAsync(async () => {
         // todo: change to health check
         try {
-            const response = await axios.get(ApiUrl)
+            await axios.get(ApiUrl);
             setServerState("Ok")
         }
         catch (err) {

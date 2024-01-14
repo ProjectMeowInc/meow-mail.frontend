@@ -1,7 +1,7 @@
 import React, {FC} from "react";
-import {Button, KeyboardAvoidingView, Platform, StyleProp, StyleSheet, View} from "react-native";
+import {KeyboardAvoidingView, Platform, StyleProp, StyleSheet} from "react-native";
 import Input from "../../../../shared/UI/Input/Input";
-import NamedStyles = StyleSheet.NamedStyles;
+
 import {ScreenUtil} from "../../../../shared/utils/ScreenUtil";
 import CustomButton from "../../../../shared/UI/Button/CustomButton";
 
