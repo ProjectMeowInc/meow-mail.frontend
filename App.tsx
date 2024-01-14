@@ -16,7 +16,7 @@ import {
 import React from "react";
 
 export default function App() {
-  const [fontLoaded, error] = useFonts({
+  const [fontLoaded] = useFonts({
     Raleway_100Thin,
     Raleway_200ExtraLight,
     Raleway_300Light,
