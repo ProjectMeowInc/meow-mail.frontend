@@ -1,30 +1,23 @@
 import React, {FC, PropsWithChildren} from 'react';
-import {Dimensions, StyleSheet, Text, TouchableOpacity} from "react-native";
+import {Dimensions, StyleProp, StyleSheet, Text, TouchableOpacity} from "react-native";
 import {COLORS} from "../../../consts/COLORS";
 
 interface ICustomButtonProps {
     onPress?: () => void
-    classes?: {
-        width?: number
-        height?: number
-    }
+    styles?: StyleProp<any>
 }
 
-const CustomButton: FC<PropsWithChildren<ICustomButtonProps>> = ({onPress, classes, children}) => {
+const CustomButton: FC<PropsWithChildren<ICustomButtonProps>> = ({onPress, styles, children}) => {
     return (
-        <TouchableOpacity style={classes ? {
-            ...styles.button,
-            width: classes.width,
-            height: classes.height
-        } : styles.button} onPress={onPress}>
-            <Text style={styles.text}>
+        <TouchableOpacity style={{...lStyles.button, ...styles}}>
+            <Text style={lStyles.text}>
                 {children}
             </Text>
         </TouchableOpacity>
     );
 };
 
-const styles = StyleSheet.create({
+const lStyles = StyleSheet.create({
     button: {
         width: Dimensions.get("window").width / 2,
         height: 45,
