@@ -18,8 +18,7 @@ export const AuthForm: FC<IAuthFormProps> = ({styles}) => {
                 ...cstyles.form,
                 backgroundColor: "grey"
             }}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            keyboardVerticalOffset={95}
+            behavior={"padding"}
         >
             <Input placeholder={"Введите логин"} />
             <Input placeholder={"Введите пароль"} />

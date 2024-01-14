@@ -1,5 +1,4 @@
 import {Dimensions, SafeAreaView, StyleSheet, Text} from 'react-native';
-import AuthTab from "./src/tags/AuthTab/AuthTab";
 import {COLORS} from "./src/consts/COLORS";
 import {
   Raleway_200ExtraLight,
@@ -14,6 +13,7 @@ import {
   useFonts
 } from "@expo-google-fonts/raleway";
 import React from "react";
+import AuthTab from "./app/(tabs)/AuthTab";
 
 export default function App() {
   const [fontLoaded ] = useFonts({
