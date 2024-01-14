@@ -1,6 +1,6 @@
 import React, {FC, PropsWithChildren} from 'react';
 import {Dimensions, StyleSheet, Text, TouchableOpacity} from "react-native";
-import {COLORS} from "../../consts/COLORS";
+import {COLORS} from "../../../consts/COLORS";
 
 interface ICustomButtonProps {
     onPress?: () => void

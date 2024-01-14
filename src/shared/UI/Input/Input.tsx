@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Dimensions, StyleSheet, TextInput} from "react-native";
-import {RALEWAY} from "../../consts/RALEWAY";
-import {COLORS} from "../../consts/COLORS";
+import {RALEWAY} from "../../../consts/RALEWAY";
+import {COLORS} from "../../../consts/COLORS";
 
 interface IInputProps {
     placeholder?: string

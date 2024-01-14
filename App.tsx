@@ -1,5 +1,5 @@
 import {Dimensions, SafeAreaView, StyleSheet, Text} from 'react-native';
-import AuthTab from "./app/(tabs)/AuthTab";
+import AuthTab from "./src/tags/AuthTab/AuthTab";
 import {COLORS} from "./src/consts/COLORS";
 import {
   Raleway_200ExtraLight,
