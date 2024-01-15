@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet, View} from "react-native";
+import {Dimensions, Platform, SafeAreaView, StatusBar, StyleSheet, View} from "react-native";
 import {FC, ReactNode} from "react";
 
 interface IWrapperProps {
@@ -7,19 +7,18 @@ interface IWrapperProps {
 
 export const Wrapper: FC<IWrapperProps> = ({children}) => {
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             {children}
-        </View>
+        </SafeAreaView>
     )
 }
 
 const styles= StyleSheet.create({
     view: {
         // todo: fix this
-        paddingTop: 30,
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingEnd: 5,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingLeft: 3,
+        paddingRight: 3,
         minHeight: Dimensions.get("screen").height,
         backgroundColor: "black"
     }
