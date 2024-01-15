@@ -1,4 +1,4 @@
-import axios, {AxiosError, AxiosRequestConfig, isAxiosError} from "axios";
+import axios, {AxiosError, AxiosRequestConfig} from "axios";
 import {ApiUrl} from "../../../consts/VARS";
 import {IncorrectUrlException} from "../../exceptions/IncorrectUrlException";
 import {Result} from "../Result/Result";

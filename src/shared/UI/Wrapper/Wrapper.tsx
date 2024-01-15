@@ -1,4 +1,4 @@
-import {Dimensions, Platform, SafeAreaView, StatusBar, StyleSheet, View} from "react-native";
+import {Dimensions, Platform, SafeAreaView, StatusBar, StyleSheet} from "react-native";
 import {FC, ReactNode} from "react";
 
 interface IWrapperProps {
