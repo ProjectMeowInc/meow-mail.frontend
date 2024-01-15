@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from "react-native";
+import {Dimensions, ImageBackground, StyleSheet} from "react-native";
 import {Wrapper} from "../../shared/UI/Wrapper/Wrapper";
 import {WelcomeMessage} from "./UI/WelcomeMessage/WelcomeMessage";
 import {AuthForm} from "./UI/AuthForm/AuthForm";
@@ -10,19 +10,29 @@ const AuthTab = () => {
 
     return (
         <Wrapper>
-            <WelcomeMessage/>
-            <AuthForm styles={styles.form}/>
-            <ServerStatus/>
+            <ImageBackground
+                source={require("../../assets/images/backgroundAuth.jpg")}
+                imageStyle={{borderTopRightRadius: 30, borderTopLeftRadius: 30}}
+                style={styles.background}
+            >
+                <WelcomeMessage/>
+                <AuthForm styles={styles.form}/>
+                <ServerStatus/>
+            </ImageBackground>
         </Wrapper>
     );
 };
 
 const styles= StyleSheet.create({
+    background: {
+        height: Dimensions.get("window").height
+    },
     message: {
         flex: 2,
     },
     form: {
         flex: 4,
+        backgroundColor: "rgba(0, 0, 0, 0)",
     },
     status: {
         flex: 1,
