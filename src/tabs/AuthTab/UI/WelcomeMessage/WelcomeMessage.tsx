@@ -1,19 +1,20 @@
 import {StyleSheet, Text, View} from "react-native";
 import {COLORS} from "../../../../consts/COLORS";
+import {RALEWAY} from "../../../../consts/RALEWAY";
+import {HEADERS} from "../../../../consts/HEADERS";
 
 export const WelcomeMessage = () => {
     return (
-        <View>
-            <Text style={styles.text}>
-                Hello!
-            </Text>
-        </View>
+        <Text style={styles.text}>
+            Добро пожаловать!
+        </Text>
     )
 }
 
 const styles = StyleSheet.create({
     text: {
         color: COLORS.white,
-        fontSize: 30
+        fontSize: HEADERS.h1,
+        fontFamily: RALEWAY.Raleway_400Regular
     }
 })

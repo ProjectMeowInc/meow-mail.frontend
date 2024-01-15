@@ -14,31 +14,31 @@ export const AuthForm: FC<IAuthFormProps> = ({styles}) => {
     return (
         <KeyboardAvoidingView
             style={{
+                ...localStyles.form,
                 ...styles,
-                ...lStyles.form,
-                backgroundColor: "grey"
             }}
             behavior={"padding"}
             keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
         >
             <Input placeholder={"Введите логин"} />
             <Input placeholder={"Введите пароль"} />
-            <CustomButton styles={lStyles.button}>
+            <CustomButton styles={localStyles.button}>
                 Авторизоваться
             </CustomButton>
         </KeyboardAvoidingView>
     )
 }
 
-const lStyles = StyleSheet.create({
+const localStyles = StyleSheet.create({
     form: {
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
         alignItems: "center",
-        gap: 20,
+        gap: 30,
         paddingBottom: ScreenUtil.calculateWindowHeightPercent(15)
     },
+
     button: {
         marginBottom: ScreenUtil.calculateWindowHeightPercent(20)
     }
