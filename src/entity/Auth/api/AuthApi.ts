@@ -3,6 +3,7 @@ import {IAuthorizationRequest} from "../models/requests/IAuthorizationRequest";
 import {IAuthorizationResponse} from "../models/responses/IAuthorizationResponse";
 import {HTTPRequest} from "../../../shared/services/HTTPRequest/HTTPRequest";
 import {EmptyResult} from "../../../shared/services/EmptyError/EmptyResult";
+import {IRegistrationRequest} from "../models/requests/IRegistrationRequest";
 
 export class AuthApi {
     
@@ -20,7 +21,7 @@ export class AuthApi {
         return Result.ok(result.unwrap())
     }
 
-    static async registrationAsync(requestData: IAuthorizationRequest): Promise<EmptyResult> {
+    static async registrationAsync(requestData: IRegistrationRequest): Promise<EmptyResult> {
         const result = await new HTTPRequest<void>()
             .withUrl("/v1/auth/registration")
             .withPOSTMethod()
