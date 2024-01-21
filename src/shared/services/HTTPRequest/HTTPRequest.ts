@@ -40,7 +40,7 @@ export class HTTPRequest<TResult> {
         try {
             const result = await axios.request<TResult>(config)
 
-            return Result.ok(result.data)
+            return Result.withOk(result.data)
         }
         catch (e: any) {
             if (e.isAxiosError) {
@@ -49,20 +49,20 @@ export class HTTPRequest<TResult> {
                 if (!baseError.response) {
                     LogService.error(baseError.message, "HTTPRequest")
 
-                    return Result.error({
+                    return Result.withError({
                         errorType: "AppError",
                         displayMessage: baseError.message
                     })
                 }
 
-                return Result.error({
+                return Result.withError({
                     errorType: "HTTPError",
                     responseBody: baseError.response.data,
                     statusCode: baseError.status ?? 400
                 })
             }
 
-            return Result.error({
+            return Result.withError({
                 errorType: "AppError",
                 displayMessage: e.message
             })
