@@ -2,7 +2,7 @@ import axios, {AxiosError, AxiosRequestConfig} from "axios";
 import {ApiUrl} from "../../../consts/VARS";
 import {IncorrectUrlException} from "../../exceptions/IncorrectUrlException";
 import {Result} from "../Result/Result";
-import {AppError} from "../AppError";
+import {Error} from "../Error";
 import {LogService} from "../LogService";
 
 type Method = "GET" | "POST" | "PUT" | "DELETE"
@@ -43,28 +43,32 @@ export class HTTPRequest<TResult> {
             return Result.withOk(result.data)
         }
         catch (e: any) {
-            if (e.isAxiosError) {
-                const baseError = e as AxiosError<AppError>
+            if (!e.isAxiosError) {
+                LogService.error("Not axios error", "HTTPRequest")
+                return Result.withError({
+                    errorType: "AppError",
+                    displayMessage: e.message
+                })
+            }
 
-                if (!baseError.response) {
-                    LogService.error(baseError.message, "HTTPRequest")
+            const baseError = e as AxiosError<Error>
 
-                    return Result.withError({
-                        errorType: "AppError",
-                        displayMessage: baseError.message
-                    })
-                }
+            if (!baseError.response) {
+                LogService.error(baseError.message, "HTTPRequest")
 
                 return Result.withError({
-                    errorType: "HTTPError",
-                    responseBody: baseError.response.data,
-                    statusCode: baseError.status ?? 400
+                    errorType: "NetworkError",
+                    statusCode: baseError.status,
+                    responseBody: baseError.response,
+                    displayMessage: "Неизвестная ошибка"
                 })
             }
 
             return Result.withError({
-                errorType: "AppError",
-                displayMessage: e.message
+                errorType: "NetworkError",
+                statusCode: baseError.status,
+                responseBody: baseError.response,
+                displayMessage: "Ошибка сети"
             })
         }
     }
