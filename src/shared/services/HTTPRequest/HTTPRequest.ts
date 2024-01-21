@@ -2,8 +2,9 @@ import axios, {AxiosError, AxiosRequestConfig} from "axios";
 import {ApiUrl} from "../../../consts/VARS";
 import {IncorrectUrlException} from "../../exceptions/IncorrectUrlException";
 import {Result} from "../Result/Result";
-import {Error} from "../Error";
 import {LogService} from "../LogService";
+import {IBaseErrorResponse} from "../../api/responses/IBaseErrorResponse";
+import {IValidationErrorResponse} from "../../api/responses/IValidationErrorResponse";
 
 type Method = "GET" | "POST" | "PUT" | "DELETE"
 
@@ -51,7 +52,7 @@ export class HTTPRequest<TResult> {
                 })
             }
 
-            const baseError = e as AxiosError<Error>
+            const baseError = e as AxiosError<IBaseErrorResponse>
 
             if (!baseError.response) {
                 LogService.error(baseError.message, "HTTPRequest")
@@ -64,11 +65,26 @@ export class HTTPRequest<TResult> {
                 })
             }
 
+            const responseData = baseError.response.data
+            if (responseData.error_type === "BaseErrors.ValidationError") {
+                const validationError = responseData as IValidationErrorResponse;
+                return Result.withError({
+                    errorType: "ApiError",
+                    response: {
+                        apiErrorType: "ValidationError",
+                        errors: validationError.errors,
+                        message: validationError.message
+                    }
+                })
+            }
+
             return Result.withError({
-                errorType: "NetworkError",
-                statusCode: baseError.status,
-                responseBody: baseError.response,
-                displayMessage: "Ошибка сети"
+                errorType: "ApiError",
+                displayMessage: responseData.message,
+                response: {
+                    apiErrorType: "BaseError",
+                    message: responseData.message
+                }
             })
         }
     }

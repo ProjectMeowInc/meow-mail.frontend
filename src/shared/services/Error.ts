@@ -3,23 +3,23 @@ export type Error = ApiError | NetworkError | AppError
 type ApiError = {
     displayMessage?: string
     errorType: "ApiError"
-    response: {
-        raw?: any
-        apiErrorType: string
-    } & ApiErrorBaseType | ApiValidationErrorType
+    response: ApiErrorBaseType | ApiValidationErrorType
 }
 
 type ApiErrorBaseType = {
-    errorType: "BaseError"
+    apiErrorType: "BaseError"
+    raw?: any
     message: string
 }
 
 type ApiValidationErrorType = {
-    errorType: "ValidationError"
+    apiErrorType: "ValidationError"
+    raw?: any
     errors: {
         field: string
         message: string
     }[]
+    message: string
 }
 
 type NetworkError = {

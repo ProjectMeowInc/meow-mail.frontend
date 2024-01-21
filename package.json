@@ -18,8 +18,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.72.6",
     "react-native-web": "~0.19.6",
-    "result": "github:ProjectMeowInc/TsResult#semver:1.0.1",
-
+    "result": "github:ProjectMeowInc/TsResult#semver:1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
