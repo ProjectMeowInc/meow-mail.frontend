@@ -74,7 +74,7 @@ export class HTTPRequest<TResult> {
     }
 
     withUrl(url: string): HTTPRequest<TResult> {
-        this.url === url
+        this.url = url
         return this
     }
 
