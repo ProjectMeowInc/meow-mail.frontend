@@ -26,3 +26,4 @@ yarn-error.log*
 /.idea/meow-mail.frontend.iml
 /.idea/modules.xml
 /.idea/vcs.xml
+package-lock.json
