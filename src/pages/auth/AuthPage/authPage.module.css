@@ -1,0 +1,54 @@
+@media (min-width: 0) {
+    .wrapper {
+        background-color: #F8F8F8;
+        width: 100dvw;
+        height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .modal {
+        width: 90%;
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px 0;
+    }
+
+    .links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px 0;
+    }
+
+    .modal_item {
+        display: flex;
+        gap: 10px;
+    }
+
+    .link {
+        color: #756CBF;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .caption {
+        font-weight: 700;
+        font-size: 22px;
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 500px) {
+    .modal {
+        width: 450px;
+    }
+}
