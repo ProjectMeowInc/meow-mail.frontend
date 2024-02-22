@@ -13,7 +13,7 @@ export class AlertService {
             progress: undefined,
             theme: "light",
             transition: Bounce,
-        });
+        })
     }
 
     public static success(message: string) {
@@ -27,6 +27,6 @@ export class AlertService {
             progress: undefined,
             theme: "light",
             transition: Bounce,
-        });
+        })
     }
 }
