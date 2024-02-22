@@ -1,12 +1,14 @@
 import React, { FC, useState } from "react"
 import classes from "./input.module.css"
-import { IOnChangeError, IOnChangeEvent } from "../../events/IOnChangeEvent"
+import { IOnChangeEvent } from "../../events/IOnChangeEvent"
+import { IInputError } from "./IInputError"
 
 interface IInputProps {
     placeholder?: string
     name?: string
     type?: "email" | "text" | "password"
-    onChange?: (data: IOnChangeEvent) => void | IOnChangeError[]
+    onChange?: (data: IOnChangeEvent) => void
+    error?: IInputError[]
     style?: {
         margin?: string
         width?: string
@@ -15,10 +17,10 @@ interface IInputProps {
 
 const Input: FC<IInputProps> = ({placeholder, type, name, style, onChange}) => {
 
-    const [error, setError] = useState<IOnChangeError[] | void>(undefined)
+    const [error, setError] = useState<IInputError[] | null>(null)
 
     const ChangeHandler = (data: IOnChangeEvent) => {
-        setError(onChange?.call(null, data))
+       onChange?.call(null, data)
     }
 
     return (
