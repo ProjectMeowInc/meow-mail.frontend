@@ -12,3 +12,18 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+.button_loading {
+    width: 100%;
+    padding: 15px;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    background-color: rgba(117, 108, 191, 0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+}
