@@ -6,7 +6,7 @@ import { AlertService } from "../../../shared/services/AlertService"
 import { TokenService } from "../../../shared/services/TokenService"
 
 export const useAuthPage = () => {
-    const [authorization, {data, error}] = useAuthorizationMutation()
+    const [authorization, {data, error, isLoading}] = useAuthorizationMutation()
     const [requestData, setRequestData] = useState<AuthorizationDto>({})
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export const useAuthPage = () => {
             TokenService.setRefreshToken(refresh_token)
         }
 
-    }, [error, data])
+    }, [error, data, isLoading])
 
     const ChangeHandler = ({fieldName, fieldValue}: IOnChangeEvent) => {
         setRequestData(prevState => ({
@@ -42,6 +42,7 @@ export const useAuthPage = () => {
 
     return {
         ChangeHandler,
-        SubmitHandler
+        SubmitHandler,
+        isLoading
     }
 }

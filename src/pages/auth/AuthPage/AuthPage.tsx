@@ -6,14 +6,14 @@ import { useAuthPage } from "./useAuthPage"
 
 const AuthPage = () => {
 
-    const {ChangeHandler, SubmitHandler} = useAuthPage()
+    const {ChangeHandler, SubmitHandler, isLoading} = useAuthPage()
 
     return (
         <div className={classes.wrapper}>
             <h1 className={classes.logo}>MeowMail</h1>
             <div className={classes.modal}>
                 <p className={classes.caption}>Вход через логин и пароль</p>
-                <Form onSubmit={SubmitHandler} onChange={ChangeHandler}/>
+                <Form isLoading={isLoading} onSubmit={SubmitHandler} onChange={ChangeHandler}/>
 
                 <div className={classes.links}>
                     <div className={classes.modal_item}>
