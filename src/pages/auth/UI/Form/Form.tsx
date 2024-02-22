@@ -2,12 +2,12 @@ import React, { FC, FormEvent } from "react"
 import Input from "../../../../shared/components/Input/Input"
 import Button from "../../../../shared/components/Button/Button"
 import classes from "./form.module.css"
-import { IOnChangeError, IOnChangeEvent } from "../../../../shared/events/IOnChangeEvent"
+import { IOnChangeEvent } from "../../../../shared/events/IOnChangeEvent"
 import { useForm } from "./useForm"
 
 interface IFormProps {
     onSubmit?: (e: FormEvent) => Promise<void>
-    onChange: (data: IOnChangeEvent) => IOnChangeError[] | void
+    onChange: (data: IOnChangeEvent) => void
     isLoading: boolean
 }
 
