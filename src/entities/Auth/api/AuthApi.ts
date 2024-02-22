@@ -1,4 +1,4 @@
-import { BaseQueryFn, createApi, EndpointBuilder, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { BASE_API_URL } from "../../../consts";
 import { IAuthorizationResponse } from "../models/responses/IAuthorizationResponse"
 import { IAuthorizationRequest } from "../models/requests/IAuthorizationRequest"
