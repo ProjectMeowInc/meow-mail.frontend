@@ -1,6 +1,6 @@
 # MeowMail
 
-- --
+--- 
 
 Корпоративная почта для [Айтион X](https://www.xn--80aqcrew.xn--p1ai/).
 
@@ -10,23 +10,58 @@
 
 > Весь дизайн можно посмотреть [здесь](https://www.figma.com/file/bf9iZLqGJmPSIJkgIEqXGW/Untitled?type=design&node-id=0-1&mode=design&t=j1TWqlkY9yv560ZR-0).
 
-- --
+---
 
-## Как начать?  
+## Как запустить?  
 
-### Для запуска front-end необходимо:  
+### Требования перед началом
 
-Скачать Node.js v20.11.1 и выше.
+- NodeJS >= v20.11.1
+- Rust >= 1.76.0
 
-``npm install для установки всех необходимых зависимостей``  
-``npm start для запуска проекта``
+Может и работать на более старых версиях, но тестируется и разрабатывается на данных.
 
-### Для запуска back-end необходимо:  
+### Frontend 
 
-Установить Rustup.  
+- Склонировать репозиторий:
+```bash
+git clone https://github.com/ProjectMeowInc/meow-mail.frontend.git frontend && cd frontend
+```
 
-``curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh``  
-``cargo r для запуска проекта``  
-``cargo r -r для запуска проекта в релизе``  
+- Установить зависимости:
+```bash
+npm i
+```
 
-- --
+- Запустить в `dev` версии:
+```bash
+npm run start
+```
+
+### Backend
+
+- Установить SQLX:
+```bash
+cargo install sqlx-cli
+```
+
+- Склонировать репозиторий:
+```bash
+git clone https://github.com/ProjectMeowInc/meow-mail.backend.git backend && cd backend
+```
+
+- Применить миграции:
+```bash
+sqlx migrate run
+```
+
+- Запустить проект в `dev` версии:
+```bash
+cargo r
+```
+
+- Или в `release`:
+```bash
+cargo r -r
+```
+
