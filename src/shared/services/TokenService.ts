@@ -11,7 +11,6 @@ interface ITokenData {
  * Сервис для работы с токенами
  */
 export class TokenService {
-
     /**
      * Метод для парсинга токена доступа
      * @param token токен доступа

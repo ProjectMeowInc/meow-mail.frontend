@@ -6,7 +6,7 @@ import { AlertService } from "../../../shared/services/AlertService"
 import { TokenService } from "../../../shared/services/TokenService"
 
 export const useAuthPage = () => {
-    const [authorization, {data, error, isLoading}] = useAuthorizationMutation()
+    const [authorization, { data, error, isLoading }] = useAuthorizationMutation()
     const [requestData, setRequestData] = useState<AuthorizationDto>({})
 
     useEffect(() => {
@@ -15,27 +15,30 @@ export const useAuthPage = () => {
         }
 
         if (data) {
-            const {access_token, refresh_token} = data
+            const { access_token, refresh_token } = data
             TokenService.setAccessToken(access_token)
             TokenService.setRefreshToken(refresh_token)
         }
-
     }, [error, data, isLoading])
 
-    const ChangeHandler = ({fieldName, fieldValue}: IOnChangeEvent) => {
-        setRequestData(prevState => ({
+    const ChangeHandler = ({ fieldName, fieldValue }: IOnChangeEvent) => {
+        setRequestData((prevState) => ({
             ...prevState,
-            [fieldName]: fieldValue
+            [fieldName]: fieldValue,
         }))
     }
 
     const SubmitHandler = async (e: FormEvent) => {
         e.preventDefault()
 
+        if (!requestData) {
+            return AlertService.error("Поля не могут быть пустыми")
+        }
+
         if (requestData.login && requestData.password) {
             await authorization({
                 login: requestData.login,
-                password: requestData.password
+                password: requestData.password,
             })
         }
     }
@@ -43,6 +46,6 @@ export const useAuthPage = () => {
     return {
         ChangeHandler,
         SubmitHandler,
-        isLoading
+        isLoading,
     }
 }

@@ -4,16 +4,21 @@ import { IAuthorizationResponse } from "../models/responses/IAuthorizationRespon
 import { IAuthorizationRequest } from "../models/requests/IAuthorizationRequest"
 import { IRegistrationRequest } from "../models/requests/IRegistrationRequest"
 import { IBaseErrorResponse } from "../../../shared/models/IBaseErrorResponse"
+import { IValidationErrorResponse } from "../../../shared/models/IValidationErrorResponse"
 
 export const authApi = createApi({
     reducerPath: "authApi",
-    baseQuery: fetchBaseQuery({baseUrl: BASE_API_URL}) as BaseQueryFn<string | FetchArgs, unknown, IBaseErrorResponse>,
+    baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL }) as BaseQueryFn<
+        string | FetchArgs,
+        unknown,
+        IBaseErrorResponse | IValidationErrorResponse
+    >,
     endpoints: (builder) => ({
         authorization: builder.mutation<IAuthorizationResponse, IAuthorizationRequest>({
             query: (body) => ({
                 url: "/v1/auth/authorization",
                 method: "POST",
-                body
+                body,
             }),
         }),
 
@@ -21,10 +26,10 @@ export const authApi = createApi({
             query: (body) => ({
                 url: "/v1/auth/registration",
                 method: "POST",
-                body
-            })
-        })
-    })
+                body,
+            }),
+        }),
+    }),
 })
 
-export const {useAuthorizationMutation, useRegistrationMutation} = authApi
+export const { useAuthorizationMutation, useRegistrationMutation } = authApi
