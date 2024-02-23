@@ -32,7 +32,7 @@ export const useAuthPage = () => {
         e.preventDefault()
 
         if (!requestData) {
-            return AlertService.error("Поля не может быть пустыми")
+            return AlertService.error("Поля не могут быть пустыми")
         }
 
         if (requestData.login && requestData.password) {
