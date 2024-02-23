@@ -4,14 +4,25 @@ import { RegistrationDto } from "../../../entities/Auth/dto/RegistrationDto"
 import { IOnChangeEvent } from "../../../shared/events/IOnChangeEvent"
 import { AlertService } from "../../../shared/services/AlertService"
 import { IInputError } from "../../../shared/components/Input/IInputError"
+import { IBaseErrorResponse } from "../../../shared/models/IBaseErrorResponse"
+import { IValidationErrorResponse } from "../../../shared/models/IValidationErrorResponse"
+import { SerializedError } from "@reduxjs/toolkit"
 
 export const useRegistrationPage = () => {
     const [registration, { isLoading, error }] = useRegistrationMutation()
     const [requestData, setRequestData] = useState<RegistrationDto>({})
     const [inputErrors, setInputErrors] = useState<IInputError[] | undefined>(undefined)
 
-    useEffect(() => {
+    const IsValidationError = (error: IBaseErrorResponse | IValidationErrorResponse |  SerializedError | undefined): error is IValidationErrorResponse => {
         if (error && "data" in error && "errors" in error.data) {
+            return true
+        }
+
+        return false
+    }
+
+    useEffect(() => {
+        if (IsValidationError(error)) {
             setInputErrors(
                 error.data.errors.map((item) => ({
                     fieldName: item.field,
