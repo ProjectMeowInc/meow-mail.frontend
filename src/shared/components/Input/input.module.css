@@ -2,8 +2,8 @@
     height: 50px;
     width: 100%;
     background-color: transparent;
-    color: #CAACF2;
-    border: 1px solid #DBDBDB;
+    color: #caacf2;
+    border: 1px solid #dbdbdb;
     border-radius: 15px;
     font-size: 16px;
     padding-left: 15px;
@@ -12,5 +12,11 @@
 
 .input:focus {
     outline: none;
-    border: 1px solid #CAACF2;
+    border: 1px solid #caacf2;
+}
+
+.error {
+    font-weight: 600;
+    color: red;
+    text-align: center;
 }
