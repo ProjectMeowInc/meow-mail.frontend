@@ -1,7 +1,6 @@
 import { FormEvent } from "react"
 
 export const useForm = () => {
-
     const SubmitHandler = (e: FormEvent, isLoading: boolean, onSubmit?: (e: FormEvent) => Promise<void>) => {
         e.preventDefault()
 
@@ -11,6 +10,6 @@ export const useForm = () => {
     }
 
     return {
-        SubmitHandler
+        SubmitHandler,
     }
 }

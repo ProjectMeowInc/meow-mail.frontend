@@ -1,7 +1,6 @@
 import { Bounce, toast } from "react-toastify"
 
 export class AlertService {
-
     public static error(message: string) {
         toast.error(message, {
             position: "top-right",

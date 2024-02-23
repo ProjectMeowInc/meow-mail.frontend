@@ -5,24 +5,27 @@ import { Link } from "react-router-dom"
 import { useAuthPage } from "./useAuthPage"
 
 const AuthPage = () => {
-
-    const {ChangeHandler, SubmitHandler, isLoading} = useAuthPage()
+    const { ChangeHandler, SubmitHandler, isLoading } = useAuthPage()
 
     return (
         <div className={classes.wrapper}>
             <h1 className={classes.logo}>MeowMail</h1>
             <div className={classes.modal}>
                 <p className={classes.caption}>Вход через логин и пароль</p>
-                <Form isLoading={isLoading} onSubmit={SubmitHandler} onChange={ChangeHandler}/>
+                <Form isLoading={isLoading} onSubmit={SubmitHandler} onChange={ChangeHandler} />
 
                 <div className={classes.links}>
                     <div className={classes.modal_item}>
                         <p>Вы забыли пароль?</p>
-                        <Link className={classes.link} to={""}>Восстановить</Link>
+                        <Link className={classes.link} to={""}>
+                            Восстановить
+                        </Link>
                     </div>
                     <div className={classes.modal_item}>
                         <p>Ещё нет аккаунта?</p>
-                        <Link className={classes.link} to={"/registration"}>Создать</Link>
+                        <Link className={classes.link} to={"/registration"}>
+                            Создать
+                        </Link>
                     </div>
                 </div>
             </div>

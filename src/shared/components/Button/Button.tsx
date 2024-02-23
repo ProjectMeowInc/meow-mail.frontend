@@ -6,8 +6,7 @@ interface IButtonProps {
     isLoading?: boolean
 }
 
-const Button: FC<PropsWithChildren<IButtonProps>> = ({children, onClick, isLoading}) => {
-
+const Button: FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isLoading }) => {
     const ClickHandler = () => {
         if (isLoading) {
             return
