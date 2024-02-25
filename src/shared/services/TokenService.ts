@@ -1,7 +1,7 @@
 import Cookies from "js-cookie"
 import { jwtDecode } from "jwt-decode"
 
-interface ITokenData {
+export interface ITokenData {
     id: number
     login: string
     expired_at: Date
@@ -47,5 +47,13 @@ export class TokenService {
      */
     public static getRefreshToken() {
         return Cookies.get("refresh_token")
+    }
+
+    /**
+     * Метод для проверки валидности токена доступа
+     */
+    public static isValidAccessToken(accessToken: string): boolean {
+        const parsedAccessToken = this.parseAccessToken(accessToken)
+        return parsedAccessToken.expired_at > new Date()
     }
 }
