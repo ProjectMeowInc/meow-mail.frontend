@@ -14,10 +14,10 @@ import sent from "../../../icons/paper-airplane-white.svg"
 
 const HeaderMobile = () => {
 
-    const {isActive, setIsActive, navigate} = useHeaderMobile()
+    const {isActive, setIsActive, navigate, menuRef} = useHeaderMobile()
 
     return (
-        <header className={classes.header_mobile}>
+        <header className={classes.header_mobile} ref={menuRef}>
             <div className={classes.left_side}>
                 <Logo/>
 
