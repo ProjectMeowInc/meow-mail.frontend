@@ -4,8 +4,8 @@
     height: 40px;
     border: none;
     border-radius: 50px;
-    background-color: #756cbf;
-    color: white;
+    background-color: var(--second);
+    color: var(--third);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,10 +20,27 @@
     border: none;
     border-radius: 50px;
     background-color: rgba(117, 108, 191, 0.5);
-    color: white;
+    color: var(--third);
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 600;
     cursor: pointer;
+}
+
+.button_white {
+    width: 100%;
+    padding: 15px;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--third);
+    color: var(--second);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
 }
