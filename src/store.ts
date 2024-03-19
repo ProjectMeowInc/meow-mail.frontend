@@ -12,11 +12,13 @@ import { persistStore,
     REGISTER,
 
 } from "redux-persist"
-import storage from "redux-persist/lib/storage" // defaults to localStorage for web
+import storage from "redux-persist/lib/storage"
+import { emailApi } from "./entities/Email/api/emailApi" // defaults to localStorage for web
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
-    [userSlice.reducerPath]: userSlice.reducer
+    [userSlice.reducerPath]: userSlice.reducer,
+    [emailApi.reducerPath]: emailApi.reducer
 })
 
 const persistConfig = {
@@ -34,7 +36,9 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(authApi.middleware),
+        })
+            .concat(authApi.middleware)
+            .concat(emailApi.middleware),
 })
 
 export const persistor = persistStore(store)
