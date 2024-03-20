@@ -56,4 +56,18 @@ export class TokenService {
         const parsedAccessToken = this.parseAccessToken(accessToken)
         return parsedAccessToken.expired_at > new Date()
     }
+
+    /**
+     * Метод для удаления токена доступа
+     */
+    public static removeAccessToken() {
+        return Cookies.remove("access_token")
+    }
+
+    /**
+     * Метод для удаления токена обновления
+     */
+    public static removeRefreshToken() {
+        return Cookies.remove("refresh_token")
+    }
 }
