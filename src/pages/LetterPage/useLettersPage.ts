@@ -12,7 +12,7 @@ export const useLettersPage = () => {
     useEffect(() => {
 
         if (!searchParams.get("page")) {
-            return setSearchParams(1)
+            return searchParams.set("page", pageNumber.toString())
         }
 
         setPageNumber(Number(searchParams.get("page")))
