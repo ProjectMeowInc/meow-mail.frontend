@@ -2,6 +2,7 @@ import React from "react"
 import { Outlet } from "react-router"
 import { useRootLayout } from "./useRootLayout"
 import HeaderMobile from "../../components/Header/HeaderMobile/HeaderMobile"
+import classes from "./rootLayout.module.css"
 
 const RootLayout = () => {
 
@@ -10,7 +11,10 @@ const RootLayout = () => {
     return (
         <>
             {deviceType === "smartphone" || deviceType === "tablet"
-                ? <HeaderMobile/>
+                ? <>
+                    <HeaderMobile/>
+                    <div className={classes.menu}/>
+                </>
                 : <></>
             }
             <Outlet/>
