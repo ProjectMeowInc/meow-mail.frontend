@@ -1,0 +1,26 @@
+.none_active {
+    display: flex;
+    gap: 15px;
+    height: 45px;
+    align-items: center;
+    padding-left: 15px;
+    color: var(--second);
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 18px;
+
+}
+
+.active {
+    display: flex;
+    gap: 15px;
+    height: 45px;
+    align-items: center;
+    padding-left: 15px;
+    color: var(--second);
+    background-color: var(--third);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 18px;
+}
