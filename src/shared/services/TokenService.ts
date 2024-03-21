@@ -39,6 +39,7 @@ export class TokenService {
      * Метод для получения токена доступа
      */
     public static getAccessToken() {
+        this.removeAccessToken()
         return Cookies.get("access_token")
     }
 
@@ -46,6 +47,7 @@ export class TokenService {
      * Метод для получения токена обновления
      */
     public static getRefreshToken() {
+        this.removeRefreshToken()
         return Cookies.get("refresh_token")
     }
 
