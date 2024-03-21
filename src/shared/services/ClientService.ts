@@ -13,4 +13,11 @@ export class ClientService {
         const deviceDetector = new DeviceDetector()
         return deviceDetector.parse(navigator.userAgent)?.device?.type ?? "desktop"
     }
+
+    /**
+     * Метод позволяет узнать является ли устройство мобильным устройством
+     */
+    public static isMobileDevice(deviceType: DeviceType): boolean {
+        return deviceType === "smartphone" || deviceType === "tablet"
+    }
 }
