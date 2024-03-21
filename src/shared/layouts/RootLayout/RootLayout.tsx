@@ -4,6 +4,8 @@ import { useRootLayout } from "./useRootLayout"
 import HeaderMobile from "../../components/Header/HeaderMobile/HeaderMobile"
 import classes from "./rootLayout.module.css"
 import HeaderDesktop from "../../components/Header/HeaderDesktop/HeaderDesktop"
+import DefaultUserImage from "../../components/DefaultUserImage/DefaultUserImage"
+import { ClientService } from "../../services/ClientService"
 
 const RootLayout = () => {
 
@@ -11,7 +13,7 @@ const RootLayout = () => {
 
     return (
         <>
-            {deviceType === "smartphone" || deviceType === "tablet"
+            {ClientService.isMobileDevice(deviceType)
                 ? <>
                     <HeaderMobile/>
                     <div className={classes.menu}/>
@@ -23,9 +25,7 @@ const RootLayout = () => {
                         <div className={classes.outlet_wrapper}>
                             <div className={classes.search}>
                                 <div className={classes.user}>
-                                    <div className={classes.user_image}>
-
-                                    </div>
+                                    <DefaultUserImage/>
 
                                     <p>{user?.login}</p>
                                 </div>

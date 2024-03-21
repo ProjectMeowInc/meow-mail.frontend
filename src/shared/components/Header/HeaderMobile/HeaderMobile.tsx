@@ -10,6 +10,7 @@ import pen from "../../../icons/pencil.svg"
 import mail from "../../../icons/mail-open-white.svg"
 import start from "../../../icons/star-white.svg"
 import sent from "../../../icons/paper-airplane-white.svg"
+import DefaultUserImage from "../../DefaultUserImage/DefaultUserImage"
 
 
 const HeaderMobile = () => {
@@ -43,9 +44,7 @@ const HeaderMobile = () => {
                 <img src={search} alt={"search icon"} />
                 <img src={pen} alt={"pen icon"} />
 
-                <div className={classes.user_image}>
-
-                </div>
+                <DefaultUserImage/>
             </div>
         </header>
     )
