@@ -11,8 +11,9 @@
     text-decoration: none;
 }
 
-.is_read {
-    font-weight: 400;
+.email_info {
+    text-decoration: none;
+    color: var(--second);
 }
 
 .email:hover {
@@ -57,4 +58,8 @@
     .email_subject {
         width: 50dvw;
     }
+}
+
+.is_read {
+    font-weight: 400;
 }
