@@ -41,6 +41,9 @@ export const useAuthPage = () => {
         }
     }, [error])
 
+    // Здесь идёт проверка ошибки при создании ящика
+    // Если приходит отличная ошибка отличная от типа MailBoxAlreadyExists,
+    // то она будет выведена.
     useEffect(() => {
         if (createMailBoxError && "data" in createMailBoxError) {
             if (createMailBoxError.data.error_type.split(".")[1] !== "MailBoxAlreadyExists") {
