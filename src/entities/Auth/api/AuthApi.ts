@@ -10,39 +10,13 @@ import { redirect } from "react-router-dom"
 import { AlertService } from "../../../shared/services/AlertService"
 import { IUpdateAuthorizationResponse } from "../models/responses/IUpdateAuthorizationResponse"
 
-export const authApi = createApi({
-    reducerPath: "authApi",
-    baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL }) as BaseQueryFn<
-        string | FetchArgs,
-        unknown,
-        IBaseErrorResponse | IValidationErrorResponse
-    >,
-    endpoints: (builder) => ({
-        authorization: builder.mutation<IAuthorizationResponse, IAuthorizationRequest>({
-            query: (body) => ({
-                url: "/v1/auth/authorization",
-                method: "POST",
-                body,
-            }),
-        }),
-
-        registration: builder.mutation<void, IRegistrationRequest>({
-            query: (body) => ({
-                url: "/v1/auth/registration",
-                method: "POST",
-                body,
-            }),
-        }),
-    }),
-})
-
 const baseQuery = fetchBaseQuery({baseUrl: BASE_API_URL}) as BaseQueryFn<
     string | FetchArgs,
     unknown,
     IBaseErrorResponse | IValidationErrorResponse
 >
 
-export const fetchBaseQueryWithAuth: BaseQueryFn<
+export const fetchBaseQueryWithReAuth: BaseQueryFn<
     string | FetchArgs,
     unknown,
     IBaseErrorResponse | IValidationErrorResponse
@@ -79,6 +53,7 @@ export const fetchBaseQueryWithAuth: BaseQueryFn<
         if (result.data) {
             const {refresh_token, access_token} = result.data as IUpdateAuthorizationResponse
 
+            TokenService.removeRefreshToken()
             TokenService.setAccessToken(access_token)
             TokenService.setRefreshToken(refresh_token)
 
@@ -92,4 +67,38 @@ export const fetchBaseQueryWithAuth: BaseQueryFn<
 
 }
 
-export const { useAuthorizationMutation, useRegistrationMutation } = authApi
+export const authApi = createApi({
+    reducerPath: "authApi",
+    baseQuery: fetchBaseQueryWithReAuth,
+    endpoints: (builder) => ({
+        authorization: builder.mutation<IAuthorizationResponse, IAuthorizationRequest>({
+            query: (body) => ({
+                url: "/v1/auth/authorization",
+                method: "POST",
+                body,
+            }),
+        }),
+
+        registration: builder.mutation<void, IRegistrationRequest>({
+            query: (body) => ({
+                url: "/v1/auth/registration",
+                method: "POST",
+                body,
+            }),
+        }),
+
+        createMailBox: builder.mutation<void, void>({
+            query: () => ({
+                url: "/v1/auth/create-mail-box",
+                method: "POST",
+                headers: {
+                    Authorization: TokenService.getAccessToken()
+                }
+            }),
+        })
+    }),
+})
+
+
+
+export const { useAuthorizationMutation, useRegistrationMutation, useCreateMailBoxMutation } = authApi
