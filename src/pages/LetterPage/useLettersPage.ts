@@ -7,7 +7,7 @@ export const useLettersPage = () => {
 
     const [searchParams] = useSearchParams()
     const [pageNumber, setPageNumber] = useState<number>(Number(searchParams.get("page")) ?? 1)
-    const {data: mails, error, isLoading, refetch} = useGetAllEmailQuery(pageNumber)
+    const {data: mails, error, isLoading} = useGetAllEmailQuery(pageNumber)
 
     useEffect(() => {
 
