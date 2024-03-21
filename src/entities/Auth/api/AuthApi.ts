@@ -34,7 +34,7 @@ export const fetchBaseQueryWithReAuth: BaseQueryFn<
     const refreshToken = TokenService.getRefreshToken()
 
     if (!refreshToken) {
-        RedirectService.redirect()
+        RedirectService.redirect("/")
         AlertService.error("Ошибка авторизации. Пожалуйста авторизуйтесь заново")
         return result
     }
