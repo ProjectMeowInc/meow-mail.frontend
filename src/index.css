@@ -1,6 +1,28 @@
+:root {
+    --accent: #CAACF2;
+    --second: #756CBF;
+    --third: rgba(255, 255, 255, 0.95);
+    --thirth: #FFF;
+    --gray: #DBDBDB;
+}
+
+body[data-theme="light"] {
+    --accent: #CAACF2;
+    --second: #756CBF;
+    --third: rgba(255, 255, 255, 0.95);
+    --gray: #DBDBDB;
+    --thirth: #FFF;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Raleway, serif;
+}
+
+svg path {
+    stroke: inherit;
+    stroke-width: inherit;
+    fill: inherit;
 }

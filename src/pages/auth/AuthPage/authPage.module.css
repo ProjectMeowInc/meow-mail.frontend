@@ -12,7 +12,7 @@
 
     .modal {
         width: 90%;
-        background-color: white;
+        background-color: var(--third);
         border-radius: 20px;
         padding: 20px;
         display: flex;
@@ -32,7 +32,7 @@
     }
 
     .link {
-        color: #756cbf;
+        color: var(--second);
         font-weight: 600;
         text-decoration: none;
     }

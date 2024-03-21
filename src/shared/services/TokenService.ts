@@ -1,7 +1,7 @@
 import Cookies from "js-cookie"
 import { jwtDecode } from "jwt-decode"
 
-interface ITokenData {
+export interface ITokenData {
     id: number
     login: string
     expired_at: Date
@@ -24,6 +24,7 @@ export class TokenService {
      * @param token токен доступа
      */
     public static setAccessToken(token: string) {
+        this.removeAccessToken()
         Cookies.set("access_token", token)
     }
 
@@ -32,6 +33,7 @@ export class TokenService {
      * @param token токен обновления
      */
     public static setRefreshToken(token: string) {
+        this.removeRefreshToken()
         Cookies.set("refresh_token", token)
     }
 
@@ -47,5 +49,27 @@ export class TokenService {
      */
     public static getRefreshToken() {
         return Cookies.get("refresh_token")
+    }
+
+    /**
+     * Метод для проверки валидности токена доступа
+     */
+    public static isValidAccessToken(accessToken: string): boolean {
+        const parsedAccessToken = this.parseAccessToken(accessToken)
+        return parsedAccessToken.expired_at > new Date()
+    }
+
+    /**
+     * Метод для удаления токена доступа
+     */
+    public static removeAccessToken() {
+        return Cookies.remove("access_token")
+    }
+
+    /**
+     * Метод для удаления токена обновления
+     */
+    public static removeRefreshToken() {
+        return Cookies.remove("refresh_token")
     }
 }
