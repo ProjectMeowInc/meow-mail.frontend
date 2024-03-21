@@ -6,6 +6,8 @@ import { IGetAllEmailWithFilterResponse } from "../models/responses/IGetAllEmail
 import { IUpdateEmailStatusRequest } from "../models/requests/IUpdateEmailStatusRequest"
 import { TokenService } from "../../../shared/services/TokenService"
 
+const EmailType = "email" as const
+
 export const emailApi = createApi({
     reducerPath: "emailApi",
     baseQuery: fetchBaseQueryWithReAuth,
@@ -20,8 +22,8 @@ export const emailApi = createApi({
                 }
             }),
             providesTags: result =>  result
-                ? [...result.items.map(({ id }) => ({ type: "email" as const, id })), "email"]
-                : ["email"],
+                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), EmailType]
+                : [EmailType],
         }),
 
         getEmailWithFilter: build.query<IGetAllEmailWithFilterResponse, IGetAllEmailWIthFilterRequest>({
@@ -33,8 +35,8 @@ export const emailApi = createApi({
                 }
             }),
             providesTags: result =>  result
-                ? [...result.items.map(({ id }) => ({ type: "email" as const, id })), "email"]
-                : ["email"],
+                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), EmailType]
+                : [EmailType],
         }),
 
         updateEmailStatus: build.mutation<void, IUpdateEmailStatusRequest>({
@@ -46,7 +48,7 @@ export const emailApi = createApi({
                     Authorization: TokenService.getAccessToken()
                 }
             }),
-            invalidatesTags: [{type: "email" as const, id: "LIST"}],
+            invalidatesTags: [{type: EmailType, id: "LIST"}],
         })
     })
 })

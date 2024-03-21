@@ -1,5 +1,3 @@
-import { BASE_SITE_URL } from "../../consts"
-
 /**
  * Сервис для редиректа пользователя
  */
@@ -10,7 +8,7 @@ export class RedirectService {
      * @param href - ссылка на конечную страницу
      */
     public static redirect(href = "") {
-        window.location.href = BASE_SITE_URL + href
+        window.location.href = window.location.hostname + href
     }
 
     /**
