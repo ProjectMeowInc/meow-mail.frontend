@@ -11,6 +11,7 @@
     align-items: center;
     font-weight: 600;
     cursor: pointer;
+    font-size: 18px;
 }
 
 .button_loading {
@@ -40,6 +41,6 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
 }
