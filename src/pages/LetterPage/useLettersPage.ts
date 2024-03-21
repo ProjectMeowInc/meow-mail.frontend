@@ -5,9 +5,9 @@ import { AlertService } from "../../shared/services/AlertService"
 
 export const useLettersPage = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const [pageNumber, setPageNumber] = useState<number>(Number(searchParams.get("page")) ?? 1)
-    const {data: mails, error, isLoading} = useGetAllEmailQuery(pageNumber)
+    const {data: mails, error, isLoading, refetch} = useGetAllEmailQuery(pageNumber)
 
     useEffect(() => {
 
