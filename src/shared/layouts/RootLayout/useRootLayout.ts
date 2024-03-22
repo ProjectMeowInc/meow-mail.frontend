@@ -16,6 +16,7 @@ export const useRootLayout = () => {
         subject: subject
     })
     const dispatch = useAppDispatch()
+    const [isActiveSendForm, setIsActiveSendForm] = useState<boolean>(false)
 
     useEffect(() => {
         if (mails) {
@@ -32,6 +33,8 @@ export const useRootLayout = () => {
     return {
         deviceType,
         user,
-        setSubject
+        setSubject,
+        isActiveSendForm,
+        setIsActiveSendForm
     }
 }
