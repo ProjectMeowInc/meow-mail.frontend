@@ -13,12 +13,14 @@ import { persistStore,
 
 } from "redux-persist"
 import storage from "redux-persist/lib/storage"
-import { emailApi } from "./entities/Email/api/emailApi" // defaults to localStorage for web
+import { emailApi } from "./entities/Email/api/emailApi"
+import { emailSlice } from "./entities/Email/slices/emailSlice" // defaults to localStorage for web
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
     [userSlice.reducerPath]: userSlice.reducer,
-    [emailApi.reducerPath]: emailApi.reducer
+    [emailApi.reducerPath]: emailApi.reducer,
+    [emailSlice.reducerPath]: emailSlice.reducer
 })
 
 const persistConfig = {
