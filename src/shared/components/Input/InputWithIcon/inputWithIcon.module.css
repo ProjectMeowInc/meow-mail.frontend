@@ -1,0 +1,31 @@
+.input_wrapper {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    border: 1px solid var(--second);
+    border-radius: 40px;
+    padding-left: 15px;
+
+}
+
+.input:focus {
+    outline: none;
+}
+
+.input {
+    width: 90%;
+    height: 100%;
+    background-color: transparent;
+    color: var(--accent);
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+}
+
+.error {
+    font-weight: 600;
+    color: red;
+    text-align: center;
+}
