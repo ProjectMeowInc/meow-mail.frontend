@@ -6,10 +6,13 @@ import classes from "./rootLayout.module.css"
 import HeaderDesktop from "../../components/Header/HeaderDesktop/HeaderDesktop"
 import DefaultUserImage from "../../components/DefaultUserImage/DefaultUserImage"
 import { ClientService } from "../../services/ClientService"
+import Input from "../../components/Input/Input"
+
+import {ReactComponent as Search} from "../../icons/search.svg"
 
 const RootLayout = () => {
 
-    const {deviceType, user} = useRootLayout()
+    const {deviceType, user, setSubject} = useRootLayout()
 
     return (
         <>
@@ -24,13 +27,23 @@ const RootLayout = () => {
                         <HeaderDesktop/>
                         <div className={classes.outlet_wrapper}>
                             <div className={classes.search}>
+                                <Input
+                                    name={"search"}
+                                    style={{width: "30%"}}
+                                    inputType={2}
+                                    icon={<Search/>}
+                                    placeholder={"Начните вводить..."}
+                                    onChange={({fieldValue}) => setSubject(fieldValue)}
+                                />
                                 <div className={classes.user}>
                                     <DefaultUserImage/>
 
                                     <p>{user?.login}</p>
                                 </div>
                             </div>
-                            <Outlet/>
+                            <div className={classes.content}>
+                                <Outlet/>
+                            </div>
                         </div>
                     </div>
                 </div>
