@@ -5,6 +5,7 @@ import { IGetAllEmailWIthFilterRequest } from "../models/requests/IGetAllEmailWI
 import { IGetAllEmailWithFilterResponse } from "../models/responses/IGetAllEmailWithFilterResponse"
 import { IUpdateEmailStatusRequest } from "../models/requests/IUpdateEmailStatusRequest"
 import { TokenService } from "../../../shared/services/TokenService"
+import { ISendEmailRequest } from "../models/requests/ISendEmailRequest"
 
 const EmailType = "email" as const
 
@@ -49,8 +50,19 @@ export const emailApi = createApi({
                 }
             }),
             invalidatesTags: [{type: EmailType, id: "LIST"}],
+        }),
+
+        sendEmail: build.mutation<void, ISendEmailRequest>({
+            query: body => ({
+                url: "/v1/email/send-message",
+                method: "POST",
+                body,
+                headers: {
+                    Authorization: TokenService.getAccessToken()
+                }
+            })
         })
     })
 })
 
-export const {useGetAllEmailQuery, useGetEmailWithFilterQuery, useUpdateEmailStatusMutation} = emailApi
+export const {useGetAllEmailQuery, useGetEmailWithFilterQuery, useUpdateEmailStatusMutation, useSendEmailMutation} = emailApi
