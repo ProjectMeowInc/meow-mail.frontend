@@ -1,0 +1,22 @@
+.input_wrapper {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid var(--accent);
+    padding: 10px 0;
+}
+
+.input {
+    border: none;
+    width: 80%;
+    font-size: 16px;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.error {
+    font-weight: 600;
+    color: red;
+    text-align: center;
+}
