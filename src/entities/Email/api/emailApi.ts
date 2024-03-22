@@ -22,8 +22,8 @@ export const emailApi = createApi({
                 }
             }),
             providesTags: result =>  result
-                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), EmailType]
-                : [EmailType],
+                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), {type: EmailType, id: "LIST"}]
+                : [{type: EmailType, id: "LIST"}],
         }),
 
         getEmailWithFilter: build.query<IGetAllEmailWithFilterResponse, IGetAllEmailWIthFilterRequest>({
@@ -35,8 +35,8 @@ export const emailApi = createApi({
                 }
             }),
             providesTags: result =>  result
-                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), EmailType]
-                : [EmailType],
+                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), {type: EmailType, id: "LIST"}]
+                : [{type: EmailType, id: "LIST"}],
         }),
 
         updateEmailStatus: build.mutation<void, IUpdateEmailStatusRequest>({

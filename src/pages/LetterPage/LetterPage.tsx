@@ -5,16 +5,16 @@ import classes from "./letterPage.module.css"
 
 const LetterPage = () => {
 
-    const {mails, isLoading} = useLettersPage()
+    const {storeMails, isLoading} = useLettersPage()
 
     // todo: change this
-    if (isLoading || !mails) {
+    if (isLoading) {
         return <>Loading...</>
     }
 
     return (
         <div className={classes.wrapper}>
-            {mails.items.map(mail => (
+            {storeMails.map(mail => (
                 <Email
                     key={mail.id}
                     id={mail.id}

@@ -17,7 +17,6 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    overflow: hidden;
     border-radius: 40px;
     background-color: var(--third);
     padding: 20px;
@@ -28,6 +27,7 @@
     background-color: var(--thirth);
     margin: -20px;
     padding: 20px;
+    border-radius: 0 40px 40px;
 }
 
 .user {
@@ -41,8 +41,8 @@
 
 .search {
     width: 100%;
+    display: flex;
     justify-content: space-between;
-
 }
 
 @media (min-width: 768px) {
@@ -62,4 +62,15 @@
     .outlet_wrapper {
         width: 84%;
     }
+}
+
+.content {
+    margin-top: 10px;
+    height: 95%;
+    overflow: scroll;
+    border-radius: 20px;
+}
+
+.content::-webkit-scrollbar {
+    width: 0;
 }
