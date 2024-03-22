@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface IInitialStateProps {
+interface IInitialState {
     id: number
     content: string
     date_time: number
@@ -10,13 +10,13 @@ interface IInitialStateProps {
     to: number
 }
 
-const initialState: IInitialStateProps[] = []
+const initialState: IInitialState[] = []
 
 export const emailSlice = createSlice({
     name: "emailSlice",
     initialState,
     reducers: {
-        setEmails(state, action: PayloadAction<IInitialStateProps[]>) {
+        setEmails(state, action: PayloadAction<IInitialState[]>) {
             return [...action.payload.filter(mail => !state.includes(mail))]
         },
 
