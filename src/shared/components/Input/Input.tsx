@@ -3,10 +3,11 @@ import { IOnChangeEvent } from "../../events/IOnChangeEvent"
 import { IInputError } from "./IInputError"
 import DefaultInput from "./DefaultInput/DefaultInput"
 import InputWithIcon from "./InputWithIcon/InputWithIcon"
+import InputEmail from "./InputEmail/InputEmail"
 
 interface IInputProps {
     icon?: ReactNode
-    inputType?: 1 | 2
+    inputType?: 1 | 2 | 3
     placeholder?: string
     name: string
     type?: "email" | "text" | "password"
@@ -16,9 +17,10 @@ interface IInputProps {
         margin?: string
         width?: string
     }
+    fieldName?: string
 }
 
-const Input: FC<IInputProps> = ({ placeholder, type, name, style, onChange, error, inputType, icon }) => {
+const Input: FC<IInputProps> = ({ placeholder, type, name, style, onChange, error, inputType, icon, fieldName }) => {
 
     switch (inputType) {
         case 1: return (
@@ -41,6 +43,18 @@ const Input: FC<IInputProps> = ({ placeholder, type, name, style, onChange, erro
                 onChange={onChange}
                 error={error}
                 icon={icon}
+            />
+        )
+
+        case 3: return (
+            <InputEmail
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                style={style}
+                onChange={onChange}
+                error={error}
+                fieldName={fieldName}
             />
         )
 

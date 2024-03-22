@@ -9,22 +9,24 @@ import { ClientService } from "../../services/ClientService"
 import Input from "../../components/Input/Input"
 
 import {ReactComponent as Search} from "../../icons/search.svg"
+import SendEmailForm from "../../components/SendEmailForm/SendEmailForm"
 
 const RootLayout = () => {
 
-    const {deviceType, user, setSubject} = useRootLayout()
+    const {deviceType, user, setSubject, isActiveSendForm ,setIsActiveSendForm} = useRootLayout()
 
     return (
         <>
             {ClientService.isMobileDevice(deviceType)
                 ? <>
-                    <HeaderMobile/>
+                    <HeaderMobile onClickSendButton={() => setIsActiveSendForm(true)}/>
                     <div className={classes.menu}/>
                     <Outlet/>
+                    {isActiveSendForm && <SendEmailForm closeForm={() => setIsActiveSendForm(false)}/>}
                 </>
                 : <div className={classes.wrapper}>
                     <div className={classes.app}>
-                        <HeaderDesktop/>
+                        <HeaderDesktop onClickSendButton={() => setIsActiveSendForm(true)}/>
                         <div className={classes.outlet_wrapper}>
                             <div className={classes.search}>
                                 <Input
@@ -44,6 +46,7 @@ const RootLayout = () => {
                             <div className={classes.content}>
                                 <Outlet/>
                             </div>
+                            {isActiveSendForm && <SendEmailForm closeForm={() => setIsActiveSendForm(false)}/>}
                         </div>
                     </div>
                 </div>

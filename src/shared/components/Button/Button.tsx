@@ -5,9 +5,12 @@ interface IButtonProps {
     onClick?: () => void
     isLoading?: boolean
     type?: number
+    styles?: {
+        width?: string
+    }
 }
 
-const Button: FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isLoading, type }) => {
+const Button: FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isLoading, type, styles }) => {
     const ClickHandler = () => {
         if (isLoading) {
             return
@@ -23,6 +26,9 @@ const Button: FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isLoad
                     type={"submit"}
                     onClick={() => ClickHandler()}
                     className={isLoading ? classes.button_loading : classes.button}
+                    style={{
+                        width: styles?.width
+                    }}
                 >
                     {children}
                 </button>
@@ -34,6 +40,9 @@ const Button: FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isLoad
                     type={"submit"}
                     onClick={() => ClickHandler()}
                     className={classes.button_white}
+                    style={{
+                        width: styles?.width
+                    }}
                 >
                     {children}
                 </button>
