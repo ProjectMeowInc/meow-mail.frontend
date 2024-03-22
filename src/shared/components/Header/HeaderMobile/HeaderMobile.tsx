@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import classes from "./headerMobile.module.css"
 import Logo from "../../Logo/Logo"
 import MenuItem from "./UI/MenuItem/MenuItem"
@@ -12,8 +12,11 @@ import start from "../../../icons/star-white.svg"
 import sent from "../../../icons/paper-airplane-white.svg"
 import DefaultUserImage from "../../DefaultUserImage/DefaultUserImage"
 
+interface IHeaderMobile {
+    onClickSendButton: () => void
+}
 
-const HeaderMobile = () => {
+const HeaderMobile: FC<IHeaderMobile> = ({onClickSendButton}) => {
 
     const {isActive, setIsActive, navigate, menuRef} = useHeaderMobile()
 
@@ -42,7 +45,7 @@ const HeaderMobile = () => {
 
             <div className={classes.right_side}>
                 <img src={search} alt={"search icon"} />
-                <img src={pen} alt={"pen icon"} />
+                <img onClick={onClickSendButton} src={pen} alt={"pen icon"} />
 
                 <DefaultUserImage/>
             </div>

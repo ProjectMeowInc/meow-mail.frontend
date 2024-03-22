@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import Button from "../../Button/Button"
 import { useAppSelector } from "../../../../store"
 import MenuItem from "./UI/MenuItem/MenuItem"
@@ -8,7 +8,11 @@ import {ReactComponent as Mail} from "../../../icons/mail-open.svg"
 import {ReactComponent as Star} from "../../../icons/star.svg"
 import {ReactComponent as AirPlane} from "../../../icons/paper-airplane.svg"
 
-const HeaderDesktop = () => {
+interface IHeaderDesktopProps {
+    onClickSendButton: () => void
+}
+
+const HeaderDesktop: FC<IHeaderDesktopProps> = ({onClickSendButton}) => {
 
     const user = useAppSelector(state => state.user.data)
 
@@ -16,7 +20,7 @@ const HeaderDesktop = () => {
         <header className={classes.header}>
             <div className={classes.menu}>
                 <div className={classes.menu_items}>
-                    <Button type={1}>Написать письмо</Button>
+                    <Button type={1} onClick={onClickSendButton}>Написать письмо</Button>
                     <div className={classes.current_mail_info}>
                         <p>Текущая почта</p>
                         <p title={`${user?.login}@projectmeow.ru`} className={classes.current_mail}>{user?.login}@projectmeow.ru</p>
