@@ -7,13 +7,14 @@ import HeaderDesktop from "../../components/Header/HeaderDesktop/HeaderDesktop"
 import DefaultUserImage from "../../components/DefaultUserImage/DefaultUserImage"
 import { ClientService } from "../../services/ClientService"
 import Input from "../../components/Input/Input"
-
 import {ReactComponent as Search} from "../../icons/search.svg"
 import SendEmailForm from "../../components/SendEmailForm/SendEmailForm"
+import {ReactComponent as Left} from "../../icons/chevron-left.svg"
+import {ReactComponent as Right} from "../../icons/chevron-right.svg"
 
 const RootLayout = () => {
 
-    const {deviceType, user, setSubject, isActiveSendForm ,setIsActiveSendForm} = useRootLayout()
+    const {deviceType, user, setSubject, isActiveSendForm ,setIsActiveSendForm, mailsCount, MovePage} = useRootLayout()
 
     return (
         <>
@@ -37,14 +38,22 @@ const RootLayout = () => {
                                     placeholder={"Начните вводить..."}
                                     onChange={({fieldValue}) => setSubject(fieldValue)}
                                 />
-                                <div className={classes.user}>
-                                    <DefaultUserImage/>
-
-                                    <p>{user?.login}</p>
+                                <div className={classes.right_side}>
+                                    <div className={classes.controls}>
+                                        <p className={classes.count}>1 - {mailsCount}</p>
+                                        <div>
+                                            <Left className={classes.icon} onClick={() => MovePage(-1)}/>
+                                            <Right className={classes.icon} onClick={() => MovePage(1)}/>
+                                        </div>
+                                    </div>
+                                    <div className={classes.user}>
+                                        <DefaultUserImage />
+                                        <p>{user?.login}</p>
+                                    </div>
                                 </div>
                             </div>
                             <div className={classes.content}>
-                                <Outlet/>
+                                <Outlet />
                             </div>
                             {isActiveSendForm && <SendEmailForm closeForm={() => setIsActiveSendForm(false)}/>}
                         </div>
