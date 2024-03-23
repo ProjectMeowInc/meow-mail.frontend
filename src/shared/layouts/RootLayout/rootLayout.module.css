@@ -45,6 +45,27 @@
     justify-content: space-between;
 }
 
+.right_side {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.count {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gray);
+}
+
 @media (min-width: 768px) {
     .outlet_wrapper {
         width: 69%;
