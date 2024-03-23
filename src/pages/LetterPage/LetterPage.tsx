@@ -19,7 +19,7 @@ const LetterPage = () => {
                     key={mail.id}
                     id={mail.id}
                     href={`${mail.id}`}
-                    from={"AntonSoul"}
+                    from={mail.from.mailbox}
                     isRead={mail.is_read}
                     subject={mail.subject}
                 />

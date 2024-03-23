@@ -4,10 +4,16 @@ export interface IGetAllEmailWithFilterResponse {
         id: number
         content: string
         date_time: number
-        from: number
+        from: {
+            id: number
+            mailbox: string
+        }
         is_read: boolean
         subject: string
-        to: number
+        to: {
+            id: number
+            mailbox: string
+        }
     }[],
 
     query: {
