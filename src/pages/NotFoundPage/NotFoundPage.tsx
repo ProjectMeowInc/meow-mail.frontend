@@ -1,9 +1,11 @@
 import React from "react"
+import classes from "./notFoundPage.module.css"
 
 const NotFoundPage = () => {
     return (
-        <div>
-            <h1>404. Страница не найдена</h1>
+        <div className={classes.wrapper}>
+            <h1 className={classes.code}>404</h1>
+            <p className={classes.text}>Страница не найдена</p>
         </div>
     )
 }
