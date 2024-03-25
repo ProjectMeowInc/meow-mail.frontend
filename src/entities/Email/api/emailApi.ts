@@ -6,6 +6,7 @@ import { IGetAllEmailWithFilterResponse } from "../models/responses/IGetAllEmail
 import { IUpdateEmailStatusRequest } from "../models/requests/IUpdateEmailStatusRequest"
 import { TokenService } from "../../../shared/services/TokenService"
 import { ISendEmailRequest } from "../models/requests/ISendEmailRequest"
+import { IGetEmailByIdResponse } from "../models/responses/IGetEmailByIdResponse"
 
 const EmailType = "email" as const
 
@@ -60,9 +61,31 @@ export const emailApi = createApi({
                 headers: {
                     Authorization: TokenService.getAccessToken()
                 }
+            }),
+            invalidatesTags: [{type: EmailType, id: "LIST"}],
+        }),
+
+        getEmailById: build.query<IGetEmailByIdResponse, number>({
+            query: (emailId: number) => ({
+                url: `/v1/email/${emailId}`,
+                method: "GET",
+                headers: {
+                    Authorization: TokenService.getAccessToken()
+                }
             })
+        }),
+
+        deleteEmailById: build.mutation<void, number>({
+            query: (emailId: number) => ({
+                url: `/v1/email/${emailId}`,
+                method: "DELETE",
+                headers: {
+                    Authorization: TokenService.getAccessToken()
+                }
+            }),
+            invalidatesTags: [{type: EmailType, id: "LIST"}],
         })
     })
 })
 
-export const {useGetAllEmailQuery, useGetEmailWithFilterQuery, useUpdateEmailStatusMutation, useSendEmailMutation} = emailApi
+export const {useGetAllEmailQuery, useGetEmailWithFilterQuery, useUpdateEmailStatusMutation, useSendEmailMutation, useGetEmailByIdQuery, useDeleteEmailByIdMutation} = emailApi
