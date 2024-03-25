@@ -1,13 +1,61 @@
-@media (min-width: 0) {
-    .wrapper {
-        width: 95%;
-        margin: 0 auto;
-        padding-top: 15px;
-    }
+.wrapper {
+    margin: 35px auto 0;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
 }
 
-@media (min-width: 1440px) {
-    .wrapper {
-        width: 100%;
-    }
+.email_subject {
+    font-size: 32px;
+    color: var(--second);
+}
+
+.email_info {
+    display: flex;
+    gap: 15px;
+}
+
+.email_sender_info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.email_sender {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.email_date {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 18px;
+}
+
+.recipient_letter {
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 18px;
+}
+
+.email_content {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 200%;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.right_side {
+    display: flex;
+    gap: 20px;
 }
