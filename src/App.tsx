@@ -4,6 +4,7 @@ import AuthPage from "./pages/auth/AuthPage/AuthPage"
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage"
 import RegistrationPage from "./pages/auth/RegistrationPage/RegistrationPage"
 import RootLayout from "./shared/layouts/RootLayout/RootLayout"
+import LettersPage from "./pages/LettersPage/LettersPage"
 import LetterPage from "./pages/LetterPage/LetterPage"
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
                 <Route index element={<AuthPage />} />
                 <Route path={"registration"} element={<RegistrationPage />} />
                 <Route path={"my"} element={<RootLayout/>}>
-                    <Route index element={<LetterPage/>} />
+                    <Route index element={<LettersPage/>} />
+                    <Route path={":mailId"} element={<LetterPage/>}/>
                 </Route>
             </Route>
             <Route path={"*"} element={<NotFoundPage />} />
