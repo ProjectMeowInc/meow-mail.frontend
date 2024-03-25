@@ -24,6 +24,10 @@
     stroke: var(--third);
 }
 
+.icon {
+    cursor: pointer;
+}
+
 .left_side {
     display: flex;
     gap: 15px;

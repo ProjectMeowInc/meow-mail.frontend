@@ -17,7 +17,7 @@ interface IEmailProps {
 
 const Email: FC<IEmailProps> = ({id, subject, isRead, from, href}) => {
 
-    const {CheckHandler} = useEmail()
+    const {CheckHandler, DeleteHandler} = useEmail()
 
     return (
         <div className={classes.email}>
@@ -35,7 +35,7 @@ const Email: FC<IEmailProps> = ({id, subject, isRead, from, href}) => {
 
             </div>
             <div className={classes.right_side}>
-                <Trash className={classes.icon}/>
+                <Trash className={classes.icon} onClick={ async () => DeleteHandler(id)}/>
                 <Check className={classes.icon} onClick={() => CheckHandler(id, isRead)}/>
             </div>
         </div>
