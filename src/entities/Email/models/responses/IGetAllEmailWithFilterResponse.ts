@@ -14,10 +14,13 @@ export interface IGetAllEmailWithFilterResponse {
             id: number
             mailbox: string
         }
-    }[],
+    }[]
+
+    page_count: number
 
     query: {
         page: number
-        subject: string
+        subject?: string
+        is_received: boolean
     }
 }

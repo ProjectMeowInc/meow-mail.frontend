@@ -13,7 +13,7 @@ export const useAuthPage = () => {
     const [requestData, setRequestData] = useState<AuthorizationDto>({})
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const [createMailBox, {error: createMailBoxError}] = useCreateMailBoxMutation()
+    const [createMailBox, { error: createMailBoxError }] = useCreateMailBoxMutation()
 
     useEffect(() => {
         if (data) {
@@ -22,12 +22,14 @@ export const useAuthPage = () => {
             TokenService.setAccessToken(access_token)
             TokenService.setRefreshToken(refresh_token)
 
-            const {id, login} = TokenService.parseAccessToken(access_token)
+            const { id, login } = TokenService.parseAccessToken(access_token)
 
-            dispatch(setUser({
-                id,
-                login
-            }))
+            dispatch(
+                setUser({
+                    id,
+                    login,
+                }),
+            )
 
             createMailBox().then()
 

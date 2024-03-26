@@ -1,4 +1,5 @@
 export interface IGetAllEmailWIthFilterRequest {
     pageNumber: number
-    subject: string
+    subject?: string
+    is_received?: boolean
 }

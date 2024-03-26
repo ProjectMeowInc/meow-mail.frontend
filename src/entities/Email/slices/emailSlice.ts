@@ -23,13 +23,13 @@ export const emailSlice = createSlice({
     initialState,
     reducers: {
         setEmails(state, action: PayloadAction<IInitialState[]>) {
-            return [...action.payload.filter(mail => !state.includes(mail))]
+            return [...action.payload.filter((mail) => !state.includes(mail))]
         },
 
         resetEmails() {
             return initialState
-        }
-    }
+        },
+    },
 })
 
-export const {setEmails, resetEmails,} = emailSlice.actions
+export const { setEmails, resetEmails } = emailSlice.actions

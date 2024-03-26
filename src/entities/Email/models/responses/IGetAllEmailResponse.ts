@@ -14,6 +14,6 @@ export interface IGetAllEmailResponse {
             id: number
             mailbox: string
         }
-    }[],
+    }[]
     page: number
 }

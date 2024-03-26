@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import classes from "./sendEmailForm.module.css"
 
-import {ReactComponent as Close} from "../../icons/plus-sm.svg"
+import { ReactComponent as Close } from "../../icons/plus-sm.svg"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
 import { useSendEmailForm } from "./useSendEmailForm"
@@ -10,15 +10,14 @@ interface ISendEmailFormProps {
     closeForm: () => void
 }
 
-const SendEmailForm: FC<ISendEmailFormProps> = ({closeForm}) => {
-
-    const {SubmitHandler, ChangeHandler} = useSendEmailForm(closeForm)
+const SendEmailForm: FC<ISendEmailFormProps> = ({ closeForm }) => {
+    const { SubmitHandler, ChangeHandler } = useSendEmailForm(closeForm)
 
     return (
         <div className={classes.wrapper}>
             <div className={classes.header}>
                 <h1 className={classes.caption}>Новое письмо</h1>
-                <Close className={classes.icon} onClick={closeForm}/>
+                <Close className={classes.icon} onClick={closeForm} />
             </div>
 
             <form className={classes.form} onSubmit={SubmitHandler}>
@@ -51,7 +50,9 @@ const SendEmailForm: FC<ISendEmailFormProps> = ({closeForm}) => {
                     />
                 </div>
 
-                <Button styles={{width: "40%"}} type={1}>Отправить</Button>
+                <Button styles={{ width: "40%" }} type={1}>
+                    Отправить
+                </Button>
             </form>
         </div>
     )

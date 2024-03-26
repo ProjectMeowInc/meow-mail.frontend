@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
-    transition: .4s all;
+    transition: 0.4s all;
     color: var(--second);
     border-radius: 20px;
     text-decoration: none;

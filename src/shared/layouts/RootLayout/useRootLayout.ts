@@ -5,17 +5,21 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { AlertService } from "../../services/AlertService"
 import { setEmails } from "../../../entities/Email/slices/emailSlice"
+import { RedirectService } from "../../services/RedirectService"
 
 export const useRootLayout = () => {
     const deviceType = ClientService.getClientType()
-    const user = useAppSelector(state => state.user.data)
+    const user = useAppSelector((state) => state.user.data)
     const [searchParams] = useSearchParams()
     const [subject, setSubject] = useState<string>("")
     const [pageNumber, setPageNumber] = useState<number>(Number(searchParams.get("page")) ?? 1)
-    const {data: mails, error} = useGetEmailWithFilterQuery({
-        pageNumber: pageNumber,
-        subject: subject
-    })
+    const { data: mails, error } = useGetEmailWithFilterQuery(
+        {
+            pageNumber: pageNumber,
+            subject: subject,
+        },
+        { skip: true },
+    )
     const dispatch = useAppDispatch()
     const [isActiveSendForm, setIsActiveSendForm] = useState<boolean>(false)
     const [mailsCount, setMailCount] = useState<number>(0)
@@ -24,7 +28,7 @@ export const useRootLayout = () => {
     useEffect(() => {
         if (mails) {
             dispatch(setEmails(mails.items))
-            setMailCount(mails.count)
+            setMailCount(mails.page_count)
         }
     }, [mails])
 
@@ -40,17 +44,22 @@ export const useRootLayout = () => {
 
     const MovePage = (number: number) => {
         if (number === 1) {
-            if (mails && mails.count === 20 && pageNumber >= 1) {
-                setPageNumber(prevState =>  prevState + 1)
-                setMailCount(prevState => prevState + mails.count)
+            if (mails && mails.page_count === 20 && mails.count <= mailsCount) {
+                setPageNumber((prevState) => prevState + 1)
+                setMailCount((prevState) => prevState + mails.page_count)
             }
             return
         }
 
-        if (mails && mails.count !== 20 && pageNumber !== 1) {
-            setPageNumber(prevState => prevState - 1)
-            setMailCount(prevState => prevState - mails.count)
+        if (mails && mails.count === mailsCount && pageNumber !== 1) {
+            setPageNumber((prevState) => prevState - 1)
+            setMailCount((prevState) => prevState - mails.page_count)
         }
+    }
+
+    const QuitHandler = () => {
+        localStorage.clear()
+        RedirectService.redirect("/")
     }
 
     return {
@@ -60,6 +69,7 @@ export const useRootLayout = () => {
         isActiveSendForm,
         setIsActiveSendForm,
         mailsCount,
-        MovePage
+        MovePage,
+        QuitHandler,
     }
 }

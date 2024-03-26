@@ -2,13 +2,12 @@
  * Сервис для редиректа пользователя
  */
 export class RedirectService {
-
     /**
      * Метод для редиректа пользователя по конкретной ссылке
      * @param href - ссылка на конечную страницу
      */
     public static redirect(href: string) {
-        window.location.href = window.location.hostname + href
+        window.location.href = href
     }
 
     /**

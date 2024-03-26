@@ -1,17 +1,17 @@
 :root {
-    --accent: #CAACF2;
-    --second: #756CBF;
+    --accent: #caacf2;
+    --second: #756cbf;
     --third: rgba(255, 255, 255, 0.95);
-    --thirth: #FFF;
-    --gray: #DBDBDB;
+    --thirth: #fff;
+    --gray: #dbdbdb;
 }
 
 body[data-theme="light"] {
-    --accent: #CAACF2;
-    --second: #756CBF;
+    --accent: #caacf2;
+    --second: #756cbf;
     --third: rgba(255, 255, 255, 0.95);
-    --gray: #DBDBDB;
-    --thirth: #FFF;
+    --gray: #dbdbdb;
+    --thirth: #fff;
 }
 
 * {

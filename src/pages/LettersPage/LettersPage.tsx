@@ -4,8 +4,7 @@ import Email from "../../shared/components/Email/Email"
 import classes from "./lettersPage.module.css"
 
 const LettersPage = () => {
-
-    const {storeMails, isLoading} = useLettersPage()
+    const { storeMails, isLoading } = useLettersPage()
 
     // todo: change this
     if (isLoading) {
@@ -14,7 +13,7 @@ const LettersPage = () => {
 
     return (
         <div className={classes.wrapper}>
-            {storeMails.map(mail => (
+            {storeMails.map((mail) => (
                 <Email
                     key={mail.id}
                     id={mail.id}

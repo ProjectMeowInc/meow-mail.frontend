@@ -4,14 +4,13 @@ import DefaultUserImage from "../../shared/components/DefaultUserImage/DefaultUs
 import classes from "./letterPage.module.css"
 import { FormatterService } from "../../shared/services/FormatterService"
 
-import {ReactComponent as Arrow} from "../../shared/icons/arrow-sm-up.svg"
-import {ReactComponent as Trash} from "../../shared/icons/trash.svg"
-import {ReactComponent as Star} from "../../shared/icons/star.svg"
+import { ReactComponent as Arrow } from "../../shared/icons/arrow-sm-up.svg"
+import { ReactComponent as Trash } from "../../shared/icons/trash.svg"
+import { ReactComponent as Star } from "../../shared/icons/star.svg"
 import { RedirectService } from "../../shared/services/RedirectService"
 
 const LetterPage = () => {
-
-    const {mail, DeleteHandler} = useLetterPage()
+    const { mail, DeleteHandler } = useLetterPage()
 
     // todo: fix this later
     if (!mail) {
@@ -21,16 +20,16 @@ const LetterPage = () => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.icons}>
-                <Arrow onClick={() => RedirectService.back()} className={classes.icon}/>
+                <Arrow onClick={() => RedirectService.back()} className={classes.icon} />
 
                 <div className={classes.right_side}>
-                    <Trash onClick={async () => DeleteHandler()} className={classes.icon}/>
-                    <Star className={classes.icon}/>
+                    <Trash onClick={async () => DeleteHandler()} className={classes.icon} />
+                    <Star className={classes.icon} />
                 </div>
             </div>
             <h1 className={classes.email_subject}>{mail.subject}</h1>
             <div className={classes.email_info}>
-                <DefaultUserImage/>
+                <DefaultUserImage />
                 <div>
                     <div className={classes.email_sender_info}>
                         <p className={classes.email_sender}>{mail.from.mailbox}</p>
@@ -39,7 +38,7 @@ const LetterPage = () => {
                     <p className={classes.recipient_letter}>Кому: {mail.to.mailbox}</p>
                 </div>
             </div>
-            <p className={classes.email_content}>{mail.content}</p>
+            <div className={classes.email_content} dangerouslySetInnerHTML={{ __html: mail.content }} />
         </div>
     )
 }

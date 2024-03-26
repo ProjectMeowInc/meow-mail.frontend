@@ -3,9 +3,8 @@ import { useEffect } from "react"
 import { AlertService } from "../../services/AlertService"
 
 export const useEmail = () => {
-
-    const [updateEmailStatus, {error}] = useUpdateEmailStatusMutation()
-    const [deleteEmailById, {error: deleteEmailByIdError}] = useDeleteEmailByIdMutation()
+    const [updateEmailStatus, { error }] = useUpdateEmailStatusMutation()
+    const [deleteEmailById, { error: deleteEmailByIdError }] = useDeleteEmailByIdMutation()
 
     useEffect(() => {
         if (error && "data" in error) {
@@ -22,7 +21,7 @@ export const useEmail = () => {
     const CheckHandler = async (mailId: number, readStatus: boolean) => {
         await updateEmailStatus({
             mail_id: mailId,
-            is_read: !readStatus
+            is_read: !readStatus,
         })
     }
 
@@ -32,6 +31,6 @@ export const useEmail = () => {
 
     return {
         CheckHandler,
-        DeleteHandler
+        DeleteHandler,
     }
 }

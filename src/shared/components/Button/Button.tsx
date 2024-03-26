@@ -27,7 +27,7 @@ const Button: FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isLoad
                     onClick={() => ClickHandler()}
                     className={isLoading ? classes.button_loading : classes.button}
                     style={{
-                        width: styles?.width
+                        width: styles?.width,
                     }}
                 >
                     {children}
@@ -41,25 +41,24 @@ const Button: FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isLoad
                     onClick={() => ClickHandler()}
                     className={classes.button_white}
                     style={{
-                        width: styles?.width
+                        width: styles?.width,
                     }}
                 >
                     {children}
                 </button>
             )
 
-        default: return (
-            <button
-                type={"submit"}
-                onClick={() => ClickHandler()}
-                className={isLoading ? classes.button_loading : classes.button}
-            >
-                {children}
-            </button>
-        )
+        default:
+            return (
+                <button
+                    type={"submit"}
+                    onClick={() => ClickHandler()}
+                    className={isLoading ? classes.button_loading : classes.button}
+                >
+                    {children}
+                </button>
+            )
     }
-
-
 }
 
 export default Button

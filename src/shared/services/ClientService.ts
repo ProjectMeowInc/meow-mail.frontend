@@ -5,7 +5,6 @@ import { DeviceType } from "device-detector-js/dist/typings/device"
  * Сервис для работы с браузером
  */
 export class ClientService {
-
     /**
      * Метод для получения типа девайса браузера
      */

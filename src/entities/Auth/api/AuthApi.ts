@@ -10,7 +10,7 @@ import { AlertService } from "../../../shared/services/AlertService"
 import { IUpdateAuthorizationResponse } from "../models/responses/IUpdateAuthorizationResponse"
 import { RedirectService } from "../../../shared/services/RedirectService"
 
-const baseQuery = fetchBaseQuery({baseUrl: BASE_API_URL}) as BaseQueryFn<
+const baseQuery = fetchBaseQuery({ baseUrl: BASE_API_URL }) as BaseQueryFn<
     string | FetchArgs,
     unknown,
     IBaseErrorResponse | IValidationErrorResponse
@@ -45,29 +45,36 @@ export const fetchBaseQueryWithReAuth: BaseQueryFn<
         return result
     }
 
-    const updateAuth = await baseQuery({
-        url: BASE_API_URL + "v1/auth/update-auth",
-        method: "POST",
-        body: {
-            refresh_token: refreshToken
-        }
-    }, api, extraOptions)
+    const updateAuth = await baseQuery(
+        {
+            url: BASE_API_URL + "v1/auth/update-auth",
+            method: "POST",
+            body: {
+                refresh_token: refreshToken,
+            },
+        },
+        api,
+        extraOptions,
+    )
 
     if (updateAuth.data) {
-        const {refresh_token, access_token} = updateAuth.data as IUpdateAuthorizationResponse
+        const { refresh_token, access_token } = updateAuth.data as IUpdateAuthorizationResponse
 
         TokenService.setAccessToken(access_token)
         TokenService.setRefreshToken(refresh_token)
 
-        return result
+        return baseQuery(args, api, extraOptions)
     }
 
-    return result
+    return baseQuery(args, api, extraOptions)
 }
 
 export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQueryWithReAuth,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
     endpoints: (builder) => ({
         authorization: builder.mutation<IAuthorizationResponse, IAuthorizationRequest>({
             query: (body) => ({
@@ -90,13 +97,11 @@ export const authApi = createApi({
                 url: "/v1/auth/create-mail-box",
                 method: "POST",
                 headers: {
-                    Authorization: TokenService.getAccessToken()
-                }
+                    Authorization: TokenService.getAccessToken(),
+                },
             }),
-        })
+        }),
     }),
 })
-
-
 
 export const { useAuthorizationMutation, useRegistrationMutation, useCreateMailBoxMutation } = authApi

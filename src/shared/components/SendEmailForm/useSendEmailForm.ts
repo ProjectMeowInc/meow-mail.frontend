@@ -5,8 +5,7 @@ import { IOnChangeEvent } from "../../events/IOnChangeEvent"
 import { AlertService } from "../../services/AlertService"
 
 export const useSendEmailForm = (closeForm: () => void) => {
-
-    const [sendEmail, {error, isSuccess}] = useSendEmailMutation()
+    const [sendEmail, { error, isSuccess }] = useSendEmailMutation()
     const [requestData, setRequestData] = useState<SendEmailDto>()
 
     useEffect(() => {
@@ -21,10 +20,10 @@ export const useSendEmailForm = (closeForm: () => void) => {
         }
     }, [isSuccess])
 
-    const ChangeHandler = ({fieldValue, fieldName}: IOnChangeEvent) => {
-        setRequestData(prevState => ({
+    const ChangeHandler = ({ fieldValue, fieldName }: IOnChangeEvent) => {
+        setRequestData((prevState) => ({
             ...prevState,
-            [fieldName]: fieldValue
+            [fieldName]: fieldValue,
         }))
     }
 
@@ -39,13 +38,13 @@ export const useSendEmailForm = (closeForm: () => void) => {
             await sendEmail({
                 to: requestData.to,
                 subject: requestData.subject,
-                content: requestData.content
+                content: requestData.content,
             })
         }
     }
 
     return {
         ChangeHandler,
-        SubmitHandler
+        SubmitHandler,
     }
 }
