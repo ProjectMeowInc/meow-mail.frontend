@@ -59,15 +59,18 @@ export const fetchBaseQueryWithReAuth: BaseQueryFn<
         TokenService.setAccessToken(access_token)
         TokenService.setRefreshToken(refresh_token)
 
-        return result
+        return baseQuery(args, api, extraOptions)
     }
 
-    return result
+    return baseQuery(args, api, extraOptions)
 }
 
 export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQueryWithReAuth,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
     endpoints: (builder) => ({
         authorization: builder.mutation<IAuthorizationResponse, IAuthorizationRequest>({
             query: (body) => ({

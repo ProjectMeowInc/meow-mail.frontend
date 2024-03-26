@@ -14,7 +14,7 @@ import {ReactComponent as Right} from "../../icons/chevron-right.svg"
 
 const RootLayout = () => {
 
-    const {deviceType, user, setSubject, isActiveSendForm ,setIsActiveSendForm, mailsCount, MovePage} = useRootLayout()
+    const {deviceType, user, setSubject, QuitHandler, isActiveSendForm , setIsActiveSendForm, mailsCount, MovePage} = useRootLayout()
 
     return (
         <>
@@ -50,6 +50,7 @@ const RootLayout = () => {
                                         <DefaultUserImage />
                                         <p>{user?.login}</p>
                                     </div>
+                                    <p className={classes.quit} onClick={() => QuitHandler()}>Выйти</p>
                                 </div>
                             </div>
                             <div className={classes.content}>

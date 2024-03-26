@@ -14,6 +14,9 @@ export const emailApi = createApi({
     reducerPath: "emailApi",
     baseQuery: fetchBaseQueryWithReAuth,
     tagTypes: ["email"],
+    refetchOnReconnect: true,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
     endpoints: build => ({
         getAllEmail: build.query<IGetAllEmailResponse, number>({
             query: pageNumber => ({
@@ -29,11 +32,16 @@ export const emailApi = createApi({
         }),
 
         getEmailWithFilter: build.query<IGetAllEmailWithFilterResponse, IGetAllEmailWIthFilterRequest>({
-            query: ({pageNumber, subject}) => ({
-                url: `/v1/email/filter?page=${pageNumber}&subject=${subject}`,
+            query: ({pageNumber, subject, is_received}) => ({
+                url: "/v1/email/filter",
                 method: "GET",
                 headers: {
                     Authorization: TokenService.getAccessToken()
+                },
+                params: {
+                    page: pageNumber,
+                    subject,
+                    is_received
                 }
             }),
             providesTags: result =>  result

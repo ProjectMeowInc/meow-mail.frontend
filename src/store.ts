@@ -16,7 +16,7 @@ import storage from "redux-persist/lib/storage"
 import { emailApi } from "./entities/Email/api/emailApi"
 import { emailSlice } from "./entities/Email/slices/emailSlice" // defaults to localStorage for web
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
     [userSlice.reducerPath]: userSlice.reducer,
     [emailApi.reducerPath]: emailApi.reducer,

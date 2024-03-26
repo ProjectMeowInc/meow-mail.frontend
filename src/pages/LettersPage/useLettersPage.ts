@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { useGetAllEmailQuery } from "../../entities/Email/api/emailApi"
+import { useGetEmailWithFilterQuery } from "../../entities/Email/api/emailApi"
 import { AlertService } from "../../shared/services/AlertService"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { setEmails } from "../../entities/Email/slices/emailSlice"
@@ -10,7 +10,10 @@ export const useLettersPage = () => {
     const [searchParams] = useSearchParams()
     const [pageNumber, setPageNumber] = useState<number>(Number(searchParams.get("page")) ?? 1)
 
-    const {data: mails, error, isLoading} = useGetAllEmailQuery(pageNumber, {
+    const {data: mails, error, isLoading} = useGetEmailWithFilterQuery({
+        pageNumber,
+        is_received: true
+    }, {
         pollingInterval: 20000
     })
 

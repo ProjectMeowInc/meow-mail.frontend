@@ -66,6 +66,12 @@
     color: var(--gray);
 }
 
+.quit {
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+}
+
 @media (min-width: 768px) {
     .outlet_wrapper {
         width: 69%;

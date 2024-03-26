@@ -39,7 +39,7 @@ const LetterPage = () => {
                     <p className={classes.recipient_letter}>Кому: {mail.to.mailbox}</p>
                 </div>
             </div>
-            <p className={classes.email_content}>{mail.content}</p>
+            <div className={classes.email_content} dangerouslySetInnerHTML={{__html: mail.content}} />
         </div>
     )
 }

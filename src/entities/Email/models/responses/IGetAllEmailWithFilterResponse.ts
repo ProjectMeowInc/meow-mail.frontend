@@ -16,8 +16,11 @@ export interface IGetAllEmailWithFilterResponse {
         }
     }[],
 
+    page_count: number
+
     query: {
         page: number
-        subject: string
+        subject?: string
+        is_received: boolean
     }
 }
