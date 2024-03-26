@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 
 export const useHeaderMobile = () => {
-
     const [isActive, setIsActive] = useState<boolean>(false)
     const navigate = useNavigate()
     const menuRef = useRef<HTMLDivElement | null>(null)
@@ -15,7 +14,7 @@ export const useHeaderMobile = () => {
         // Здесь логика закрытия меню по нажатию на любое пространство.
         // Вешается click на document. После завершения обработчик удаляется
 
-        document.addEventListener("click", e => {
+        document.addEventListener("click", (e) => {
             if (!menuRef.current) {
                 return
             }
@@ -26,7 +25,7 @@ export const useHeaderMobile = () => {
         })
 
         return () => {
-            document.removeEventListener("click", e => {
+            document.removeEventListener("click", (e) => {
                 if (!menuRef.current) {
                     return
                 }
@@ -36,13 +35,12 @@ export const useHeaderMobile = () => {
                 }
             })
         }
-
     }, [isActive, setIsActive])
 
     return {
         isActive,
         setIsActive,
         navigate,
-        menuRef
+        menuRef,
     }
 }

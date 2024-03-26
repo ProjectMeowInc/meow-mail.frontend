@@ -21,15 +21,14 @@ const InputWithIcon: FC<IInputWithIcon> = ({ placeholder, type, name, style, onC
     const { inputError, ChangeHandler } = useInput(name, onChange, error)
 
     return (
-        <div className={classes.input_wrapper}
-             style={{
-                 width: style?.width,
-                 margin: style?.margin,
-             }}
+        <div
+            className={classes.input_wrapper}
+            style={{
+                width: style?.width,
+                margin: style?.margin,
+            }}
         >
-            <div>
-                {icon}
-            </div>
+            <div>{icon}</div>
             <input
                 placeholder={placeholder}
                 type={type}

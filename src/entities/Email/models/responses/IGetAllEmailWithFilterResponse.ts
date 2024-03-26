@@ -14,7 +14,7 @@ export interface IGetAllEmailWithFilterResponse {
             id: number
             mailbox: string
         }
-    }[],
+    }[]
 
     page_count: number
 

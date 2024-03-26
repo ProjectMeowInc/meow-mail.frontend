@@ -13,7 +13,9 @@ export const useRegistrationPage = () => {
     const [requestData, setRequestData] = useState<RegistrationDto>({})
     const [inputErrors, setInputErrors] = useState<IInputError[] | undefined>(undefined)
 
-    const IsValidationError = (error: IBaseErrorResponse | IValidationErrorResponse |  SerializedError | undefined): error is IValidationErrorResponse => {
+    const IsValidationError = (
+        error: IBaseErrorResponse | IValidationErrorResponse | SerializedError | undefined,
+    ): error is IValidationErrorResponse => {
         if (error && "data" in error && "errors" in error.data) {
             return true
         }

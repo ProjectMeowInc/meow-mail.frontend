@@ -2,16 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { authApi } from "./entities/Auth/api/AuthApi"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import { userSlice } from "./entities/Auth/redusers/userSlice"
-import { persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-
-} from "redux-persist"
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 import { emailApi } from "./entities/Email/api/emailApi"
 import { emailSlice } from "./entities/Email/slices/emailSlice" // defaults to localStorage for web
@@ -20,12 +11,12 @@ export const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
     [userSlice.reducerPath]: userSlice.reducer,
     [emailApi.reducerPath]: emailApi.reducer,
-    [emailSlice.reducerPath]: emailSlice.reducer
+    [emailSlice.reducerPath]: emailSlice.reducer,
 })
 
 const persistConfig = {
     key: "root",
-    storage
+    storage,
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

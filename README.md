@@ -1,10 +1,10 @@
 # MeowMail
 
---- 
+---
 
 Корпоративная почта для [Айтион X](https://www.xn--80aqcrew.xn--p1ai/).
 
-![DesignSample.png](.github%2FDesignSample.png) 
+![DesignSample.png](.github%2FDesignSample.png)
 
 ![SecondDesignSample.png](.github%2FSecondDesignSample.png)
 
@@ -12,56 +12,63 @@
 
 ---
 
-## Как запустить?  
+## Как запустить?
 
 ### Требования перед началом
 
-- NodeJS >= v20.11.1
-- Rust >= 1.76.0
+-   NodeJS >= v20.11.1
+-   Rust >= 1.76.0
 
 Может и работать на более старых версиях, но тестируется и разрабатывается на данных.
 
-### Frontend 
+### Frontend
 
-- Склонировать репозиторий:
+-   Склонировать репозиторий:
+
 ```bash
 git clone https://github.com/ProjectMeowInc/meow-mail.frontend.git frontend && cd frontend
 ```
 
-- Установить зависимости:
+-   Установить зависимости:
+
 ```bash
 npm i
 ```
 
-- Запустить в `dev` версии:
+-   Запустить в `dev` версии:
+
 ```bash
 npm run start
 ```
 
 ### Backend
 
-- Установить SQLX:
+-   Установить SQLX:
+
 ```bash
 cargo install sqlx-cli
 ```
 
-- Склонировать репозиторий:
+-   Склонировать репозиторий:
+
 ```bash
 git clone https://github.com/ProjectMeowInc/meow-mail.backend.git backend && cd backend
 ```
 
-- Применить миграции:
+-   Применить миграции:
+
 ```bash
 sqlx migrate run
 ```
 
-- Запустить проект в `dev` версии:
+-   Запустить проект в `dev` версии:
+
 ```bash
 cargo r
 ```
 
-- Или в `release`:
+-   Или в `release`:
+
 ```bash
 cargo r -r
 ```
-

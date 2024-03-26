@@ -9,14 +9,17 @@ import { RedirectService } from "../../services/RedirectService"
 
 export const useRootLayout = () => {
     const deviceType = ClientService.getClientType()
-    const user = useAppSelector(state => state.user.data)
+    const user = useAppSelector((state) => state.user.data)
     const [searchParams] = useSearchParams()
     const [subject, setSubject] = useState<string>("")
     const [pageNumber, setPageNumber] = useState<number>(Number(searchParams.get("page")) ?? 1)
-    const {data: mails, error} = useGetEmailWithFilterQuery({
-        pageNumber: pageNumber,
-        subject: subject
-    }, {skip: true})
+    const { data: mails, error } = useGetEmailWithFilterQuery(
+        {
+            pageNumber: pageNumber,
+            subject: subject,
+        },
+        { skip: true },
+    )
     const dispatch = useAppDispatch()
     const [isActiveSendForm, setIsActiveSendForm] = useState<boolean>(false)
     const [mailsCount, setMailCount] = useState<number>(0)
@@ -42,15 +45,15 @@ export const useRootLayout = () => {
     const MovePage = (number: number) => {
         if (number === 1) {
             if (mails && mails.page_count === 20 && mails.count <= mailsCount) {
-                setPageNumber(prevState =>  prevState + 1)
-                setMailCount(prevState => prevState + mails.page_count)
+                setPageNumber((prevState) => prevState + 1)
+                setMailCount((prevState) => prevState + mails.page_count)
             }
             return
         }
 
         if (mails && mails.count === mailsCount && pageNumber !== 1) {
-            setPageNumber(prevState => prevState - 1)
-            setMailCount(prevState => prevState - mails.page_count)
+            setPageNumber((prevState) => prevState - 1)
+            setMailCount((prevState) => prevState - mails.page_count)
         }
     }
 
@@ -67,6 +70,6 @@ export const useRootLayout = () => {
         setIsActiveSendForm,
         mailsCount,
         MovePage,
-        QuitHandler
+        QuitHandler,
     }
 }

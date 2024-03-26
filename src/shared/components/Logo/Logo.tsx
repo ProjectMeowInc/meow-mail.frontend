@@ -6,12 +6,13 @@ interface ILogoProps {
     color?: string
 }
 
-const Logo: FC<ILogoProps> = ({fontSize, color}) => {
+const Logo: FC<ILogoProps> = ({ fontSize, color }) => {
     return (
         <h1
             style={{
-            color,
-            fontSize }}
+                color,
+                fontSize,
+            }}
             className={classes.logo}
         >
             MeowMail

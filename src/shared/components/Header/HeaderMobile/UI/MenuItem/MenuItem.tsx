@@ -7,7 +7,7 @@ interface IMenuItemProps {
     href: string
 }
 
-const MenuItem: FC<PropsWithChildren<IMenuItemProps>> = ({children, icon, href}) => {
+const MenuItem: FC<PropsWithChildren<IMenuItemProps>> = ({ children, icon, href }) => {
     return (
         <Link to={href} className={classes.link}>
             <img src={icon} alt={"icon"} />

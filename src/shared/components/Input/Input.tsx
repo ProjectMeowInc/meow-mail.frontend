@@ -21,53 +21,56 @@ interface IInputProps {
 }
 
 const Input: FC<IInputProps> = ({ placeholder, type, name, style, onChange, error, inputType, icon, fieldName }) => {
-
     switch (inputType) {
-        case 1: return (
-            <DefaultInput
-                name={name}
-                placeholder={placeholder}
-                type={type}
-                style={style}
-                onChange={onChange}
-                error={error}
-            />
-        )
+        case 1:
+            return (
+                <DefaultInput
+                    name={name}
+                    placeholder={placeholder}
+                    type={type}
+                    style={style}
+                    onChange={onChange}
+                    error={error}
+                />
+            )
 
-        case 2: return (
-            <InputWithIcon
-                name={name}
-                placeholder={placeholder}
-                type={type}
-                style={style}
-                onChange={onChange}
-                error={error}
-                icon={icon}
-            />
-        )
+        case 2:
+            return (
+                <InputWithIcon
+                    name={name}
+                    placeholder={placeholder}
+                    type={type}
+                    style={style}
+                    onChange={onChange}
+                    error={error}
+                    icon={icon}
+                />
+            )
 
-        case 3: return (
-            <InputEmail
-                name={name}
-                placeholder={placeholder}
-                type={type}
-                style={style}
-                onChange={onChange}
-                error={error}
-                fieldName={fieldName}
-            />
-        )
+        case 3:
+            return (
+                <InputEmail
+                    name={name}
+                    placeholder={placeholder}
+                    type={type}
+                    style={style}
+                    onChange={onChange}
+                    error={error}
+                    fieldName={fieldName}
+                />
+            )
 
-        default: return (
-            <DefaultInput
-                name={name}
-                placeholder={placeholder}
-                type={type}
-                style={style}
-                onChange={onChange}
-                error={error}
-            />
-        )
+        default:
+            return (
+                <DefaultInput
+                    name={name}
+                    placeholder={placeholder}
+                    type={type}
+                    style={style}
+                    onChange={onChange}
+                    error={error}
+                />
+            )
     }
 }
 

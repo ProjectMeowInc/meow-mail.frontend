@@ -6,28 +6,32 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { setEmails } from "../../entities/Email/slices/emailSlice"
 
 export const useLettersPage = () => {
-
     const [searchParams] = useSearchParams()
     const [pageNumber, setPageNumber] = useState<number>(Number(searchParams.get("page")) ?? 1)
 
-    const {data: mails, error, isLoading} = useGetEmailWithFilterQuery({
-        pageNumber,
-        is_received: true
-    }, {
-        pollingInterval: 20000
-    })
+    const {
+        data: mails,
+        error,
+        isLoading,
+    } = useGetEmailWithFilterQuery(
+        {
+            pageNumber,
+            is_received: true,
+        },
+        {
+            pollingInterval: 20000,
+        },
+    )
 
     const dispatch = useAppDispatch()
-    const storeMails = useAppSelector(state => state.emailSlice)
+    const storeMails = useAppSelector((state) => state.emailSlice)
 
     useEffect(() => {
-
         if (!searchParams.get("page")) {
             return searchParams.set("page", pageNumber.toString())
         }
 
         setPageNumber(Number(searchParams.get("page")))
-
     }, [pageNumber])
 
     useEffect(() => {
@@ -44,6 +48,6 @@ export const useLettersPage = () => {
 
     return {
         isLoading,
-        storeMails
+        storeMails,
     }
 }

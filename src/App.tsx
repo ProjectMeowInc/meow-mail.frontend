@@ -13,9 +13,9 @@ function App() {
             <Route path={"/"}>
                 <Route index element={<AuthPage />} />
                 <Route path={"registration"} element={<RegistrationPage />} />
-                <Route path={"my"} element={<RootLayout/>}>
-                    <Route index element={<LettersPage/>} />
-                    <Route path={":mailId"} element={<LetterPage/>}/>
+                <Route path={"my"} element={<RootLayout />}>
+                    <Route index element={<LettersPage />} />
+                    <Route path={":mailId"} element={<LetterPage />} />
                 </Route>
             </Route>
             <Route path={"*"} element={<NotFoundPage />} />

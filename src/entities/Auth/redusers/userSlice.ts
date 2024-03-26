@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface IUser {
-    id: number,
+    id: number
     login: string
 }
 
@@ -10,7 +10,7 @@ type SliceState = {
 }
 
 const initialState: SliceState = {
-    data: null
+    data: null,
 }
 
 export const userSlice = createSlice({
@@ -23,8 +23,8 @@ export const userSlice = createSlice({
 
         resetUser() {
             return initialState
-        }
-    }
+        },
+    },
 })
 
-export const {setUser, resetUser} = userSlice.actions
+export const { setUser, resetUser } = userSlice.actions

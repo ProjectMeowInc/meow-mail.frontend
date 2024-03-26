@@ -16,17 +16,16 @@ interface IHeaderMobile {
     onClickSendButton: () => void
 }
 
-const HeaderMobile: FC<IHeaderMobile> = ({onClickSendButton}) => {
-
-    const {isActive, setIsActive, navigate, menuRef} = useHeaderMobile()
+const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
+    const { isActive, setIsActive, navigate, menuRef } = useHeaderMobile()
 
     return (
         <header className={classes.header_mobile} ref={menuRef}>
             <div className={classes.left_side}>
-                <Logo/>
+                <Logo />
 
                 <div>
-                    <div className={classes.menu_button} onClick={() => setIsActive(prevState => !prevState)}>
+                    <div className={classes.menu_button} onClick={() => setIsActive((prevState) => !prevState)}>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -34,11 +33,19 @@ const HeaderMobile: FC<IHeaderMobile> = ({onClickSendButton}) => {
 
                     <div className={isActive ? classes.menu__active : classes.menu}>
                         <div className={classes.menu_list}>
-                            <MenuItem icon={mail} href={""} >Входящее</MenuItem>
-                            <MenuItem icon={start} href={""}>Избранное</MenuItem>
-                            <MenuItem icon={sent} href={""}>Отправленные</MenuItem>
+                            <MenuItem icon={mail} href={""}>
+                                Входящее
+                            </MenuItem>
+                            <MenuItem icon={start} href={""}>
+                                Избранное
+                            </MenuItem>
+                            <MenuItem icon={sent} href={""}>
+                                Отправленные
+                            </MenuItem>
                         </div>
-                        <Button onClick={() => navigate("settings")} type={2}>Настройки</Button>
+                        <Button onClick={() => navigate("settings")} type={2}>
+                            Настройки
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -47,7 +54,7 @@ const HeaderMobile: FC<IHeaderMobile> = ({onClickSendButton}) => {
                 <img src={search} alt={"search icon"} />
                 <img onClick={onClickSendButton} src={pen} alt={"pen icon"} />
 
-                <DefaultUserImage/>
+                <DefaultUserImage />
             </div>
         </header>
     )

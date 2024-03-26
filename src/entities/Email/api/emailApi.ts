@@ -17,60 +17,62 @@ export const emailApi = createApi({
     refetchOnReconnect: true,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
-    endpoints: build => ({
+    endpoints: (build) => ({
         getAllEmail: build.query<IGetAllEmailResponse, number>({
-            query: pageNumber => ({
+            query: (pageNumber) => ({
                 url: `/v1/email/my?page=${pageNumber}`,
                 method: "GET",
                 headers: {
-                    Authorization: TokenService.getAccessToken()
-                }
+                    Authorization: TokenService.getAccessToken(),
+                },
             }),
-            providesTags: result =>  result
-                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), {type: EmailType, id: "LIST"}]
-                : [{type: EmailType, id: "LIST"}],
+            providesTags: (result) =>
+                result
+                    ? [...result.items.map(({ id }) => ({ type: EmailType, id })), { type: EmailType, id: "LIST" }]
+                    : [{ type: EmailType, id: "LIST" }],
         }),
 
         getEmailWithFilter: build.query<IGetAllEmailWithFilterResponse, IGetAllEmailWIthFilterRequest>({
-            query: ({pageNumber, subject, is_received}) => ({
+            query: ({ pageNumber, subject, is_received }) => ({
                 url: "/v1/email/filter",
                 method: "GET",
                 headers: {
-                    Authorization: TokenService.getAccessToken()
+                    Authorization: TokenService.getAccessToken(),
                 },
                 params: {
                     page: pageNumber,
                     subject,
-                    is_received
-                }
+                    is_received,
+                },
             }),
-            providesTags: result =>  result
-                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), {type: EmailType, id: "LIST"}]
-                : [{type: EmailType, id: "LIST"}],
+            providesTags: (result) =>
+                result
+                    ? [...result.items.map(({ id }) => ({ type: EmailType, id })), { type: EmailType, id: "LIST" }]
+                    : [{ type: EmailType, id: "LIST" }],
         }),
 
         updateEmailStatus: build.mutation<void, IUpdateEmailStatusRequest>({
-            query: body => ({
+            query: (body) => ({
                 url: "/v1/email/my/set-read",
                 method: "PUT",
                 body,
                 headers: {
-                    Authorization: TokenService.getAccessToken()
-                }
+                    Authorization: TokenService.getAccessToken(),
+                },
             }),
-            invalidatesTags: [{type: EmailType, id: "LIST"}],
+            invalidatesTags: [{ type: EmailType, id: "LIST" }],
         }),
 
         sendEmail: build.mutation<void, ISendEmailRequest>({
-            query: body => ({
+            query: (body) => ({
                 url: "/v1/email/send-message",
                 method: "POST",
                 body,
                 headers: {
-                    Authorization: TokenService.getAccessToken()
-                }
+                    Authorization: TokenService.getAccessToken(),
+                },
             }),
-            invalidatesTags: [{type: EmailType, id: "LIST"}],
+            invalidatesTags: [{ type: EmailType, id: "LIST" }],
         }),
 
         getEmailById: build.query<IGetEmailByIdResponse, number>({
@@ -78,9 +80,9 @@ export const emailApi = createApi({
                 url: `/v1/email/${emailId}`,
                 method: "GET",
                 headers: {
-                    Authorization: TokenService.getAccessToken()
-                }
-            })
+                    Authorization: TokenService.getAccessToken(),
+                },
+            }),
         }),
 
         deleteEmailById: build.mutation<void, number>({
@@ -88,12 +90,19 @@ export const emailApi = createApi({
                 url: `/v1/email/${emailId}`,
                 method: "DELETE",
                 headers: {
-                    Authorization: TokenService.getAccessToken()
-                }
+                    Authorization: TokenService.getAccessToken(),
+                },
             }),
-            invalidatesTags: [{type: EmailType, id: "LIST"}],
-        })
-    })
+            invalidatesTags: [{ type: EmailType, id: "LIST" }],
+        }),
+    }),
 })
 
-export const {useGetAllEmailQuery, useGetEmailWithFilterQuery, useUpdateEmailStatusMutation, useSendEmailMutation, useGetEmailByIdQuery, useDeleteEmailByIdMutation} = emailApi
+export const {
+    useGetAllEmailQuery,
+    useGetEmailWithFilterQuery,
+    useUpdateEmailStatusMutation,
+    useSendEmailMutation,
+    useGetEmailByIdQuery,
+    useDeleteEmailByIdMutation,
+} = emailApi
