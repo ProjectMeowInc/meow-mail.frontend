@@ -6,7 +6,6 @@ import { useEffect, useState } from "react"
 import { AlertService } from "../../services/AlertService"
 import { setEmails } from "../../../entities/Email/slices/emailSlice"
 import { RedirectService } from "../../services/RedirectService"
-import { resetUser } from "../../../entities/Auth/redusers/userSlice"
 
 export const useRootLayout = () => {
     const deviceType = ClientService.getClientType()
