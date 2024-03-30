@@ -1,13 +1,21 @@
-import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useGetEmailWithFilterQuery } from "../../entities/Email/api/emailApi"
 import { AlertService } from "../../shared/services/AlertService"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { setEmails } from "../../entities/Email/slices/emailSlice"
+import { useSearchParamsWrapper } from "../../shared/hooks/useSearchParamsWrapper"
+import { LogService } from "../../shared/services/LogService"
+
+const DefaultPage = "1"
 
 export const useLettersPage = () => {
-    const [searchParams] = useSearchParams()
-    const [pageNumber, setPageNumber] = useState<number>(Number(searchParams.get("page")) ?? 1)
+    const { setSearchParams, getParamExcept } = useSearchParamsWrapper()
+    const pageStr = getParamExcept("page", ["0"]).unwrapOrElse(() => {
+        LogService.log(`Error get page STR. Use default value: ${DefaultPage}`, "ERROR")
+        return DefaultPage
+    })
+
+    const [pageNumber] = useState<number>(Number(pageStr))
 
     const {
         data: mails,
@@ -27,11 +35,9 @@ export const useLettersPage = () => {
     const storeMails = useAppSelector((state) => state.emailSlice)
 
     useEffect(() => {
-        if (!searchParams.get("page")) {
-            return searchParams.set("page", pageNumber.toString())
+        if (!pageNumber) {
+            return setSearchParams("page", pageNumber.toString())
         }
-
-        setPageNumber(Number(searchParams.get("page")))
     }, [pageNumber])
 
     useEffect(() => {
