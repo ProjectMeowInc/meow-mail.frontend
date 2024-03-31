@@ -18,7 +18,7 @@ const LettersPage = () => {
                     key={mail.id}
                     id={mail.id}
                     href={`${mail.id}`}
-                    from={mail.from.mailbox}
+                    from={{ address: mail.from.mailbox, type: mail.from.type }}
                     isRead={mail.is_read}
                     subject={mail.subject}
                 />
