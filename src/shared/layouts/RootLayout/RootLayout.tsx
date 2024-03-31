@@ -7,10 +7,10 @@ import HeaderDesktop from "../../components/Header/HeaderDesktop/HeaderDesktop"
 import DefaultUserImage from "../../components/DefaultUserImage/DefaultUserImage"
 import { ClientService } from "../../services/ClientService"
 import Input from "../../components/Input/Input"
-import { ReactComponent as Search } from "../../icons/search.svg"
+import Search from "../../icons/search.svg?react"
 import SendEmailForm from "../../components/SendEmailForm/SendEmailForm"
-import { ReactComponent as Left } from "../../icons/chevron-left.svg"
-import { ReactComponent as Right } from "../../icons/chevron-right.svg"
+import Left from "../../icons/chevron-left.svg?react"
+import Right from "../../icons/chevron-right.svg?react"
 
 const RootLayout = () => {
     const { deviceType, user, setSubject, QuitHandler, isActiveSendForm, setIsActiveSendForm, mailsCount, MovePage } =

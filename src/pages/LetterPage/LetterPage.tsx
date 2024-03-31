@@ -3,11 +3,11 @@ import { useLetterPage } from "./useLetterPage"
 import DefaultUserImage from "../../shared/components/DefaultUserImage/DefaultUserImage"
 import classes from "./letterPage.module.css"
 import { FormatterService } from "../../shared/services/FormatterService"
-
-import { ReactComponent as Arrow } from "../../shared/icons/arrow-sm-up.svg"
-import { ReactComponent as Trash } from "../../shared/icons/trash.svg"
-import { ReactComponent as Star } from "../../shared/icons/star.svg"
 import { RedirectService } from "../../shared/services/RedirectService"
+
+import Arrow from "../../shared/icons/arrow-sm-up.svg?react"
+import Trash from "../../shared/icons/trash.svg?react"
+import Star  from "../../shared/icons/star.svg?react"
 
 const LetterPage = () => {
     const { mail, DeleteHandler } = useLetterPage()

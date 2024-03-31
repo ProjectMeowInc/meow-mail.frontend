@@ -4,9 +4,9 @@ import { useAppSelector } from "../../../../store"
 import MenuItem from "./UI/MenuItem/MenuItem"
 import classes from "./headerDesktop.module.css"
 
-import { ReactComponent as Mail } from "../../../icons/mail-open.svg"
-import { ReactComponent as Star } from "../../../icons/star.svg"
-import { ReactComponent as AirPlane } from "../../../icons/paper-airplane.svg"
+import Mail from "../../../icons/mail-open.svg?react"
+import Star from "../../../icons/star.svg?react"
+import AirPlane from "../../../icons/paper-airplane.svg?react"
 
 interface IHeaderDesktopProps {
     onClickSendButton: () => void
