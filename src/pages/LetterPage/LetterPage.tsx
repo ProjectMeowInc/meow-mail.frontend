@@ -34,7 +34,7 @@ const LetterPage = () => {
                 <div>
                     <div className={classes.email_sender_info}>
                         <div className={classes.email_sender}>
-                            {mail.from.mailbox}
+                            <p>{mail.from.mailbox}</p>
                             <MailboxBadge type={mail.from.type} />
                         </div>
                         <p className={classes.email_date}>{FormatterService.formatDate(mail.date_time * 1000)}</p>

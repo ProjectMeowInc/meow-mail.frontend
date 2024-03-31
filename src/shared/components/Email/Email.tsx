@@ -30,7 +30,7 @@ const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
 
                 <Link to={href} className={classes.email_info}>
                     <div className={`${classes.email_from} ${isRead && classes.is_read}`}>
-                        {from.address}
+                        <p>{from.address}</p>
                         <MailboxBadge type={from.type} />
                     </div>
                     <p className={classes.email_subject}>{subject}</p>
