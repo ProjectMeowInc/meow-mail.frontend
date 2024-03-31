@@ -2,11 +2,11 @@ import React, { FC } from "react"
 import classes from "./email.module.css"
 import { Link } from "react-router-dom"
 import { useEmail } from "./useEmail"
-
-import { ReactComponent as Star } from "../../icons/star.svg"
-import { ReactComponent as Trash } from "../../icons/trash.svg"
-import { ReactComponent as Check } from "../../icons/check.svg"
 import { EmailImage } from "../EmailImage/EmailImage"
+
+import Star from "../../icons/star.svg?react"
+import Trash  from "../../icons/trash.svg?react"
+import Check from "../../icons/check.svg?react"
 
 interface IEmailProps {
     id: number

@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import classes from "./sendEmailForm.module.css"
 
-import { ReactComponent as Close } from "../../icons/plus-sm.svg"
+import Close from "../../icons/plus-sm.svg?react"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
 import { useSendEmailForm } from "./useSendEmailForm"
