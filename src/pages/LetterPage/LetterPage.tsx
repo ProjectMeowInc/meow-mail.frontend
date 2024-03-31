@@ -7,7 +7,8 @@ import { RedirectService } from "../../shared/services/RedirectService"
 
 import Arrow from "../../shared/icons/arrow-sm-up.svg?react"
 import Trash from "../../shared/icons/trash.svg?react"
-import Star  from "../../shared/icons/star.svg?react"
+import Star from "../../shared/icons/star.svg?react"
+import { MailboxBadge } from "../../shared/components/MailboxBadge/MailboxBadge"
 
 const LetterPage = () => {
     const { mail, DeleteHandler } = useLetterPage()
@@ -32,7 +33,10 @@ const LetterPage = () => {
                 <DefaultUserImage />
                 <div>
                     <div className={classes.email_sender_info}>
-                        <p className={classes.email_sender}>{mail.from.mailbox}</p>
+                        <div className={classes.email_sender}>
+                            <p>{mail.from.mailbox}</p>
+                            <MailboxBadge type={mail.from.type} />
+                        </div>
                         <p className={classes.email_date}>{FormatterService.formatDate(mail.date_time * 1000)}</p>
                     </div>
                     <p className={classes.recipient_letter}>Кому: {mail.to.mailbox}</p>

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { MailboxType } from "../models/type/MailboxType"
 
 interface IInitialState {
     id: number
@@ -7,12 +8,14 @@ interface IInitialState {
     from: {
         id: number
         mailbox: string
+        type: MailboxType
     }
     is_read: boolean
     subject: string
     to: {
         id: number
         mailbox: string
+        type: MailboxType
     }
 }
 

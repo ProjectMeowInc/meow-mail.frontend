@@ -42,6 +42,8 @@
 
 .email_from {
     font-weight: 700;
+    display: flex;
+    gap: 10px;
 }
 
 .email_subject {
