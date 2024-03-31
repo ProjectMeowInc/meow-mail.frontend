@@ -1,9 +1,12 @@
+import { MailboxType } from "../type/MailboxRole"
+
 export interface IGetEmailByIdResponse {
     content: string
     date_time: 0
     from: {
         id: number
         mailbox: string
+        type: MailboxType
     }
     id: number
     is_read: boolean
@@ -11,5 +14,6 @@ export interface IGetEmailByIdResponse {
     to: {
         id: number
         mailbox: string
+        type: MailboxType
     }
 }
