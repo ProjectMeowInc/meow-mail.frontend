@@ -1,3 +1,5 @@
+import { MailboxType } from "../type/MailboxType"
+
 export interface IGetAllEmailWithFilterResponse {
     count: number
     items: {
@@ -7,12 +9,14 @@ export interface IGetAllEmailWithFilterResponse {
         from: {
             id: number
             mailbox: string
+            type: MailboxType
         }
         is_read: boolean
         subject: string
         to: {
             id: number
             mailbox: string
+            type: MailboxType
         }
     }[]
 
