@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { MailboxType } from "../../../entities/Email/models/type/MailboxRole"
+import { MailboxType } from "../../../entities/Email/models/type/MailboxType"
 
 import AlertBadge from "../../icons/alert-mailbox-badge.svg?react"
 

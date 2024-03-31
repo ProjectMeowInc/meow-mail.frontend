@@ -1,4 +1,4 @@
-import { MailboxType } from "../type/MailboxRole"
+import { MailboxType } from "../type/MailboxType"
 
 export interface IGetEmailByIdResponse {
     content: string

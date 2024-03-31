@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { MailboxType } from "../models/type/MailboxRole"
+import { MailboxType } from "../models/type/MailboxType"
 
 interface IInitialState {
     id: number

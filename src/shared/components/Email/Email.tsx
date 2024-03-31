@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { useEmail } from "./useEmail"
 import { EmailImage } from "../EmailImage/EmailImage"
 import { MailboxBadge } from "../MailboxBadge/MailboxBadge"
-import { MailboxType } from "../../../entities/Email/models/type/MailboxRole"
+import { MailboxType } from "../../../entities/Email/models/type/MailboxType"
 
 import Star from "../../icons/star.svg?react"
 import Trash from "../../icons/trash.svg?react"
