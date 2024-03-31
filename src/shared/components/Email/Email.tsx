@@ -6,6 +6,7 @@ import { useEmail } from "./useEmail"
 import { ReactComponent as Star } from "../../icons/star.svg"
 import { ReactComponent as Trash } from "../../icons/trash.svg"
 import { ReactComponent as Check } from "../../icons/check.svg"
+import { EmailImage } from "../EmailImage/EmailImage"
 
 interface IEmailProps {
     id: number
@@ -23,7 +24,7 @@ const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
             <div className={classes.left_side}>
                 <Star className={classes.icon} />
 
-                <div className={classes.email_from_image}></div>
+                <EmailImage from={from} />
 
                 <Link to={href} className={classes.email_info}>
                     <p className={`${classes.email_from} ${isRead && classes.is_read}`}>{from}</p>
