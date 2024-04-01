@@ -8,7 +8,8 @@ import { MailboxType } from "../../../entities/Email/models/type/MailboxType"
 
 import Star from "../../icons/star.svg?react"
 import Trash from "../../icons/trash.svg?react"
-import Check from "../../icons/check.svg?react"
+import Eye from "../../icons/eye.svg?react"
+import EyeOff from "../../icons/eye-off.svg?react"
 
 interface IEmailProps {
     id: number
@@ -38,7 +39,10 @@ const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
             </div>
             <div className={classes.right_side}>
                 <Trash className={classes.icon} onClick={async () => DeleteHandler(id)} />
-                <Check className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
+                {isRead
+                    ? <EyeOff className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
+                    : <Eye className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
+                }
             </div>
         </div>
     )
