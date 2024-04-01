@@ -9,13 +9,14 @@ import Arrow from "../../shared/icons/arrow-sm-up.svg?react"
 import Trash from "../../shared/icons/trash.svg?react"
 import Star from "../../shared/icons/star.svg?react"
 import { MailboxBadge } from "../../shared/components/MailboxBadge/MailboxBadge"
+import Preloader from "../../shared/components/Preloader/Preloader"
 
 const LetterPage = () => {
     const { mail, DeleteHandler } = useLetterPage()
 
     // todo: fix this later
     if (!mail) {
-        return <>Loading...</>
+        return <Preloader/>
     }
 
     return (

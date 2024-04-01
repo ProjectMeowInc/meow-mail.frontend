@@ -2,13 +2,14 @@ import React from "react"
 import { useLettersPage } from "./useLettersPage"
 import Email from "../../shared/components/Email/Email"
 import classes from "./lettersPage.module.css"
+import Preloader from "../../shared/components/Preloader/Preloader"
 
 const LettersPage = () => {
     const { storeMails, isLoading } = useLettersPage()
 
     // todo: change this
     if (isLoading) {
-        return <>Loading...</>
+        return <Preloader/>
     }
 
     return (
