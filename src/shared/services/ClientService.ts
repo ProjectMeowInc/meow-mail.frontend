@@ -19,4 +19,11 @@ export class ClientService {
     public static isMobileDevice(deviceType: DeviceType): boolean {
         return deviceType === "smartphone" || deviceType === "tablet"
     }
+
+    /**
+     * Метод позволяет узнать является ли устройство настольным компьютером
+     */
+    public static isDesktopDevice(deviceType: DeviceType): boolean {
+        return deviceType === "desktop"
+    }
 }
