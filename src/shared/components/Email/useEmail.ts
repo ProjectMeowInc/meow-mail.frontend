@@ -1,10 +1,16 @@
 import { useDeleteEmailByIdMutation, useUpdateEmailStatusMutation } from "../../../entities/Email/api/emailApi"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { AlertService } from "../../services/AlertService"
+import { ClientService } from "../../services/ClientService"
+import { TouchEvent } from "react"
 
 export const useEmail = () => {
     const [updateEmailStatus, { error }] = useUpdateEmailStatusMutation()
     const [deleteEmailById, { error: deleteEmailByIdError }] = useDeleteEmailByIdMutation()
+    const isDesktopDevice = ClientService.isDesktopDevice(ClientService.getClientType())
+
+    const [touchStart, setTouchStart] = useState<number>(0)
+    const [moveToucheX, setMoveToucheX] = useState<number>(0)
 
     useEffect(() => {
         if (error && "data" in error) {
@@ -29,8 +35,42 @@ export const useEmail = () => {
         await deleteEmailById(emailId)
     }
 
+    const TouchStartHandler = (event: TouchEvent<HTMLDivElement>) => {
+        setTouchStart(event.changedTouches[0].clientX)
+    }
+
+    const TouchMoveHandler = (event: TouchEvent<HTMLDivElement>) => {
+
+        if (event.changedTouches[0].clientX > event.changedTouches[0].clientX - screen.width * 0.3) {
+            return
+        }
+
+        setMoveToucheX(event.targetTouches[0].clientX)
+    }
+
+    const TouchEndHandler = (event: TouchEvent<HTMLDivElement>) => {
+        const touchEnd = event.changedTouches[0].clientX
+
+        if (Math.abs(touchStart - touchEnd) < screen.width * 0.3) {
+            setMoveToucheX(0)
+            return
+        }
+
+        if (touchStart > touchEnd) {
+            setMoveToucheX(-screen.width * 0.15)
+        }
+        else {
+            setMoveToucheX(screen.width * 0.15)
+        }
+    }
+
     return {
         CheckHandler,
         DeleteHandler,
+        isDesktopDevice,
+        TouchStartHandler,
+        TouchMoveHandler,
+        TouchEndHandler,
+        moveToucheX,
     }
 }
