@@ -15,9 +15,10 @@ interface IInputEmailProps {
         width?: string
     }
     fieldName?: string
+    required?: boolean
 }
 
-const InputEmail: FC<IInputEmailProps> = ({ placeholder, type, name, style, onChange, error, fieldName }) => {
+const InputEmail: FC<IInputEmailProps> = ({ placeholder, required, type, name, style, onChange, error, fieldName }) => {
     const { inputError, ChangeHandler } = useInput(name, onChange, error)
 
     return (
@@ -39,6 +40,7 @@ const InputEmail: FC<IInputEmailProps> = ({ placeholder, type, name, style, onCh
                         width: style?.width,
                         margin: style?.margin,
                     }}
+                    required={required}
                 />
             </div>
             {inputError && <p className={classes.error}>{inputError.fieldError}</p>}

@@ -18,9 +18,10 @@ interface IInputProps {
         width?: string
     }
     fieldName?: string
+    required?: boolean
 }
 
-const Input: FC<IInputProps> = ({ placeholder, type, name, style, onChange, error, inputType, icon, fieldName }) => {
+const Input: FC<IInputProps> = ({ placeholder, required, type, name, style, onChange, error, inputType, icon, fieldName }) => {
     switch (inputType) {
         case 1:
             return (
@@ -31,6 +32,7 @@ const Input: FC<IInputProps> = ({ placeholder, type, name, style, onChange, erro
                     style={style}
                     onChange={onChange}
                     error={error}
+                    required={required}
                 />
             )
 
@@ -57,6 +59,7 @@ const Input: FC<IInputProps> = ({ placeholder, type, name, style, onChange, erro
                     onChange={onChange}
                     error={error}
                     fieldName={fieldName}
+                    required={required}
                 />
             )
 
@@ -69,6 +72,7 @@ const Input: FC<IInputProps> = ({ placeholder, type, name, style, onChange, erro
                     style={style}
                     onChange={onChange}
                     error={error}
+                    required={required}
                 />
             )
     }

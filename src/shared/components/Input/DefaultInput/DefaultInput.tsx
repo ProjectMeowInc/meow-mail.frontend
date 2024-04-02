@@ -14,9 +14,10 @@ interface IDefaultInputProps {
         margin?: string
         width?: string
     }
+    required?: boolean
 }
 
-const DefaultInput: FC<IDefaultInputProps> = ({ placeholder, type, name, style, onChange, error }) => {
+const DefaultInput: FC<IDefaultInputProps> = ({ placeholder, required, type, name, style, onChange, error }) => {
     const { inputError, ChangeHandler } = useInput(name, onChange, error)
 
     return (
@@ -26,6 +27,7 @@ const DefaultInput: FC<IDefaultInputProps> = ({ placeholder, type, name, style, 
                 placeholder={placeholder}
                 type={type}
                 name={name}
+                required={required}
                 onChange={(event) =>
                     ChangeHandler({
                         fieldName: event.target.name,
