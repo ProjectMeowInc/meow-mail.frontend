@@ -20,7 +20,15 @@ interface IEmailProps {
 }
 
 const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
-    const { CheckHandler, DeleteHandler, isDesktopDevice, TouchEndHandler, TouchStartHandler, moveToucheX, TouchMoveHandler } = useEmail()
+    const {
+        CheckHandler,
+        DeleteHandler,
+        isDesktopDevice,
+        TouchEndHandler,
+        TouchStartHandler,
+        moveToucheX,
+        TouchMoveHandler,
+    } = useEmail()
 
     return (
         <div className={classes.email_wrapper}>
@@ -28,10 +36,15 @@ const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
                 <Star className={classes.email_icon_wrapper} />
                 <Trash className={classes.email_icon_wrapper} onClick={async () => DeleteHandler(id)} />
             </div>
-            <div style={{
-                transform: `translateX(${moveToucheX}px)`
-            }} className={classes.email} onTouchStart={TouchStartHandler} onTouchMove={TouchMoveHandler}
-                 onTouchEnd={TouchEndHandler}>
+            <div
+                style={{
+                    transform: `translateX(${moveToucheX}px)`,
+                }}
+                className={classes.email}
+                onTouchStart={TouchStartHandler}
+                onTouchMove={TouchMoveHandler}
+                onTouchEnd={TouchEndHandler}
+            >
                 <div className={classes.left_side}>
                     {isDesktopDevice && <Star className={classes.icon} />}
 
@@ -47,10 +60,11 @@ const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
                 </div>
                 <div className={classes.right_side}>
                     {isDesktopDevice && <Trash className={classes.icon} onClick={async () => DeleteHandler(id)} />}
-                    {isRead
-                        ? <EyeOff className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
-                        : <Eye className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
-                    }
+                    {isRead ? (
+                        <EyeOff className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
+                    ) : (
+                        <Eye className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
+                    )}
                 </div>
             </div>
         </div>
