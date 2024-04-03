@@ -40,7 +40,6 @@ export const useEmail = () => {
     }
 
     const TouchMoveHandler = (event: TouchEvent<HTMLDivElement>) => {
-
         if (event.changedTouches[0].clientX > event.changedTouches[0].clientX - screen.width * 0.3) {
             return
         }
@@ -51,15 +50,14 @@ export const useEmail = () => {
     const TouchEndHandler = (event: TouchEvent<HTMLDivElement>) => {
         const touchEnd = event.changedTouches[0].clientX
 
-        if (Math.abs(touchStart - touchEnd) < screen.width * 0.3) {
+        if (Math.abs(touchStart - touchEnd) < screen.width * 0.2) {
             setMoveToucheX(0)
             return
         }
 
         if (touchStart > touchEnd) {
             setMoveToucheX(-screen.width * 0.15)
-        }
-        else {
+        } else {
             setMoveToucheX(screen.width * 0.15)
         }
     }
