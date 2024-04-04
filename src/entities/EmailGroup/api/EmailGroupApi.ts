@@ -1,9 +1,9 @@
 import {createApi} from "@reduxjs/toolkit/query/react"
-import {fetchBaseQueryWithReAuth} from "../../Auth/api/AuthApi";
-import {ICreateEmailGroupResponse} from "../models/responses/ICreateEmailGroupResponse";
-import {ICreateEmailGroupRequest} from "../models/requests/ICreateEmailGroupRequest";
-import {TokenService} from "../../../shared/services/TokenService";
-import {IGetEmailGroupsResponse} from "../models/responses/IGetEmailGroupsResponse";
+import {fetchBaseQueryWithReAuth} from "../../Auth/api/AuthApi"
+import {ICreateEmailGroupResponse} from "../models/responses/ICreateEmailGroupResponse"
+import {ICreateEmailGroupRequest} from "../models/requests/ICreateEmailGroupRequest"
+import {TokenService} from "../../../shared/services/TokenService"
+import {IGetEmailGroupsResponse} from "../models/responses/IGetEmailGroupsResponse"
 
 export const emailGroupApi = createApi({
     reducerPath: "emailGroupApi",

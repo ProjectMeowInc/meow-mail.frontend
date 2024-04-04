@@ -7,7 +7,7 @@ import classes from "./headerDesktop.module.css"
 import Mail from "../../../icons/mail-open.svg?react"
 import Star from "../../../icons/star.svg?react"
 import AirPlane from "../../../icons/paper-airplane.svg?react"
-import EmailGroup from "../../EmailGroup/EmailGroup";
+import EmailGroup from "../../EmailGroup/EmailGroup"
 
 interface IHeaderDesktopProps {
     onClickSendButton: () => void
