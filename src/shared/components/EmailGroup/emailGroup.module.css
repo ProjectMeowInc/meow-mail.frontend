@@ -1,0 +1,22 @@
+.menu {
+    width: 100%;
+    background-color: white;
+    padding: 15px 10px;
+    border-radius: 20px;
+}
+
+.button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.button_text {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

@@ -41,3 +41,5 @@ export const emailGroupApi = createApi({
         })
     })
 })
+
+export const {useCreateEmailGroupMutation, useDeleteEmailGroupByIdMutation, useGetAllEmailGroupQuery} = emailGroupApi
