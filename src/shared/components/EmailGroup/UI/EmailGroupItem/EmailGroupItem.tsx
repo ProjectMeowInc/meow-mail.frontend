@@ -15,7 +15,7 @@ interface IEmailGroupItemProps {
     }
 }
 
-const EmailGroupItem: FC<IEmailGroupItemProps> = ({id, constrains, name}) => {
+const EmailGroupItem: FC<IEmailGroupItemProps> = ({id, name}) => {
 
     const {DeleteHandler} = useEmailGroupItem()
 
