@@ -2,6 +2,8 @@ import React, { FC } from "react"
 import classes from "./emailGroupItem.module.css"
 
 import Collection from "../../../../icons/collection.svg?react"
+import Trash from "../../../../icons/trash.svg?react"
+import { useEmailGroupItem } from "./useEmailGroupItem"
 
 interface IEmailGroupItemProps {
     id: number
@@ -13,11 +15,18 @@ interface IEmailGroupItemProps {
     }
 }
 
-const EmailGroupItem: FC<IEmailGroupItemProps> = ({name}) => {
+const EmailGroupItem: FC<IEmailGroupItemProps> = ({id, constrains, name}) => {
+
+    const {DeleteHandler} = useEmailGroupItem()
+
     return (
         <div className={classes.group}>
-            <Collection className={classes.icon}/>
-            <p>{name}</p>
+            <div>
+                <Collection className={classes.icon}/>
+                <p>{name}</p>
+            </div>
+
+            <Trash onClick={async () => DeleteHandler(id)}/>
         </div>
     )
 }
