@@ -1,9 +1,23 @@
-import React from "react"
+import React, { FC } from "react"
+import classes from "./emailGroupItem.module.css"
 
-const EmailGroupItem = () => {
+import Collection from "../../../../icons/collection.svg?react"
+
+interface IEmailGroupItemProps {
+    id: number
+    name: string
+    constrains: {
+        from: string
+        subject: string
+        to: string
+    }
+}
+
+const EmailGroupItem: FC<IEmailGroupItemProps> = ({name}) => {
     return (
-        <div>
-
+        <div className={classes.group}>
+            <Collection className={classes.icon}/>
+            <p>{name}</p>
         </div>
     )
 }
