@@ -22,7 +22,7 @@ export const emailGroupApi = createApi({
 
         getAllEmailGroup: build.query<IGetEmailGroupsResponse, void>({
             query: () => ({
-                url: "/v1/email-groups/my",
+                url: "/v1/email-group/my",
                 method: "GET",
                 headers: {
                     Authorization: TokenService.getAccessToken()

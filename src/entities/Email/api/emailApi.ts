@@ -16,7 +16,6 @@ export const emailApi = createApi({
     tagTypes: ["email"],
     refetchOnReconnect: true,
     refetchOnFocus: true,
-    refetchOnMountOrArgChange: true,
     endpoints: (build) => ({
         getAllEmail: build.query<IGetAllEmailResponse, number>({
             query: (pageNumber) => ({
