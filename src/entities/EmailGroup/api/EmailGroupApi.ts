@@ -4,20 +4,24 @@ import {ICreateEmailGroupResponse} from "../models/responses/ICreateEmailGroupRe
 import {ICreateEmailGroupRequest} from "../models/requests/ICreateEmailGroupRequest"
 import {TokenService} from "../../../shared/services/TokenService"
 import {IGetEmailGroupsResponse} from "../models/responses/IGetEmailGroupsResponse"
+import { EmailGroup, EmailType } from "../../../consts"
+
 
 export const emailGroupApi = createApi({
     reducerPath: "emailGroupApi",
     baseQuery: fetchBaseQueryWithReAuth,
+    tagTypes: [EmailGroup, EmailType],
     endpoints: build => ({
         createEmailGroup: build.mutation<ICreateEmailGroupResponse, ICreateEmailGroupRequest>({
             query: (body) => ({
-                url: "/v1/email-group",
+                url: "/v1/email-group/",
                 method: "POST",
                 body,
                 headers: {
                     Authorization: TokenService.getAccessToken()
                 }
-            })
+            }),
+            invalidatesTags: [{type: EmailGroup, id: "LIST"}]
         }),
 
         getAllEmailGroup: build.query<IGetEmailGroupsResponse, void>({
@@ -27,7 +31,10 @@ export const emailGroupApi = createApi({
                 headers: {
                     Authorization: TokenService.getAccessToken()
                 }
-            })
+            }),
+            providesTags: result => result
+                ? [...result.items.map(({ id }) => ({ type: EmailGroup, id })), { type: EmailGroup, id: "LIST" }]
+                : [{ type: EmailGroup, id: "LIST" }],
         }),
 
         deleteEmailGroupById: build.mutation<void, number>({
@@ -37,7 +44,8 @@ export const emailGroupApi = createApi({
                 headers: {
                     Authorization: TokenService.getAccessToken()
                 }
-            })
+            }),
+            invalidatesTags: [{type: EmailGroup, id: "LIST"}]
         })
     })
 })

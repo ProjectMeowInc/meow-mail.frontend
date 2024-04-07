@@ -4,6 +4,7 @@ import classes from "./emailGroupItem.module.css"
 import Collection from "../../../../icons/collection.svg?react"
 import Trash from "../../../../icons/trash.svg?react"
 import { useEmailGroupItem } from "./useEmailGroupItem"
+import { Link } from "react-router-dom"
 
 interface IEmailGroupItemProps {
     id: number
@@ -21,12 +22,12 @@ const EmailGroupItem: FC<IEmailGroupItemProps> = ({id, name}) => {
 
     return (
         <div className={classes.group}>
-            <div>
+            <Link to={`email-group/${id}?page=1`} className={classes.caption}>
                 <Collection className={classes.icon}/>
                 <p>{name}</p>
-            </div>
+            </Link>
 
-            <Trash onClick={async () => DeleteHandler(id)}/>
+            <Trash className={classes.icon} onClick={async () => DeleteHandler(id)}/>
         </div>
     )
 }

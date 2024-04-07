@@ -6,6 +6,7 @@ import LettersPage from "./pages/LettersPage/LettersPage"
 import LetterPage from "./pages/LetterPage/LetterPage"
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage"
 import RootLayout from "./shared/layouts/RootLayout/RootLayout"
+import EmailGroupPage from "./pages/EmailGroupPage/EmailGroupPage"
 
 const router = createBrowserRouter([
     {
@@ -35,9 +36,15 @@ const router = createBrowserRouter([
                     {
                         path: ":mailId",
                         element: <LetterPage/>
-                    }
-                ]
+                    },
+
+                    {
+                        path: "email-group/:groupId",
+                        element: <EmailGroupPage/>
+                    },
+                ],
             },
+
 
             {
                 path: "*",

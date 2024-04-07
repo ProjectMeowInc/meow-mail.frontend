@@ -55,3 +55,8 @@
     cursor: pointer;
     color: var(--accent);
 }
+
+.icon {
+    stroke: var(--accent);
+    rotate: 45deg;
+}
