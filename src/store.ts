@@ -6,7 +6,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from "redux-persist/lib/storage"
 import { emailApi } from "./entities/Email/api/emailApi"
 import { emailSlice } from "./entities/Email/slices/emailSlice"
-import {emailGroupApi} from "./entities/EmailGroup/api/EmailGroupApi"; // defaults to localStorage for web
+import {emailGroupApi} from "./entities/EmailGroup/api/EmailGroupApi"
 
 export const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,

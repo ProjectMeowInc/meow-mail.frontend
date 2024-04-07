@@ -3,7 +3,7 @@ import classes from "./headerMobile.module.css"
 import Logo from "../../Logo/Logo"
 import MenuItem from "./UI/MenuItem/MenuItem"
 import Button from "../../Button/Button"
-import { useHeaderMobile } from "./UI/useHeaderMobile"
+import { useHeaderMobile } from "./useHeaderMobile"
 
 import search from "../../../icons/search-white.svg"
 import pen from "../../../icons/pencil.svg"
