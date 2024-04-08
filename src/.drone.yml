@@ -1,0 +1,29 @@
+kind: pipeline
+type: exec
+name: deploy
+
+trigger:
+    branch:
+        - dev
+    event:
+        - push
+
+steps:
+    - name: cleanup-app
+      detach: true
+      commands:
+          - tmux kill-session -t meow_mail_frontend
+
+    - name: cleanup-folder
+      commands:
+          - rm -r /var/apps/meow-mail-frontend
+
+    - name: build
+      commands:
+          - npm install
+          - npm run build
+          - mv ./dist /var/apps/meow-mail-frontend
+
+    - name: run
+      commands:
+          - tmux new-session -d -s "meow_mail_frontend" "cd /var/apps/meow-mail-frontend && serve -p 3001"
