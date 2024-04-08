@@ -5,13 +5,15 @@ import { userSlice } from "./entities/Auth/redusers/userSlice"
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 import { emailApi } from "./entities/Email/api/emailApi"
-import { emailSlice } from "./entities/Email/slices/emailSlice" // defaults to localStorage for web
+import { emailSlice } from "./entities/Email/slices/emailSlice"
+import {emailGroupApi} from "./entities/EmailGroup/api/EmailGroupApi"
 
 export const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
     [userSlice.reducerPath]: userSlice.reducer,
     [emailApi.reducerPath]: emailApi.reducer,
     [emailSlice.reducerPath]: emailSlice.reducer,
+    [emailGroupApi.reducerPath]: emailGroupApi.reducer
 })
 
 const persistConfig = {
@@ -31,7 +33,8 @@ export const store = configureStore({
             },
         })
             .concat(authApi.middleware)
-            .concat(emailApi.middleware),
+            .concat(emailApi.middleware)
+            .concat(emailGroupApi.middleware),
 })
 
 export const persistor = persistStore(store)

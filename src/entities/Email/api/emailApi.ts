@@ -7,16 +7,16 @@ import { IUpdateEmailStatusRequest } from "../models/requests/IUpdateEmailStatus
 import { TokenService } from "../../../shared/services/TokenService"
 import { ISendEmailRequest } from "../models/requests/ISendEmailRequest"
 import { IGetEmailByIdResponse } from "../models/responses/IGetEmailByIdResponse"
-
-const EmailType = "email" as const
+import { EmailGroup, EmailType } from "../../../consts"
+import { IGetEmailsByEmailGroupResponse } from "../../EmailGroup/models/responses/IGetEmailsByEmailGroupResponse"
+import { IGetEmailByEmailGroupRequest } from "../../EmailGroup/models/requests/IGetEmailByEmailGroupRequest"
 
 export const emailApi = createApi({
     reducerPath: "emailApi",
     baseQuery: fetchBaseQueryWithReAuth,
-    tagTypes: ["email"],
+    tagTypes: [EmailType, EmailGroup],
     refetchOnReconnect: true,
     refetchOnFocus: true,
-    refetchOnMountOrArgChange: true,
     endpoints: (build) => ({
         getAllEmail: build.query<IGetAllEmailResponse, number>({
             query: (pageNumber) => ({
@@ -51,6 +51,19 @@ export const emailApi = createApi({
                     : [{ type: EmailType, id: "LIST" }],
         }),
 
+        getEmailsByEmailGroup: build.query<IGetEmailsByEmailGroupResponse, IGetEmailByEmailGroupRequest>({
+            query: ({page, email_group_id}) => ({
+                url: `/v1/email-group/find/${email_group_id}?page=${page}`,
+                method: "GET",
+                headers: {
+                    Authorization: TokenService.getAccessToken()
+                },
+            }),
+            providesTags: result => result
+                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), { type: EmailType, id: "LIST" }]
+                : [{ type: EmailType, id: "LIST" }, { type: EmailGroup, id: "LIST" }],
+        }),
+
         updateEmailStatus: build.mutation<void, IUpdateEmailStatusRequest>({
             query: (body) => ({
                 url: "/v1/email/my/set-read",
@@ -60,7 +73,7 @@ export const emailApi = createApi({
                     Authorization: TokenService.getAccessToken(),
                 },
             }),
-            invalidatesTags: [{ type: EmailType, id: "LIST" }],
+            invalidatesTags: [{ type: EmailType, id: "LIST" }, { type: EmailGroup, id: "LIST" }],
         }),
 
         sendEmail: build.mutation<void, ISendEmailRequest>({
@@ -93,7 +106,7 @@ export const emailApi = createApi({
                     Authorization: TokenService.getAccessToken(),
                 },
             }),
-            invalidatesTags: [{ type: EmailType, id: "LIST" }],
+            invalidatesTags: [{ type: EmailType, id: "LIST" }, { type: EmailGroup, id: "LIST" }],
         }),
     }),
 })
@@ -105,4 +118,5 @@ export const {
     useSendEmailMutation,
     useGetEmailByIdQuery,
     useDeleteEmailByIdMutation,
+    useGetEmailsByEmailGroupQuery
 } = emailApi

@@ -1,0 +1,62 @@
+.menu {
+    width: 100%;
+    background-color: white;
+    padding: 15px 10px;
+    border-radius: 20px;
+}
+
+.button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    color: var(--second);
+}
+
+.button_text {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.down {
+    transform: rotateY(0);
+    transition: 0.2s all;
+}
+
+.down_active {
+    transform: rotateX(180deg);
+    transition: 0.2s all;
+}
+
+.groups {
+    user-select: none;
+    display: none;
+}
+
+.groups_active {
+    display: block;
+    user-select: none;
+}
+
+.create_button {
+    width: 100%;
+    padding: 15px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    background-color: var(--third);
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--accent);
+}
+
+.icon {
+    stroke: var(--accent);
+    rotate: 45deg;
+}
