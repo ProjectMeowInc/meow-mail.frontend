@@ -26,4 +26,4 @@ steps:
 
     - name: run
       commands:
-          - tmux new-session -d -s "meow_mail_frontend" "cd /var/apps/meow-mail-frontend && serve . -p 3001"
+          - tmux new-session -d -s "meow_mail_frontend" "cd /var/apps/meow-mail-frontend && serve . -p 4001 -s"
