@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             },
 
             {
-                path: "agreement-for-processing-personal-data",
+                path: "confidentiality-agreement",
                 element: <AgreementProcessingPersonalDataPage/>
             },
 

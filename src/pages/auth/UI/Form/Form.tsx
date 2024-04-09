@@ -30,7 +30,7 @@ const Form: FC<IFormProps> = ({ onSubmit, isRegistration, onChange, isLoading, i
                 name={"password"}
                 placeholder={"Введите пароль"}
             />
-            {isRegistration && <Checkbox label={<p>Я принимаю <Link className={classes.agree} to={"/agreement-for-processing-personal-data"}>соглашение</Link>  на обработку персональныйх данных</p>}/>}
+            {isRegistration && <Checkbox label={<p>Я принимаю <Link className={classes.agree} to={"/confidentiality-agreement"}>соглашение</Link>  на обработку персональныйх данных</p>}/>}
             <Button isLoading={isLoading}>Отправить</Button>
         </form>
     )
