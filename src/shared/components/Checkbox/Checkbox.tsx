@@ -1,16 +1,16 @@
-import React, { FC } from "react"
+import React, { FC, ReactNode } from "react"
 import classes from "./checkbox.module.css"
 import "./checkbox.module.css"
 
 interface ICheckboxProps {
-    label?: string
+    label?: ReactNode
 }
 
 const Checkbox: FC<ICheckboxProps> = ({label}) => {
     return (
         <label className={classes.label}>
             <input className={classes.checkbox} type={"checkbox"} required/>
-            {label}
+            <p className={classes.label_content}>{label ?? ""}</p>
         </label>
     )
 }

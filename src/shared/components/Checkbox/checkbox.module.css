@@ -44,3 +44,7 @@
 .checkbox::before {
     content: "";
 }
+
+.label_content {
+    width: 95%;
+}
