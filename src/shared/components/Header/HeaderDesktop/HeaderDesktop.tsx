@@ -7,6 +7,7 @@ import classes from "./headerDesktop.module.css"
 import Mail from "../../../icons/mail-open.svg?react"
 import Star from "../../../icons/star.svg?react"
 import AirPlane from "../../../icons/paper-airplane.svg?react"
+import EmailGroup from "../../EmailGroup/EmailGroup"
 
 interface IHeaderDesktopProps {
     onClickSendButton: () => void
@@ -45,6 +46,8 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                             <p>Отправленные</p>
                         </MenuItem>
                     </div>
+
+                    <EmailGroup/>
                 </div>
 
                 <Button type={2}>Настройки почты</Button>

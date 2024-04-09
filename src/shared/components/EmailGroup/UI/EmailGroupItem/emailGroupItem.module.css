@@ -1,0 +1,31 @@
+.group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+    cursor: pointer;
+    transition: 0.2s all;
+    border-radius: 10px;
+    color: var(--second);
+    font-weight: 600;
+}
+
+.caption {
+    display: flex;
+    gap: 10px;
+    color: var(--second);
+    text-decoration: none;
+}
+
+.group:hover {
+    background-color: var(--accent);;
+    color: var(--thirth);
+}
+
+.group:hover .icon {
+    stroke: white;
+}
+
+.group:hover .caption {
+    color: var(--thirth);
+}

@@ -20,29 +20,52 @@ interface IEmailProps {
 }
 
 const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
-    const { CheckHandler, DeleteHandler } = useEmail()
+    const {
+        CheckHandler,
+        DeleteHandler,
+        isDesktopDevice,
+        TouchEndHandler,
+        TouchStartHandler,
+        moveToucheX,
+        TouchMoveHandler,
+    } = useEmail()
 
     return (
-        <div className={classes.email}>
-            <div className={classes.left_side}>
-                <Star className={classes.icon} />
-
-                <EmailImage from={from.address} />
-
-                <Link to={href} className={classes.email_info}>
-                    <div className={`${classes.email_from} ${isRead && classes.is_read}`}>
-                        <p>{from.address}</p>
-                        <MailboxBadge type={from.type} />
-                    </div>
-                    <p className={classes.email_subject}>{subject}</p>
-                </Link>
+        <div className={classes.email_wrapper}>
+            <div className={classes.block}>
+                <Star className={classes.email_icon_wrapper} />
+                <Trash className={classes.email_icon_wrapper} onClick={async () => DeleteHandler(id)} />
             </div>
-            <div className={classes.right_side}>
-                <Trash className={classes.icon} onClick={async () => DeleteHandler(id)} />
-                {isRead
-                    ? <EyeOff className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
-                    : <Eye className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
-                }
+            <div
+                style={{
+                    transform: `translateX(${moveToucheX}px)`,
+                }}
+                className={classes.email}
+                onTouchStart={TouchStartHandler}
+                onTouchMove={TouchMoveHandler}
+                onTouchEnd={TouchEndHandler}
+            >
+                <div className={classes.left_side}>
+                    {isDesktopDevice && <Star className={classes.icon} />}
+
+                    <EmailImage from={from.address} />
+
+                    <Link to={href} className={classes.email_info}>
+                        <div className={`${classes.email_from} ${isRead && classes.is_read}`}>
+                            <p>{from.address}</p>
+                            <MailboxBadge type={from.type} />
+                        </div>
+                        <p className={classes.email_subject}>{subject}</p>
+                    </Link>
+                </div>
+                <div className={classes.right_side}>
+                    {isDesktopDevice && <Trash className={classes.icon} onClick={async () => DeleteHandler(id)} />}
+                    {isRead ? (
+                        <EyeOff className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
+                    ) : (
+                        <Eye className={classes.icon} onClick={() => CheckHandler(id, isRead)} />
+                    )}
+                </div>
             </div>
         </div>
     )

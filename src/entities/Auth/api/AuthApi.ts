@@ -9,6 +9,7 @@ import { TokenService } from "../../../shared/services/TokenService"
 import { AlertService } from "../../../shared/services/AlertService"
 import { IUpdateAuthorizationResponse } from "../models/responses/IUpdateAuthorizationResponse"
 import { RedirectService } from "../../../shared/services/RedirectService"
+import { query } from "../../../shared/utils/query"
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_API_URL }) as BaseQueryFn<
     string | FetchArgs,
@@ -77,29 +78,16 @@ export const authApi = createApi({
     refetchOnReconnect: true,
     endpoints: (builder) => ({
         authorization: builder.mutation<IAuthorizationResponse, IAuthorizationRequest>({
-            query: (body) => ({
-                url: "/v1/auth/authorization",
-                method: "POST",
-                body,
-            }),
+            query: (body) =>  query("/v1/auth/authorization", "POST", false, body),
         }),
 
         registration: builder.mutation<void, IRegistrationRequest>({
-            query: (body) => ({
-                url: "/v1/auth/registration",
-                method: "POST",
-                body,
-            }),
+            query: (body) =>  query("/v1/auth/registration", "POST", false, body),
+
         }),
 
         createMailBox: builder.mutation<void, void>({
-            query: () => ({
-                url: "/v1/auth/create-mail-box",
-                method: "POST",
-                headers: {
-                    Authorization: TokenService.getAccessToken(),
-                },
-            }),
+            query: () => query("/v1/auth/create-mail-box", "POST", true),
         }),
     }),
 })
