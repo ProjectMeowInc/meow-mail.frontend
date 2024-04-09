@@ -6,6 +6,8 @@ import LettersPage from "./pages/LettersPage/LettersPage"
 import LetterPage from "./pages/LetterPage/LetterPage"
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage"
 import RootLayout from "./shared/layouts/RootLayout/RootLayout"
+import AgreementProcessingPersonalDataPage
+    from "./pages/auth/AgreementProcessingPersonalDataPage/AgreementProcessingPersonalDataPage"
 
 const router = createBrowserRouter([
     {
@@ -20,6 +22,11 @@ const router = createBrowserRouter([
             {
                 path: "registration",
                 element: <RegistrationPage/>
+            },
+
+            {
+                path: "agreement-for-processing-personal-data",
+                element: <AgreementProcessingPersonalDataPage/>
             },
 
             {
