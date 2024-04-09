@@ -7,6 +7,7 @@ import LetterPage from "./pages/LetterPage/LetterPage"
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage"
 import RootLayout from "./shared/layouts/RootLayout/RootLayout"
 import EmailGroupPage from "./pages/EmailGroupPage/EmailGroupPage"
+import AgreementProcessingPersonalDataPage from "./pages/auth/AgreementProcessingPersonalDataPage/AgreementProcessingPersonalDataPage"
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
             {
                 path: "registration",
                 element: <RegistrationPage/>
+            },
+
+            {
+                path: "confidentiality-agreement",
+                element: <AgreementProcessingPersonalDataPage/>
             },
 
             {
@@ -42,9 +48,8 @@ const router = createBrowserRouter([
                         path: "email-group/:groupId",
                         element: <EmailGroupPage/>
                     },
-                ],
+                ]
             },
-
 
             {
                 path: "*",

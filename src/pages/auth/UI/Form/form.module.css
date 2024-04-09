@@ -3,3 +3,9 @@
     flex-direction: column;
     gap: 20px 0;
 }
+
+.agree {
+    text-decoration: none;
+    color: var(--second);
+    font-weight: 700;
+}

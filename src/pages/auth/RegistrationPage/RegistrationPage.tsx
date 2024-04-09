@@ -17,6 +17,7 @@ const RegistrationPage = () => {
                     isLoading={isLoading}
                     onSubmit={SubmitHandler}
                     onChange={ChangeHandler}
+                    isRegistration={true}
                 />
 
                 <div className={classes.links}>

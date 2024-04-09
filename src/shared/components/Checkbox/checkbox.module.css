@@ -1,0 +1,50 @@
+.label {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.label:hover .checkbox {
+    box-shadow: 0 0 10px var(--gray);
+    transition: 0.2s all;
+}
+
+.label:hover .checkbox:checked {
+    box-shadow: 0 0 10px var(--accent);
+    transition: 0.2s all;
+}
+
+.checkbox {
+    appearance: none;
+    background: #fff;
+    border: 2px solid var(--gray);
+    height: 20px;
+    width: 20px;
+    border-radius: 5px;
+    vertical-align: text-bottom;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox:checked {
+    border: 2px solid var(--second);
+}
+
+.checkbox:checked::before {
+    width: 70%;
+    height: 30%;
+    border-left: 2px solid var(--second);
+    border-bottom: 2px solid var(--second);
+    transform: rotate(-50deg) translateY(-20%) translateX(10%);
+}
+
+.checkbox::before {
+    content: "";
+}
+
+.label_content {
+    width: 95%;
+}
