@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode"
 export interface ITokenData {
     id: number
     login: string
+    role: "NonActive" | "User" | "Administrator" | "Root"
     expired_at: Date
 }
 
