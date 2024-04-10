@@ -1,0 +1,39 @@
+.wrapper {
+    width: 100%;
+    background-color: var(--thirth);
+    border-radius: 20px;
+    padding: 15px 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.button {
+    font-weight: 600;
+    color: var(--second);
+    display: flex;
+    justify-content: space-between;
+}
+
+.caption {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.menu_active {
+    margin-top: 20px;
+}
+
+.menu {
+    display: none;
+}
+
+.icon {
+    transform: rotateX(0deg);
+    transition: 0.2s;
+}
+
+.icon_active {
+    transform: rotateX(180deg);
+    transition: 0.2s;
+}

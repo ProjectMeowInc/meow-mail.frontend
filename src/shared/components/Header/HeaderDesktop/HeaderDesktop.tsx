@@ -8,6 +8,7 @@ import Mail from "../../../icons/mail-open.svg?react"
 import Star from "../../../icons/star.svg?react"
 import AirPlane from "../../../icons/paper-airplane.svg?react"
 import EmailGroup from "../../EmailGroup/EmailGroup"
+import AdminDropDownMenu from "./UI/AdminDropDownMenu/AdminDropDownMenu"
 
 interface IHeaderDesktopProps {
     onClickSendButton: () => void
@@ -45,9 +46,11 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                             <AirPlane />
                             <p>Отправленные</p>
                         </MenuItem>
+
+                        {user?.role === "Root" ? <AdminDropDownMenu /> : <></>}
                     </div>
 
-                    <EmailGroup/>
+                    <EmailGroup />
                 </div>
 
                 <Button type={2}>Настройки почты</Button>
