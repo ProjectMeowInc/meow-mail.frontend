@@ -9,7 +9,7 @@ const LettersPage = () => {
 
     // todo: change this
     if (isLoading) {
-        return <Preloader/>
+        return <Preloader />
     }
 
     return (

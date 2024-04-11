@@ -78,12 +78,11 @@ export const authApi = createApi({
     refetchOnReconnect: true,
     endpoints: (builder) => ({
         authorization: builder.mutation<IAuthorizationResponse, IAuthorizationRequest>({
-            query: (body) =>  query("/v1/auth/authorization", "POST", false, body),
+            query: (body) => query("/v1/auth/authorization", "POST", false, body),
         }),
 
         registration: builder.mutation<void, IRegistrationRequest>({
-            query: (body) =>  query("/v1/auth/registration", "POST", false, body),
-
+            query: (body) => query("/v1/auth/registration", "POST", false, body),
         }),
 
         createMailBox: builder.mutation<void, void>({

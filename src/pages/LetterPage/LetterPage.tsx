@@ -16,7 +16,7 @@ const LetterPage = () => {
 
     // todo: fix this later
     if (!mail) {
-        return <Preloader/>
+        return <Preloader />
     }
 
     return (

@@ -3,8 +3,7 @@ import { useEffect } from "react"
 import { AlertService } from "../../../../services/AlertService"
 
 export const useEmailGroupItem = () => {
-
-    const [deleteEmailGroupById, {error: deleteEmailGroupError}] = useDeleteEmailGroupByIdMutation()
+    const [deleteEmailGroupById, { error: deleteEmailGroupError }] = useDeleteEmailGroupByIdMutation()
 
     useEffect(() => {
         if (deleteEmailGroupError && "data" in deleteEmailGroupError) {
@@ -17,6 +16,6 @@ export const useEmailGroupItem = () => {
     }
 
     return {
-        DeleteHandler
+        DeleteHandler,
     }
 }

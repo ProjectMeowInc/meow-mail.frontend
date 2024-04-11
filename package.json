@@ -26,7 +26,7 @@
         "dev": "vite --host",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "style-fix": "vite prettier . --write",
+        "style-fix": "prettier . --write",
         "lint": "vite eslint src"
     },
     "eslintConfig": {

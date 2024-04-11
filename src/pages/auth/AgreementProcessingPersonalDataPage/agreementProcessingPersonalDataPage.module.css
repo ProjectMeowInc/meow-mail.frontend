@@ -35,7 +35,7 @@
     position: relative;
     display: flex;
     list-style: none; /* Убрать стандартный маркер */
-    margin-left: 20px /* Добавить отступ слева, место для маркера */
+    margin-left: 20px; /* Добавить отступ слева, место для маркера */
 }
 
 .content li::before {
