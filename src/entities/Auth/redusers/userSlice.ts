@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { UserRoleType } from "../../User/types/UserRoleType"
 
 interface IUser {
     id: number
     login: string
+    role: UserRoleType
 }
 
 type SliceState = {

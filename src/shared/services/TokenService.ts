@@ -1,9 +1,11 @@
 import Cookies from "js-cookie"
 import { jwtDecode } from "jwt-decode"
+import { UserRoleType } from "../../entities/User/types/UserRoleType"
 
 export interface ITokenData {
     id: number
     login: string
+    role: UserRoleType
     expired_at: Date
 }
 

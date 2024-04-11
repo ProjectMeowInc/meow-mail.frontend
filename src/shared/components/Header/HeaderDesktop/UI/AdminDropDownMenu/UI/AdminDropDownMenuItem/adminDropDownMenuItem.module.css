@@ -1,0 +1,5 @@
+.link {
+    color: var(--second);
+    text-decoration: none;
+    padding: 0 35px;
+}

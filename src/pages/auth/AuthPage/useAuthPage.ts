@@ -22,12 +22,13 @@ export const useAuthPage = () => {
             TokenService.setAccessToken(access_token)
             TokenService.setRefreshToken(refresh_token)
 
-            const { id, login } = TokenService.parseAccessToken(access_token)
+            const { id, login, role } = TokenService.parseAccessToken(access_token)
 
             dispatch(
                 setUser({
                     id,
                     login,
+                    role,
                 }),
             )
 

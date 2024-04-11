@@ -6,3 +6,4 @@ export const EMAIL_COLORS: string[] = ["5E2BFF", "C04CFD", "FC6DAB", "C7EAE4", "
 
 export const EmailType = "email" as const
 export const EmailGroup = "email-groups" as const
+export const UserType = "type" as const
