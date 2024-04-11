@@ -1,0 +1,35 @@
+.wrapper {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 0 20px;
+    transition: 0.2s all;
+}
+
+.login {
+    font-weight: 600;
+    color: var(--second);
+    font-size: 20px;
+}
+
+.wrapper:hover {
+    color: var(--thirth);
+    background-color: var(--accent);
+}
+
+.select {
+    font-size: 18px;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.select:focus {
+    outline: none;
+}

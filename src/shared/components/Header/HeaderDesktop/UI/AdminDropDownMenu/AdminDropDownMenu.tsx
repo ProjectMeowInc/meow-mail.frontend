@@ -19,7 +19,7 @@ const AdminDropDownMenu = () => {
             </div>
 
             <div className={isActive ? classes.menu_active : classes.menu}>
-                <AdminDropDownMenuItem href={"/admin/users"}>Пользователи</AdminDropDownMenuItem>
+                <AdminDropDownMenuItem href={"admin/users?page=1"}>Пользователи</AdminDropDownMenuItem>
             </div>
         </div>
     )

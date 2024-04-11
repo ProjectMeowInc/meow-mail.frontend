@@ -8,61 +8,68 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage"
 import RootLayout from "./shared/layouts/RootLayout/RootLayout"
 import EmailGroupPage from "./pages/EmailGroupPage/EmailGroupPage"
 import AgreementProcessingPersonalDataPage from "./pages/auth/AgreementProcessingPersonalDataPage/AgreementProcessingPersonalDataPage"
+import AdminUserPage from "./pages/AdminUserPage/AdminUserPage"
 
 const router = createBrowserRouter([
     {
         path: "/",
         children: [
-
             {
                 index: true,
-                element: <AuthPage/>
+                element: <AuthPage />,
             },
 
             {
                 path: "registration",
-                element: <RegistrationPage/>
+                element: <RegistrationPage />,
             },
 
             {
                 path: "confidentiality-agreement",
-                element: <AgreementProcessingPersonalDataPage/>
+                element: <AgreementProcessingPersonalDataPage />,
             },
 
             {
                 path: "my",
-                element: <RootLayout/>,
+                element: <RootLayout />,
                 children: [
-
                     {
                         index: true,
-                        element: <LettersPage/>
+                        element: <LettersPage />,
                     },
 
                     {
                         path: ":mailId",
-                        element: <LetterPage/>
+                        element: <LetterPage />,
                     },
 
                     {
                         path: "email-group/:groupId",
-                        element: <EmailGroupPage/>
+                        element: <EmailGroupPage />,
                     },
-                ]
+
+                    {
+                        path: "admin",
+                        children: [
+                            {
+                                path: "users",
+                                element: <AdminUserPage />,
+                            },
+                        ],
+                    },
+                ],
             },
 
             {
                 path: "*",
-                element: <NotFoundPage/>
-            }
-        ]
-    }
+                element: <NotFoundPage />,
+            },
+        ],
+    },
 ])
 
 function App() {
-    return (
-        <RouterProvider router={router}/>
-    )
+    return <RouterProvider router={router} />
 }
 
 export default App
