@@ -8,7 +8,6 @@ import { useGetEmailsByEmailGroupQuery } from "../../entities/Email/api/emailApi
 const DefaultPage = "1"
 
 export const useEmailGroupPage = () => {
-
     const { setSearchParams, getParamExcept } = useSearchParamsWrapper()
     const pageStr = getParamExcept("page", ["0"]).unwrapOrElse(() => {
         LogService.log(`Error get page STR. Use default value: ${DefaultPage}`, "ERROR")
@@ -23,12 +22,15 @@ export const useEmailGroupPage = () => {
         }
     }, [pageNumber])
 
-    const params = useParams<{groupId: string}>()
+    const params = useParams<{ groupId: string }>()
 
-    const {data: mails, error} = useGetEmailsByEmailGroupQuery({
-        page: Number(pageNumber),
-        email_group_id: Number(params.groupId)
-    }, {pollingInterval: 20000})
+    const { data: mails, error } = useGetEmailsByEmailGroupQuery(
+        {
+            page: Number(pageNumber),
+            email_group_id: Number(params.groupId),
+        },
+        { pollingInterval: 20000 },
+    )
 
     useEffect(() => {
         if (error && "data" in error) {
@@ -37,6 +39,6 @@ export const useEmailGroupPage = () => {
     }, [error])
 
     return {
-        mails
+        mails,
     }
 }

@@ -6,10 +6,10 @@ interface ICheckboxProps {
     label?: ReactNode
 }
 
-const Checkbox: FC<ICheckboxProps> = ({label}) => {
+const Checkbox: FC<ICheckboxProps> = ({ label }) => {
     return (
         <label className={classes.label}>
-            <input className={classes.checkbox} type={"checkbox"} required/>
+            <input className={classes.checkbox} type={"checkbox"} required />
             <p className={classes.label_content}>{label ?? ""}</p>
         </label>
     )

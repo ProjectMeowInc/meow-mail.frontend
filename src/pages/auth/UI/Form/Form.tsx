@@ -21,7 +21,14 @@ const Form: FC<IFormProps> = ({ onSubmit, isRegistration, onChange, isLoading, i
 
     return (
         <form className={classes.form} method={"post"} onSubmit={(e) => SubmitHandler(e, isLoading, onSubmit)}>
-            <Input required={true} error={inputErrors} onChange={onChange} type={"text"} name={"login"} placeholder={"Введите логин"} />
+            <Input
+                required={true}
+                error={inputErrors}
+                onChange={onChange}
+                type={"text"}
+                name={"login"}
+                placeholder={"Введите логин"}
+            />
             <Input
                 required={true}
                 error={inputErrors}
@@ -30,7 +37,19 @@ const Form: FC<IFormProps> = ({ onSubmit, isRegistration, onChange, isLoading, i
                 name={"password"}
                 placeholder={"Введите пароль"}
             />
-            {isRegistration && <Checkbox label={<p>Я принимаю <Link className={classes.agree} to={"/confidentiality-agreement"}>соглашение</Link>  на обработку персональныйх данных</p>}/>}
+            {isRegistration && (
+                <Checkbox
+                    label={
+                        <p>
+                            Я принимаю{" "}
+                            <Link className={classes.agree} to={"/confidentiality-agreement"}>
+                                соглашение
+                            </Link>{" "}
+                            на обработку персональныйх данных
+                        </p>
+                    }
+                />
+            )}
             <Button isLoading={isLoading}>Отправить</Button>
         </form>
     )

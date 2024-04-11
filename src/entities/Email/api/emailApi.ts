@@ -27,11 +27,12 @@ export const emailApi = createApi({
         }),
 
         getEmailWithFilter: build.query<IGetAllEmailWithFilterResponse, IGetAllEmailWIthFilterRequest>({
-            query: ({ pageNumber, subject, is_received }) => query("/v1/email/filter", "GET", true, undefined, {
-                page: pageNumber,
-                subject,
-                is_received,
-            }),
+            query: ({ pageNumber, subject, is_received }) =>
+                query("/v1/email/filter", "GET", true, undefined, {
+                    page: pageNumber,
+                    subject,
+                    is_received,
+                }),
             providesTags: (result) =>
                 result
                     ? [...result.items.map(({ id }) => ({ type: EmailType, id })), { type: EmailType, id: "LIST" }]
@@ -39,15 +40,23 @@ export const emailApi = createApi({
         }),
 
         getEmailsByEmailGroup: build.query<IGetEmailsByEmailGroupResponse, IGetEmailByEmailGroupRequest>({
-            query: ({page, email_group_id}) => query(`/v1/email-group/find/${email_group_id}?page=${page}`, "GET", true),
-            providesTags: result => result
-                ? [...result.items.map(({ id }) => ({ type: EmailType, id })), { type: EmailType, id: "LIST" }]
-                : [{ type: EmailType, id: "LIST" }, { type: EmailGroup, id: "LIST" }],
+            query: ({ page, email_group_id }) =>
+                query(`/v1/email-group/find/${email_group_id}?page=${page}`, "GET", true),
+            providesTags: (result) =>
+                result
+                    ? [...result.items.map(({ id }) => ({ type: EmailType, id })), { type: EmailType, id: "LIST" }]
+                    : [
+                          { type: EmailType, id: "LIST" },
+                          { type: EmailGroup, id: "LIST" },
+                      ],
         }),
 
         updateEmailStatus: build.mutation<void, IUpdateEmailStatusRequest>({
             query: (body) => query("/v1/email/my/set-read", "PUT", true, body),
-            invalidatesTags: [{ type: EmailType, id: "LIST" }, { type: EmailGroup, id: "LIST" }],
+            invalidatesTags: [
+                { type: EmailType, id: "LIST" },
+                { type: EmailGroup, id: "LIST" },
+            ],
         }),
 
         sendEmail: build.mutation<void, ISendEmailRequest>({
@@ -56,12 +65,15 @@ export const emailApi = createApi({
         }),
 
         getEmailById: build.query<IGetEmailByIdResponse, number>({
-            query: (emailId: number) => query(`/v1/email/${emailId}`, "GET", true)
+            query: (emailId: number) => query(`/v1/email/${emailId}`, "GET", true),
         }),
 
         deleteEmailById: build.mutation<void, number>({
             query: (emailId: number) => query(`/v1/email/${emailId}`, "DELETE", true),
-            invalidatesTags: [{ type: EmailType, id: "LIST" }, { type: EmailGroup, id: "LIST" }],
+            invalidatesTags: [
+                { type: EmailType, id: "LIST" },
+                { type: EmailGroup, id: "LIST" },
+            ],
         }),
     }),
 })
@@ -73,5 +85,5 @@ export const {
     useSendEmailMutation,
     useGetEmailByIdQuery,
     useDeleteEmailByIdMutation,
-    useGetEmailsByEmailGroupQuery
+    useGetEmailsByEmailGroupQuery,
 } = emailApi

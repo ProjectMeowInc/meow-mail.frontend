@@ -16,18 +16,17 @@ interface IEmailGroupItemProps {
     }
 }
 
-const EmailGroupItem: FC<IEmailGroupItemProps> = ({id, name}) => {
-
-    const {DeleteHandler} = useEmailGroupItem()
+const EmailGroupItem: FC<IEmailGroupItemProps> = ({ id, name }) => {
+    const { DeleteHandler } = useEmailGroupItem()
 
     return (
         <div className={classes.group}>
             <Link to={`email-group/${id}?page=1`} className={classes.caption}>
-                <Collection className={classes.icon}/>
+                <Collection className={classes.icon} />
                 <p>{name}</p>
             </Link>
 
-            <Trash className={classes.icon} onClick={async () => DeleteHandler(id)}/>
+            <Trash className={classes.icon} onClick={async () => DeleteHandler(id)} />
         </div>
     )
 }

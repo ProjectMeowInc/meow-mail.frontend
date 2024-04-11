@@ -2,11 +2,9 @@ import { useEffect, useState } from "react"
 import { AlertService } from "../../services/AlertService"
 import { useGetAllEmailGroupQuery } from "../../../entities/EmailGroup/api/EmailGroupApi"
 
-
 export const useEmailGroup = () => {
-
     const [isOpen, setIsOpen] = useState(false)
-    const {data: groups, error} = useGetAllEmailGroupQuery()
+    const { data: groups, error } = useGetAllEmailGroupQuery()
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
 
     useEffect(() => {
@@ -20,6 +18,6 @@ export const useEmailGroup = () => {
         setIsOpen,
         groups,
         setModalIsOpen,
-        modalIsOpen
+        modalIsOpen,
     }
 }

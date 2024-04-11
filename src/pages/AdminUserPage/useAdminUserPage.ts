@@ -8,7 +8,7 @@ import { IOnChangeEvent } from "../../shared/events/IOnChangeEvent"
 
 const DefaultPage = "1"
 
-export const useAdminPage = () => {
+export const useAdminUserPage = () => {
     const { setSearchParams, getParamExcept } = useSearchParamsWrapper()
     const pageStr = getParamExcept("page", ["0"]).unwrapOrElse(() => {
         LogService.log(`Error get page STR. Use default value: ${DefaultPage}`, "ERROR")

@@ -10,36 +10,30 @@ import CreateEmailGroupModal from "./UI/CreateEmailGroupModal/CreateEmailGroupMo
 import Cross from "../../icons/plus-sm.svg?react"
 
 const EmailGroup = () => {
-
-    const {setIsOpen, isOpen, groups, setModalIsOpen, modalIsOpen,} = useEmailGroup()
+    const { setIsOpen, isOpen, groups, setModalIsOpen, modalIsOpen } = useEmailGroup()
 
     if (!groups) {
-        return <Preloader/>
+        return <Preloader />
     }
 
     return (
         <div className={classes.menu}>
-            {modalIsOpen && <CreateEmailGroupModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>}
-            <div className={classes.button} onClick={() => setIsOpen(prevState => !prevState)}>
+            {modalIsOpen && <CreateEmailGroupModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />}
+            <div className={classes.button} onClick={() => setIsOpen((prevState) => !prevState)}>
                 <div className={classes.button_text}>
-                    <Filter/>
+                    <Filter />
                     <p>Группы писем</p>
                 </div>
-                <Down className={isOpen ? classes.down_active : classes.down}/>
+                <Down className={isOpen ? classes.down_active : classes.down} />
             </div>
 
             <div className={isOpen ? classes.groups_active : classes.groups}>
                 <div className={classes.create_button} onClick={() => setModalIsOpen(true)}>
                     <p>Добавить новую группу</p>
-                    <Cross className={classes.icon}/>
+                    <Cross className={classes.icon} />
                 </div>
-                {groups.items.map(group => (
-                    <EmailGroupItem
-                        key={group.id}
-                        id={group.id}
-                        name={group.name}
-                        constrains={group.constrains}
-                    />
+                {groups.items.map((group) => (
+                    <EmailGroupItem key={group.id} id={group.id} name={group.name} constrains={group.constrains} />
                 ))}
             </div>
         </div>

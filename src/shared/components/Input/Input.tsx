@@ -21,7 +21,18 @@ interface IInputProps {
     required?: boolean
 }
 
-const Input: FC<IInputProps> = ({ placeholder, required, type, name, style, onChange, error, inputType, icon, fieldName }) => {
+const Input: FC<IInputProps> = ({
+    placeholder,
+    required,
+    type,
+    name,
+    style,
+    onChange,
+    error,
+    inputType,
+    icon,
+    fieldName,
+}) => {
     switch (inputType) {
         case 1:
             return (

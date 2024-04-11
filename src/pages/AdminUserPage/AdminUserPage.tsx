@@ -1,10 +1,10 @@
 import React from "react"
-import { useAdminPage } from "./useAdminPage"
+import { useAdminUserPage } from "./useAdminUserPage"
 import Preloader from "../../shared/components/Preloader/Preloader"
 import UserItem from "./UI/UserItem/UserItem"
 
 const AdminUserPage = () => {
-    const { users, ChangeHandler } = useAdminPage()
+    const { users, ChangeHandler } = useAdminUserPage()
 
     if (!users) {
         return <Preloader />
