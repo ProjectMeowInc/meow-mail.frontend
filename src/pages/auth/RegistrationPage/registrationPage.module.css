@@ -1,6 +1,6 @@
 @media (min-width: 0) {
     .wrapper {
-        background-color: #f8f8f8;
+        background-color: var(--gray);
         width: 100dvw;
         height: 100dvh;
         display: flex;
@@ -8,11 +8,12 @@
         align-items: center;
         flex-direction: column;
         user-select: none;
+        color: var(--white);
     }
 
     .modal {
         width: 90%;
-        background-color: white;
+        background-color: var(--thirth);
         border-radius: 20px;
         padding: 20px;
         display: flex;
@@ -22,6 +23,7 @@
 
     .links {
         display: flex;
+        color: var(--second);
         flex-direction: column;
         gap: 20px 0;
     }
@@ -40,8 +42,8 @@
     .caption {
         font-weight: 700;
         font-size: 22px;
-        color: rgba(0, 0, 0, 0.5);
-    }
+        color: var(--white);
+        }
 
     .logo {
         margin-bottom: 20px;

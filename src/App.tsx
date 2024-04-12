@@ -9,6 +9,8 @@ import RootLayout from "./shared/layouts/RootLayout/RootLayout"
 import EmailGroupPage from "./pages/EmailGroupPage/EmailGroupPage"
 import AgreementProcessingPersonalDataPage from "./pages/auth/AgreementProcessingPersonalDataPage/AgreementProcessingPersonalDataPage"
 import AdminUserPage from "./pages/AdminUserPage/AdminUserPage"
+import "./index.module.css"
+import { useAppSelector } from "./store"
 
 const router = createBrowserRouter([
     {
@@ -69,7 +71,13 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-    return <RouterProvider router={router} />
+    const theme = useAppSelector((state) => state.theme.theme)
+
+    return (
+        <div data-theme={theme}>
+            <RouterProvider router={router} />
+        </div>
+    )
 }
 
 export default App

@@ -8,6 +8,7 @@ import { emailApi } from "./entities/Email/api/emailApi"
 import { emailSlice } from "./entities/Email/slices/emailSlice"
 import { emailGroupApi } from "./entities/EmailGroup/api/EmailGroupApi"
 import { userApi } from "./entities/User/api/userApi"
+import { themeSlice } from "./entities/Theme/slices/themeSlice"
 
 export const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
     [emailSlice.reducerPath]: emailSlice.reducer,
     [emailGroupApi.reducerPath]: emailGroupApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [themeSlice.reducerPath]: themeSlice.reducer,
 })
 
 const persistConfig = {

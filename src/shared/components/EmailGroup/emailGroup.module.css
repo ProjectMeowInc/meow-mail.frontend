@@ -1,6 +1,6 @@
 .menu {
     width: 100%;
-    background-color: white;
+    background-color: var(--thirth);
     padding: 15px 10px;
     border-radius: 20px;
 }
@@ -15,6 +15,7 @@
     cursor: pointer;
     user-select: none;
     color: var(--second);
+    padding: 10px;
 }
 
 .button_text {

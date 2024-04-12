@@ -1,17 +1,20 @@
-:root {
-    --accent: #552695;
-    --second: #756cbf;
-    --third: rgba(255, 255, 255, 0.95);
-    --thirth: #fff;
-    --gray: #dbdbdb;
-}
 
-body[data-theme="light"] {
+[data-theme="light"] {
     --accent: #caacf2;
     --second: #756cbf;
     --third: rgba(255, 255, 255, 0.95);
     --gray: #dbdbdb;
     --thirth: #fff;
+    --white: #000;
+}
+
+[data-theme="dark"] {
+    --accent: #caacf2;
+    --second: #756cbf;
+    --third: #202020;
+    --gray: #0A0A0A;
+    --thirth: #2E2E2E;
+    --white: #fff;
 }
 
 * {
