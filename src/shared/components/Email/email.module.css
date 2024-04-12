@@ -22,7 +22,7 @@
 }
 
 .email {
-    background-color: white;
+    background-color: var(--third);
     width: 100%;
     height: 100%;
     display: flex;
