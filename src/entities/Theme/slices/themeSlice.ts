@@ -4,8 +4,6 @@ type ThemeInitialSliceState = {
     theme: "dark" | "light"
 }
 
-console.log(window.matchMedia("(prefers-color-scheme: dark)").matches)
-
 const initialState: ThemeInitialSliceState = {
     theme: window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
 }
