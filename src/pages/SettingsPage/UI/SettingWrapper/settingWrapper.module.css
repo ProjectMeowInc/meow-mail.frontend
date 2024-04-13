@@ -1,0 +1,10 @@
+.wrapper {
+    padding: 20px;
+    width: 25dvw;
+}
+
+.caption {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--second);
+}

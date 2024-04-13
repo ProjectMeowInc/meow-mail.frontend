@@ -1,0 +1,42 @@
+.switch {
+    width: 32px;
+    height: 16px;
+    border: 2px solid var(--second);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--second);
+    transform: translateX(0);
+    transition: 0.2s all;
+}
+
+.switch_active {
+    width: 32px;
+    height: 16px;
+    border: 2px solid var(--second);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    cursor: pointer;
+    background-color: var(--second);
+    transition: 0.2s all;
+}
+
+.circle_active {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--thirth);
+    margin-left: 12px;
+    transition: 0.2s all;
+}
