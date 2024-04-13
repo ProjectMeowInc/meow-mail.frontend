@@ -10,7 +10,7 @@ const SettingsPage = () => {
                 <ChangeTheme />
             </SettingsWrapper>
 
-            <SettingsWrapper caption={"Некий заголовок"}>
+            <SettingsWrapper caption={"Настройки аккаунта"}>
                 <ChangePasswordForm />
             </SettingsWrapper>
         </div>
