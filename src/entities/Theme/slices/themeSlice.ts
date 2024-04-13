@@ -22,4 +22,4 @@ export const themeSlice = createSlice({
     },
 })
 
-const { setTheme, resetTheme } = themeSlice.actions
+export const { setTheme, resetTheme } = themeSlice.actions
