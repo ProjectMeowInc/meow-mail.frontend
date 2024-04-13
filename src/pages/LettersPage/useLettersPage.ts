@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../store"
 import { setEmails } from "../../entities/Email/slices/emailSlice"
 import { useSearchParamsWrapper } from "../../shared/hooks/useSearchParamsWrapper"
 import { LogService } from "../../shared/services/LogService"
+import { hasDataInError } from "../../shared/utils/hasData"
 
 const DefaultPage = "1"
 
@@ -47,7 +48,7 @@ export const useLettersPage = () => {
     }, [mails])
 
     useEffect(() => {
-        if (error && "data" in error) {
+        if (hasDataInError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])

@@ -3,6 +3,7 @@ import { FormEvent, useEffect, useRef, useState } from "react"
 import { AlertService } from "../../../../services/AlertService"
 import { IOnChangeEvent } from "../../../../events/IOnChangeEvent"
 import { useAppSelector } from "../../../../../store"
+import { hasDataInError } from "../../../../utils/hasData"
 
 interface IRequestDataProps {
     constrains?: {
@@ -20,7 +21,7 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
     const ref = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-        if (createEmailGroupError && "data" in createEmailGroupError) {
+        if (hasDataInError(createEmailGroupError)) {
             return AlertService.error(createEmailGroupError.data.message)
         }
     }, [createEmailGroupError])

@@ -5,6 +5,7 @@ import { useSearchParamsWrapper } from "../../shared/hooks/useSearchParamsWrappe
 import { LogService } from "../../shared/services/LogService"
 import { UserRoleType } from "../../entities/User/types/UserRoleType"
 import { IOnChangeEvent } from "../../shared/events/IOnChangeEvent"
+import { hasDataInError } from "../../shared/utils/hasData"
 
 const DefaultPage = "1"
 
@@ -28,7 +29,7 @@ export const useAdminUserPage = () => {
     })
 
     useEffect(() => {
-        if (getUserError && "data" in getUserError) {
+        if (hasDataInError(getUserError)) {
             return AlertService.error(getUserError.data.message)
         }
     }, [getUserError])
@@ -40,13 +41,13 @@ export const useAdminUserPage = () => {
     }, [isUpdateRoleSuccess])
 
     useEffect(() => {
-        if (getUserError && "data" in getUserError) {
+        if (hasDataInError(getUserError)) {
             return AlertService.error(getUserError.data.message)
         }
     }, [getUserError])
 
     useEffect(() => {
-        if (updateRoleError && "data" in updateRoleError) {
+        if (hasDataInError(updateRoleError)) {
             return AlertService.error(updateRoleError.data.message)
         }
     }, [updateRoleError])
