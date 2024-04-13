@@ -11,6 +11,7 @@ import AgreementProcessingPersonalDataPage from "./pages/auth/AgreementProcessin
 import AdminUserPage from "./pages/AdminUserPage/AdminUserPage"
 import "./index.css"
 import { useAppSelector } from "./store"
+import SettingsPage from "./pages/SettingsPage/SettingsPage"
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
                                 element: <AdminUserPage />,
                             },
                         ],
+                    },
+
+                    {
+                        path: "settings",
+                        element: <SettingsPage />,
                     },
                 ],
             },
