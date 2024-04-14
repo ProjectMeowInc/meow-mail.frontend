@@ -5,6 +5,7 @@ import Button from "../../../Button/Button"
 import { useCreateEmailGroupModal } from "./useCreateEmailGroupModal"
 
 import Cross from "../../../../icons/plus-sm.svg?react"
+import EmailBadge from "../../../EmailBadge/EmailBadge"
 
 interface ICreateEmailGroupModal {
     modalIsOpen: boolean
@@ -12,14 +13,22 @@ interface ICreateEmailGroupModal {
 }
 
 const CreateEmailGroupModal: FC<ICreateEmailGroupModal> = ({ setModalIsOpen, modalIsOpen }) => {
-    const { ref, SubmitHandler, ChangeHandler } = useCreateEmailGroupModal(modalIsOpen, setModalIsOpen)
+    const { SubmitHandler, ChangeHandler, emails, DeleteEmailHandler } = useCreateEmailGroupModal(
+        modalIsOpen,
+        setModalIsOpen,
+    )
 
     return (
         <div className={classes.wrapper}>
-            <div className={classes.modal} ref={ref}>
+            <div className={classes.modal}>
                 <div className={classes.caption}>
                     <h1>Создание группы</h1>
-                    <Cross className={classes.cross} />
+                    <Cross
+                        className={classes.cross}
+                        onClick={() => {
+                            setModalIsOpen(false)
+                        }}
+                    />
                 </div>
                 <form className={classes.form} onSubmit={SubmitHandler}>
                     <Input
@@ -30,6 +39,13 @@ const CreateEmailGroupModal: FC<ICreateEmailGroupModal> = ({ setModalIsOpen, mod
                         }}
                         onChange={ChangeHandler}
                     />
+
+                    <div className={classes.emails}>
+                        {emails.map((email, index) => (
+                            <EmailBadge key={index} mailbox={email} deleteHandler={() => DeleteEmailHandler(email)} />
+                        ))}
+                    </div>
+
                     <Input
                         name={"from"}
                         placeholder={"Введите от кого письмо"}

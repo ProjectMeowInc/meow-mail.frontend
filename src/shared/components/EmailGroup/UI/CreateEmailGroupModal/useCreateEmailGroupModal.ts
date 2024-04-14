@@ -1,5 +1,5 @@
 import { useCreateEmailGroupMutation } from "../../../../../entities/EmailGroup/api/EmailGroupApi"
-import { FormEvent, useEffect, useRef, useState } from "react"
+import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { AlertService } from "../../../../services/AlertService"
 import { IOnChangeEvent } from "../../../../events/IOnChangeEvent"
 import { useAppSelector } from "../../../../../store"
@@ -7,7 +7,7 @@ import { hasDataInError } from "../../../../utils/hasData"
 
 interface IRequestDataProps {
     constrains?: {
-        from?: string
+        from?: string[]
         subject?: string
         to?: string
     }
@@ -18,7 +18,7 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
     const [createEmailGroup, { error: createEmailGroupError, isSuccess }] = useCreateEmailGroupMutation()
     const [requestData, setRequestData] = useState<IRequestDataProps>()
     const user = useAppSelector((state) => state.user.data)
-    const ref = useRef<HTMLDivElement | null>(null)
+    const [emails, setEmails] = useState<string[]>([])
 
     useEffect(() => {
         if (hasDataInError(createEmailGroupError)) {
@@ -33,12 +33,22 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
         }
     }, [isSuccess])
 
-    const ChangeHandler = ({ fieldValue, fieldName }: IOnChangeEvent) => {
+    const ChangeHandler = ({ fieldValue, fieldName }: IOnChangeEvent, event?: ChangeEvent<HTMLInputElement>) => {
+        console.log(emails)
+
         if (fieldName === "name") {
             setRequestData((prevState) => ({
                 ...prevState,
                 name: fieldValue,
             }))
+        } else if (fieldName === "from" && fieldValue.includes(" ")) {
+            if (event) {
+                event.target.value = ""
+            }
+
+            if (!emails.includes(fieldValue.trim())) {
+                setEmails((prevState) => [...prevState, fieldValue.trim()])
+            }
         } else {
             setRequestData((prevState) => ({
                 ...prevState,
@@ -61,14 +71,20 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
             name: requestData.name,
             constrains: {
                 ...requestData.constrains,
-                to: user ? `${user.login}@projectmeow.ru` : "",
+                from: emails,
+                to: [user ? `${user.login}@projectmeow.ru` : ""],
             },
         })
+    }
+
+    const DeleteEmailHandler = (mailbox: string) => {
+        setEmails(emails.filter((email) => email !== mailbox))
     }
 
     return {
         SubmitHandler,
         ChangeHandler,
-        ref,
+        emails,
+        DeleteEmailHandler,
     }
 }
