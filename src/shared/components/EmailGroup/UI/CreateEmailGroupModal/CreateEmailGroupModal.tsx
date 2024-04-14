@@ -6,7 +6,6 @@ import { useCreateEmailGroupModal } from "./useCreateEmailGroupModal"
 
 import Cross from "../../../../icons/plus-sm.svg?react"
 import Mailbox from "../../../Mailbox/Mailbox"
-import mailbox from "../../../Mailbox/Mailbox"
 
 interface ICreateEmailGroupModal {
     modalIsOpen: boolean
