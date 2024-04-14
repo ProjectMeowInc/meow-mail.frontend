@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react"
+import React, { ChangeEvent, FC, ReactNode } from "react"
 import { IOnChangeEvent } from "../../events/IOnChangeEvent"
 import { IInputError } from "./IInputError"
 import DefaultInput from "./DefaultInput/DefaultInput"
@@ -11,7 +11,7 @@ interface IInputProps {
     placeholder?: string
     name: string
     type?: "email" | "text" | "password"
-    onChange?: (data: IOnChangeEvent) => void
+    onChange?: (data: IOnChangeEvent, event?: ChangeEvent<HTMLInputElement>) => void
     error?: IInputError[]
     style?: {
         margin?: string

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { ChangeEvent, FC } from "react"
 import classes from "./defaultInput.module.css"
 import { IOnChangeEvent } from "../../../events/IOnChangeEvent"
 import { IInputError } from "../IInputError"
@@ -8,7 +8,7 @@ interface IDefaultInputProps {
     placeholder?: string
     name: string
     type?: "email" | "text" | "password"
-    onChange?: (data: IOnChangeEvent) => void
+    onChange?: (data: IOnChangeEvent, event?: ChangeEvent<HTMLInputElement>) => void
     error?: IInputError[]
     style?: {
         margin?: string
@@ -29,10 +29,13 @@ const DefaultInput: FC<IDefaultInputProps> = ({ placeholder, required, type, nam
                 name={name}
                 required={required}
                 onChange={(event) =>
-                    ChangeHandler({
-                        fieldName: event.target.name,
-                        fieldValue: event.target.value,
-                    })
+                    ChangeHandler(
+                        {
+                            fieldName: event.target.name,
+                            fieldValue: event.target.value,
+                        },
+                        event,
+                    )
                 }
                 style={{
                     width: style?.width,
