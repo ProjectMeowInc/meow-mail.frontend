@@ -16,7 +16,7 @@ steps:
 
     - name: cleanup-folder
       commands:
-          - rm -r /var/apps/meow-mail-frontend
+          - rm -r -f /var/apps/meow-mail-frontend
 
     - name: build
       commands:
