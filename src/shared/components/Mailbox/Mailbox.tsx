@@ -2,12 +2,12 @@ import React, { FC } from "react"
 import Cross from "../../icons/plus-sm.svg?react"
 import classes from "./mailbox.module.css"
 
-interface IEmailBadgeProps {
+interface IMailboxProps {
     mailbox: string
     deleteHandler?: () => void
 }
 
-const Mailbox: FC<IEmailBadgeProps> = ({ mailbox, deleteHandler }) => {
+const Mailbox: FC<IMailboxProps> = ({ mailbox, deleteHandler }) => {
     return (
         <div className={classes.badge} title={mailbox}>
             <p className={classes.mailbox}>{mailbox}</p>
