@@ -33,15 +33,15 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
         }
     }, [isSuccess])
 
-    const ChangeHandler = ({ fieldValue, fieldName, input }: IOnChangeEvent) => {
+    const ChangeHandler = ({ fieldValue, fieldName, baseEvent }: IOnChangeEvent) => {
         if (fieldName === "name") {
             setRequestData((prevState) => ({
                 ...prevState,
                 name: fieldValue,
             }))
         } else if (fieldName === "from" && fieldValue.includes(" ")) {
-            if (input) {
-                input.target.value = ""
+            if (baseEvent) {
+                baseEvent.target.value = ""
             }
 
             const email = fieldValue.trim()
