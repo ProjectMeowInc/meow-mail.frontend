@@ -1,5 +1,5 @@
 import { useCreateEmailGroupMutation } from "../../../../../entities/EmailGroup/api/EmailGroupApi"
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { AlertService } from "../../../../services/AlertService"
 import { IOnChangeEvent } from "../../../../events/IOnChangeEvent"
 import { useAppSelector } from "../../../../../store"
@@ -33,21 +33,21 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
         }
     }, [isSuccess])
 
-    const ChangeHandler = ({ fieldValue, fieldName }: IOnChangeEvent, event?: ChangeEvent<HTMLInputElement>) => {
-        console.log(emails)
-
+    const ChangeHandler = ({ fieldValue, fieldName, input }: IOnChangeEvent) => {
         if (fieldName === "name") {
             setRequestData((prevState) => ({
                 ...prevState,
                 name: fieldValue,
             }))
         } else if (fieldName === "from" && fieldValue.includes(" ")) {
-            if (event) {
-                event.target.value = ""
+            if (input) {
+                input.target.value = ""
             }
 
-            if (!emails.includes(fieldValue.trim())) {
-                setEmails((prevState) => [...prevState, fieldValue.trim()])
+            const email = fieldValue.trim()
+
+            if (!emails.includes(email)) {
+                setEmails((prevState) => [...prevState, email])
             }
         } else {
             setRequestData((prevState) => ({
