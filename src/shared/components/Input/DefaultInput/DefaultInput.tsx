@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, FocusEvent } from "react"
 import classes from "./defaultInput.module.css"
 import { IOnChangeEvent } from "../../../events/IOnChangeEvent"
 import { IInputError } from "../IInputError"
@@ -9,6 +9,7 @@ interface IDefaultInputProps {
     name: string
     type?: "email" | "text" | "password"
     onChange?: (data: IOnChangeEvent) => void
+    onBlur?: (event: FocusEvent<HTMLInputElement>) => void
     error?: IInputError[]
     style?: {
         margin?: string
@@ -17,7 +18,16 @@ interface IDefaultInputProps {
     required?: boolean
 }
 
-const DefaultInput: FC<IDefaultInputProps> = ({ placeholder, required, type, name, style, onChange, error }) => {
+const DefaultInput: FC<IDefaultInputProps> = ({
+    placeholder,
+    required,
+    onBlur,
+    type,
+    name,
+    style,
+    onChange,
+    error,
+}) => {
     const { inputError, ChangeHandler } = useInput(name, onChange, error)
 
     return (
@@ -28,6 +38,7 @@ const DefaultInput: FC<IDefaultInputProps> = ({ placeholder, required, type, nam
                 type={type}
                 name={name}
                 required={required}
+                onBlur={onBlur}
                 onChange={(event) =>
                     ChangeHandler({
                         fieldName: event.target.name,

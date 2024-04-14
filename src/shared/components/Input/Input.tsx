@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, ReactNode } from "react"
+import React, { FC, ReactNode, FocusEvent } from "react"
 import { IOnChangeEvent } from "../../events/IOnChangeEvent"
 import { IInputError } from "./IInputError"
 import DefaultInput from "./DefaultInput/DefaultInput"
@@ -11,7 +11,8 @@ interface IInputProps {
     placeholder?: string
     name: string
     type?: "email" | "text" | "password"
-    onChange?: (data: IOnChangeEvent, event?: ChangeEvent<HTMLInputElement>) => void
+    onChange?: (data: IOnChangeEvent) => void
+    onBlur?: (event: FocusEvent<HTMLInputElement>) => void
     error?: IInputError[]
     style?: {
         margin?: string
@@ -28,6 +29,7 @@ const Input: FC<IInputProps> = ({
     name,
     style,
     onChange,
+    onBlur,
     error,
     inputType,
     icon,
@@ -44,6 +46,7 @@ const Input: FC<IInputProps> = ({
                     onChange={onChange}
                     error={error}
                     required={required}
+                    onBlur={onBlur}
                 />
             )
 
@@ -84,6 +87,7 @@ const Input: FC<IInputProps> = ({
                     onChange={onChange}
                     error={error}
                     required={required}
+                    onBlur={onBlur}
                 />
             )
     }

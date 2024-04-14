@@ -13,7 +13,7 @@ interface ICreateEmailGroupModal {
 }
 
 const CreateEmailGroupModal: FC<ICreateEmailGroupModal> = ({ setModalIsOpen, modalIsOpen }) => {
-    const { SubmitHandler, ChangeHandler, emails, DeleteEmailHandler } = useCreateEmailGroupModal(
+    const { SubmitHandler, ChangeHandler, emails, DeleteEmailHandler, BlurHandler } = useCreateEmailGroupModal(
         modalIsOpen,
         setModalIsOpen,
     )
@@ -52,7 +52,9 @@ const CreateEmailGroupModal: FC<ICreateEmailGroupModal> = ({ setModalIsOpen, mod
                         style={{
                             width: "100p%",
                         }}
+                        inputType={1}
                         onChange={ChangeHandler}
+                        onBlur={BlurHandler}
                     />
 
                     <Input

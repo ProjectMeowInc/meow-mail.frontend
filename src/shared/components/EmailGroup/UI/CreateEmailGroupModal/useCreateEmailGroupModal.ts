@@ -1,5 +1,5 @@
 import { useCreateEmailGroupMutation } from "../../../../../entities/EmailGroup/api/EmailGroupApi"
-import { FormEvent, useEffect, useState } from "react"
+import { FocusEvent, FormEvent, useEffect, useState } from "react"
 import { AlertService } from "../../../../services/AlertService"
 import { IOnChangeEvent } from "../../../../events/IOnChangeEvent"
 import { useAppSelector } from "../../../../../store"
@@ -81,10 +81,22 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
         setEmails(emails.filter((email) => email !== mailbox))
     }
 
+    const BlurHandler = (event: FocusEvent<HTMLInputElement>) => {
+        console.log(event.target.value)
+        const email = event.target.value.trim()
+
+        if (!emails.includes(email)) {
+            setEmails((prevState) => [...prevState, email])
+        }
+
+        event.target.value = ""
+    }
+
     return {
         SubmitHandler,
         ChangeHandler,
         emails,
         DeleteEmailHandler,
+        BlurHandler,
     }
 }
