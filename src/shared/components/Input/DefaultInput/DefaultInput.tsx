@@ -43,7 +43,7 @@ const DefaultInput: FC<IDefaultInputProps> = ({
                     ChangeHandler({
                         fieldName: event.target.name,
                         fieldValue: event.target.value,
-                        input: event,
+                        baseEvent: event,
                     })
                 }
                 style={{
