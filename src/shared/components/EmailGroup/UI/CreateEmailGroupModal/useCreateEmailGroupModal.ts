@@ -18,7 +18,7 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
     const [createEmailGroup, { error: createEmailGroupError, isSuccess }] = useCreateEmailGroupMutation()
     const [requestData, setRequestData] = useState<IRequestDataProps>()
     const user = useAppSelector((state) => state.user.data)
-    const [emails, setEmails] = useState<string[]>([])
+    const [mailboxes, setMailboxes] = useState<string[]>([])
 
     useEffect(() => {
         if (hasDataInError(createEmailGroupError)) {
@@ -46,8 +46,8 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
 
             const email = fieldValue.trim()
 
-            if (!emails.includes(email)) {
-                setEmails((prevState) => [...prevState, email])
+            if (!mailboxes.includes(email)) {
+                setMailboxes((prevState) => [...prevState, email])
             }
         } else {
             setRequestData((prevState) => ({
@@ -71,22 +71,22 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
             name: requestData.name,
             constrains: {
                 ...requestData.constrains,
-                from: emails,
+                from: mailboxes,
                 to: [user ? `${user.login}@projectmeow.ru` : ""],
             },
         })
     }
 
     const DeleteEmailHandler = (mailbox: string) => {
-        setEmails(emails.filter((email) => email !== mailbox))
+        setMailboxes(mailboxes.filter((email) => email !== mailbox))
     }
 
     const BlurHandler = (event: FocusEvent<HTMLInputElement>) => {
         console.log(event.target.value)
         const email = event.target.value.trim()
 
-        if (!emails.includes(email)) {
-            setEmails((prevState) => [...prevState, email])
+        if (!mailboxes.includes(email)) {
+            setMailboxes((prevState) => [...prevState, email])
         }
 
         event.target.value = ""
@@ -95,7 +95,7 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
     return {
         SubmitHandler,
         ChangeHandler,
-        emails,
+        mailboxes,
         DeleteEmailHandler,
         BlurHandler,
     }

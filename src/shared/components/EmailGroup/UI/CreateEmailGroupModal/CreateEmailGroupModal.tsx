@@ -6,6 +6,7 @@ import { useCreateEmailGroupModal } from "./useCreateEmailGroupModal"
 
 import Cross from "../../../../icons/plus-sm.svg?react"
 import Mailbox from "../../../Mailbox/Mailbox"
+import mailbox from "../../../Mailbox/Mailbox"
 
 interface ICreateEmailGroupModal {
     modalIsOpen: boolean
@@ -13,7 +14,7 @@ interface ICreateEmailGroupModal {
 }
 
 const CreateEmailGroupModal: FC<ICreateEmailGroupModal> = ({ setModalIsOpen, modalIsOpen }) => {
-    const { SubmitHandler, ChangeHandler, emails, DeleteEmailHandler, BlurHandler } = useCreateEmailGroupModal(
+    const { SubmitHandler, ChangeHandler, mailboxes, DeleteEmailHandler, BlurHandler } = useCreateEmailGroupModal(
         modalIsOpen,
         setModalIsOpen,
     )
@@ -41,8 +42,8 @@ const CreateEmailGroupModal: FC<ICreateEmailGroupModal> = ({ setModalIsOpen, mod
                     />
 
                     <div className={classes.emails}>
-                        {emails.map((email, index) => (
-                            <Mailbox key={index} mailbox={email} deleteHandler={() => DeleteEmailHandler(email)} />
+                        {mailboxes.map((mailbox, index) => (
+                            <Mailbox key={index} mailbox={mailbox} deleteHandler={() => DeleteEmailHandler(mailbox)} />
                         ))}
                     </div>
 
