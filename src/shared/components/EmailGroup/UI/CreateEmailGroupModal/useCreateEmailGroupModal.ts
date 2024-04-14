@@ -1,5 +1,5 @@
 import { useCreateEmailGroupMutation } from "../../../../../entities/EmailGroup/api/EmailGroupApi"
-import { FormEvent, useEffect, useRef, useState } from "react"
+import { FocusEvent, FormEvent, useEffect, useState } from "react"
 import { AlertService } from "../../../../services/AlertService"
 import { IOnChangeEvent } from "../../../../events/IOnChangeEvent"
 import { useAppSelector } from "../../../../../store"
@@ -7,7 +7,7 @@ import { hasDataInError } from "../../../../utils/hasData"
 
 interface IRequestDataProps {
     constrains?: {
-        from?: string
+        from?: string[]
         subject?: string
         to?: string
     }
@@ -18,7 +18,7 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
     const [createEmailGroup, { error: createEmailGroupError, isSuccess }] = useCreateEmailGroupMutation()
     const [requestData, setRequestData] = useState<IRequestDataProps>()
     const user = useAppSelector((state) => state.user.data)
-    const ref = useRef<HTMLDivElement | null>(null)
+    const [mailboxes, setMailboxes] = useState<string[]>([])
 
     useEffect(() => {
         if (hasDataInError(createEmailGroupError)) {
@@ -33,12 +33,22 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
         }
     }, [isSuccess])
 
-    const ChangeHandler = ({ fieldValue, fieldName }: IOnChangeEvent) => {
+    const ChangeHandler = ({ fieldValue, fieldName, baseEvent }: IOnChangeEvent) => {
         if (fieldName === "name") {
             setRequestData((prevState) => ({
                 ...prevState,
                 name: fieldValue,
             }))
+        } else if (fieldName === "from" && fieldValue.includes(" ")) {
+            if (baseEvent) {
+                baseEvent.target.value = ""
+            }
+
+            const email = fieldValue.trim()
+
+            if (!mailboxes.includes(email)) {
+                setMailboxes((prevState) => [...prevState, email])
+            }
         } else {
             setRequestData((prevState) => ({
                 ...prevState,
@@ -61,14 +71,32 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
             name: requestData.name,
             constrains: {
                 ...requestData.constrains,
-                to: user ? `${user.login}@projectmeow.ru` : "",
+                from: mailboxes,
+                to: [user ? `${user.login}@projectmeow.ru` : ""],
             },
         })
+    }
+
+    const DeleteEmailHandler = (mailbox: string) => {
+        setMailboxes(mailboxes.filter((email) => email !== mailbox))
+    }
+
+    const BlurHandler = (event: FocusEvent<HTMLInputElement>) => {
+        console.log(event.target.value)
+        const email = event.target.value.trim()
+
+        if (!mailboxes.includes(email)) {
+            setMailboxes((prevState) => [...prevState, email])
+        }
+
+        event.target.value = ""
     }
 
     return {
         SubmitHandler,
         ChangeHandler,
-        ref,
+        mailboxes,
+        DeleteEmailHandler,
+        BlurHandler,
     }
 }

@@ -1,0 +1,19 @@
+.badge {
+    padding: 3px;
+    border-radius: 20px;
+    border: 1px solid var(--accent);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mailbox {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.cross {
+    stroke: var(--accent);
+    cursor: pointer;
+}

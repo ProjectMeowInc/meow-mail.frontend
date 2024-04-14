@@ -1,8 +1,8 @@
 export interface ICreateEmailGroupRequest {
     constrains?: {
-        from?: string
+        from?: string[]
         subject?: string
-        to?: string
+        to?: string[]
     }
     name: string
 }
