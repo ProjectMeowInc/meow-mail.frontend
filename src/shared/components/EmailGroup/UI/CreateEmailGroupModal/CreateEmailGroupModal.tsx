@@ -5,7 +5,7 @@ import Button from "../../../Button/Button"
 import { useCreateEmailGroupModal } from "./useCreateEmailGroupModal"
 
 import Cross from "../../../../icons/plus-sm.svg?react"
-import EmailBadge from "../../../EmailBadge/EmailBadge"
+import Mailbox from "../../../Mailbox/Mailbox"
 
 interface ICreateEmailGroupModal {
     modalIsOpen: boolean
@@ -42,7 +42,7 @@ const CreateEmailGroupModal: FC<ICreateEmailGroupModal> = ({ setModalIsOpen, mod
 
                     <div className={classes.emails}>
                         {emails.map((email, index) => (
-                            <EmailBadge key={index} mailbox={email} deleteHandler={() => DeleteEmailHandler(email)} />
+                            <Mailbox key={index} mailbox={email} deleteHandler={() => DeleteEmailHandler(email)} />
                         ))}
                     </div>
 

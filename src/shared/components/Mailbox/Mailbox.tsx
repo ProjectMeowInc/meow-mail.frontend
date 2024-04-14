@@ -1,13 +1,13 @@
 import React, { FC } from "react"
 import Cross from "../../icons/plus-sm.svg?react"
-import classes from "./emailBadge.module.css"
+import classes from "./mailbox.module.css"
 
 interface IEmailBadgeProps {
     mailbox: string
     deleteHandler?: () => void
 }
 
-const EmailBadge: FC<IEmailBadgeProps> = ({ mailbox, deleteHandler }) => {
+const Mailbox: FC<IEmailBadgeProps> = ({ mailbox, deleteHandler }) => {
     return (
         <div className={classes.badge} title={mailbox}>
             <p className={classes.mailbox}>{mailbox}</p>
@@ -16,4 +16,4 @@ const EmailBadge: FC<IEmailBadgeProps> = ({ mailbox, deleteHandler }) => {
     )
 }
 
-export default EmailBadge
+export default Mailbox
