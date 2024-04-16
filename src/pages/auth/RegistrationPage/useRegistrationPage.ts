@@ -7,7 +7,7 @@ import { IInputError } from "../../../shared/components/Input/IInputError"
 import { IBaseErrorResponse } from "../../../shared/models/IBaseErrorResponse"
 import { IValidationErrorResponse } from "../../../shared/models/IValidationErrorResponse"
 import { SerializedError } from "@reduxjs/toolkit"
-import { hasDataInError } from "../../../shared/utils/hasData"
+import { isCorrectError } from "../../../shared/utils/hasData"
 
 export const useRegistrationPage = () => {
     const [registration, { isLoading, error }] = useRegistrationMutation()
@@ -17,7 +17,7 @@ export const useRegistrationPage = () => {
     const IsValidationError = (
         error: IBaseErrorResponse | IValidationErrorResponse | SerializedError | undefined,
     ): error is IValidationErrorResponse => {
-        if (hasDataInError(error) && "errors" in error.data) {
+        if (isCorrectError(error) && "errors" in error.data) {
             return true
         }
 

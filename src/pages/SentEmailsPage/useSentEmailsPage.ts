@@ -1,6 +1,6 @@
 import { useGetEmailWithFilterQuery } from "../../entities/Email/api/emailApi"
 import { useEffect } from "react"
-import { hasDataInError } from "../../shared/utils/hasData"
+import { isCorrectError } from "../../shared/utils/hasData"
 import { AlertService } from "../../shared/services/AlertService"
 
 export const useSentEmailsPage = () => {
@@ -10,7 +10,7 @@ export const useSentEmailsPage = () => {
     })
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])

@@ -3,7 +3,7 @@ import { FocusEvent, FormEvent, useEffect, useState } from "react"
 import { AlertService } from "../../../../services/AlertService"
 import { IOnChangeEvent } from "../../../../events/IOnChangeEvent"
 import { useAppSelector } from "../../../../../store"
-import { hasDataInError } from "../../../../utils/hasData"
+import { isCorrectError } from "../../../../utils/hasData"
 
 interface IRequestDataProps {
     constrains?: {
@@ -21,7 +21,7 @@ export const useCreateEmailGroupModal = (isActive: boolean, setModalIsOpen: (val
     const [mailboxes, setMailboxes] = useState<string[]>([])
 
     useEffect(() => {
-        if (hasDataInError(createEmailGroupError)) {
+        if (isCorrectError(createEmailGroupError)) {
             return AlertService.error(createEmailGroupError.data.message)
         }
     }, [createEmailGroupError])

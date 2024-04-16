@@ -7,7 +7,7 @@ import { TokenService } from "../../../shared/services/TokenService"
 import { useAppDispatch } from "../../../store"
 import { useNavigate } from "react-router-dom"
 import { setUser } from "../../../entities/Auth/redusers/userSlice"
-import { hasDataInError } from "../../../shared/utils/hasData"
+import { isCorrectError } from "../../../shared/utils/hasData"
 
 export const useAuthPage = () => {
     const [authorization, { data, error, isLoading }] = useAuthorizationMutation()
@@ -40,7 +40,7 @@ export const useAuthPage = () => {
     }, [data, isLoading])
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             AlertService.error(error.data.message)
         }
     }, [error])
@@ -49,7 +49,7 @@ export const useAuthPage = () => {
     // Если приходит отличная ошибка отличная от типа MailBoxAlreadyExists,
     // то она будет выведена.
     useEffect(() => {
-        if (hasDataInError(createMailBoxError)) {
+        if (isCorrectError(createMailBoxError)) {
             if (createMailBoxError.data.error_type.split(".")[1] !== "MailBoxAlreadyExists") {
                 return AlertService.error(createMailBoxError.data.message)
             }

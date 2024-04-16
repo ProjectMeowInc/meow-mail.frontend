@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { AlertService } from "../../services/AlertService"
 import { useGetAllEmailGroupQuery } from "../../../entities/EmailGroup/api/EmailGroupApi"
-import { hasDataInError } from "../../utils/hasData"
+import { isCorrectError } from "../../utils/hasData"
 
 export const useEmailGroup = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -9,7 +9,7 @@ export const useEmailGroup = () => {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])

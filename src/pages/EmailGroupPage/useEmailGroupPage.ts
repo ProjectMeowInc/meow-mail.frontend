@@ -4,7 +4,7 @@ import { LogService } from "../../shared/services/LogService"
 import { useParams } from "react-router"
 import { AlertService } from "../../shared/services/AlertService"
 import { useGetEmailsByEmailGroupQuery } from "../../entities/Email/api/emailApi"
-import { hasDataInError } from "../../shared/utils/hasData"
+import { isCorrectError } from "../../shared/utils/hasData"
 
 const DefaultPage = "1"
 
@@ -34,7 +34,7 @@ export const useEmailGroupPage = () => {
     )
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])

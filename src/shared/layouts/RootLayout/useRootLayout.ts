@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { AlertService } from "../../services/AlertService"
 import { setEmails } from "../../../entities/Email/slices/emailSlice"
 import { RedirectService } from "../../services/RedirectService"
-import { hasDataInError } from "../../utils/hasData"
+import { isCorrectError } from "../../utils/hasData"
 
 export const useRootLayout = () => {
     const deviceType = ClientService.getClientType()
@@ -34,7 +34,7 @@ export const useRootLayout = () => {
     }, [mails])
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])
