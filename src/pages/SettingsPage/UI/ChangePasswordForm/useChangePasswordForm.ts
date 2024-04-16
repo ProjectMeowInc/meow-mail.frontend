@@ -3,7 +3,7 @@ import { FormEvent, useEffect, useState } from "react"
 import { AlertService } from "../../../../shared/services/AlertService"
 import { IOnChangeEvent } from "../../../../shared/events/IOnChangeEvent"
 import { LogService } from "../../../../shared/services/LogService"
-import { hasDataInError } from "../../../../shared/utils/hasData"
+import { isCorrectError } from "../../../../shared/utils/hasData"
 
 interface IFormData {
     old_password: string
@@ -26,7 +26,7 @@ export const useChangePasswordForm = () => {
     }, [isSuccess])
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])

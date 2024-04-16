@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { AlertService } from "../../services/AlertService"
 import { ClientService } from "../../services/ClientService"
 import { TouchEvent } from "react"
-import { hasDataInError } from "../../utils/hasData"
+import { isCorrectError } from "../../utils/hasData"
 
 export const useEmail = () => {
     const [updateEmailStatus, { error }] = useUpdateEmailStatusMutation()
@@ -14,13 +14,13 @@ export const useEmail = () => {
     const [moveToucheX, setMoveToucheX] = useState<number>(0)
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])
 
     useEffect(() => {
-        if (hasDataInError(deleteEmailByIdError)) {
+        if (isCorrectError(deleteEmailByIdError)) {
             return AlertService.error(deleteEmailByIdError.data.message)
         }
     }, [deleteEmailByIdError])

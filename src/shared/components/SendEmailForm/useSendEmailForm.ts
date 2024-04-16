@@ -3,14 +3,14 @@ import { FormEvent, useEffect, useState } from "react"
 import { SendEmailDto } from "../../../entities/Email/models/dto/SendEmailDto"
 import { IOnChangeEvent } from "../../events/IOnChangeEvent"
 import { AlertService } from "../../services/AlertService"
-import { hasDataInError } from "../../utils/hasData"
+import { isCorrectError } from "../../utils/hasData"
 
 export const useSendEmailForm = (closeForm: () => void) => {
     const [sendEmail, { error, isSuccess }] = useSendEmailMutation()
     const [requestData, setRequestData] = useState<SendEmailDto>()
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])

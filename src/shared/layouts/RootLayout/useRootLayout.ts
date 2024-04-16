@@ -1,12 +1,12 @@
 import { ClientService } from "../../services/ClientService"
-import { useAppDispatch, useAppSelector } from "../../../store"
+import { cleanUpStore, useAppDispatch, useAppSelector } from "../../../store"
 import { useGetEmailWithFilterQuery } from "../../../entities/Email/api/emailApi"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { AlertService } from "../../services/AlertService"
 import { setEmails } from "../../../entities/Email/slices/emailSlice"
 import { RedirectService } from "../../services/RedirectService"
-import { hasDataInError } from "../../utils/hasData"
+import { isCorrectError } from "../../utils/hasData"
 
 export const useRootLayout = () => {
     const deviceType = ClientService.getClientType()
@@ -34,7 +34,7 @@ export const useRootLayout = () => {
     }, [mails])
 
     useEffect(() => {
-        if (hasDataInError(error)) {
+        if (isCorrectError(error)) {
             return AlertService.error(error.data.message)
         }
     }, [error])
@@ -59,7 +59,7 @@ export const useRootLayout = () => {
     }
 
     const QuitHandler = () => {
-        localStorage.clear()
+        cleanUpStore()
         RedirectService.redirect("/")
     }
 

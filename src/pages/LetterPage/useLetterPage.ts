@@ -7,7 +7,7 @@ import { useParams } from "react-router"
 import { useEffect } from "react"
 import { AlertService } from "../../shared/services/AlertService"
 import { RedirectService } from "../../shared/services/RedirectService"
-import { hasDataInError } from "../../shared/utils/hasData"
+import { isCorrectError } from "../../shared/utils/hasData"
 
 export const useLetterPage = () => {
     const params = useParams<{ mailId: string }>()
@@ -23,13 +23,13 @@ export const useLetterPage = () => {
     }, [])
 
     useEffect(() => {
-        if (hasDataInError(updateEmailError)) {
+        if (isCorrectError(updateEmailError)) {
             return AlertService.error(updateEmailError.data.message)
         }
     }, [updateEmailError])
 
     useEffect(() => {
-        if (hasDataInError(deleteEmailError)) {
+        if (isCorrectError(deleteEmailError)) {
             return AlertService.error(deleteEmailError.data.message)
         }
     }, [deleteEmailError])
