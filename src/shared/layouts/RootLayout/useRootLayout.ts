@@ -1,5 +1,5 @@
 import { ClientService } from "../../services/ClientService"
-import { useAppDispatch, useAppSelector } from "../../../store"
+import { cleanUpStore, useAppDispatch, useAppSelector } from "../../../store"
 import { useGetEmailWithFilterQuery } from "../../../entities/Email/api/emailApi"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -59,7 +59,7 @@ export const useRootLayout = () => {
     }
 
     const QuitHandler = () => {
-        localStorage.clear()
+        cleanUpStore()
         RedirectService.redirect("/")
     }
 

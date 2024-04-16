@@ -4,7 +4,7 @@ import { IOnChangeEvent } from "../../../shared/events/IOnChangeEvent"
 import { AuthorizationDto } from "../../../entities/Auth/dto/AuthorizationDto"
 import { AlertService } from "../../../shared/services/AlertService"
 import { TokenService } from "../../../shared/services/TokenService"
-import { useAppDispatch } from "../../../store"
+import { cleanUpStore, useAppDispatch } from "../../../store"
 import { useNavigate } from "react-router-dom"
 import { setUser } from "../../../entities/Auth/redusers/userSlice"
 import { isCorrectError } from "../../../shared/utils/hasData"
@@ -71,6 +71,7 @@ export const useAuthPage = () => {
         }
 
         if (requestData.login && requestData.password) {
+            cleanUpStore()
             await authorization({
                 login: requestData.login,
                 password: requestData.password,
