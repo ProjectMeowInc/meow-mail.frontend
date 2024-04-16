@@ -9,11 +9,6 @@ import { Link } from "react-router-dom"
 interface IEmailGroupItemProps {
     id: number
     name: string
-    constrains: {
-        from: string
-        subject: string
-        to: string
-    }
 }
 
 const EmailGroupItem: FC<IEmailGroupItemProps> = ({ id, name }) => {

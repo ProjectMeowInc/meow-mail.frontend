@@ -1,6 +1,5 @@
 import React, { FC } from "react"
 import Button from "../../Button/Button"
-import { useAppSelector } from "../../../../store"
 import MenuItem from "./UI/MenuItem/MenuItem"
 import classes from "./headerDesktop.module.css"
 
@@ -9,13 +8,14 @@ import Star from "../../../icons/star.svg?react"
 import AirPlane from "../../../icons/paper-airplane.svg?react"
 import EmailGroup from "../../EmailGroup/EmailGroup"
 import AdminDropDownMenu from "./UI/AdminDropDownMenu/AdminDropDownMenu"
+import { useHeaderDesktop } from "./useHeaderDesktop"
 
 interface IHeaderDesktopProps {
     onClickSendButton: () => void
 }
 
 const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
-    const user = useAppSelector((state) => state.user.data)
+    const { user, navigate } = useHeaderDesktop()
 
     return (
         <header className={classes.header}>
@@ -53,7 +53,9 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                     <EmailGroup />
                 </div>
 
-                <Button type={2}>Настройки почты</Button>
+                <Button onClick={() => navigate("settings")} type={2}>
+                    Настройки почты
+                </Button>
             </div>
         </header>
     )

@@ -10,6 +10,7 @@ import { AlertService } from "../../../shared/services/AlertService"
 import { IUpdateAuthorizationResponse } from "../models/responses/IUpdateAuthorizationResponse"
 import { RedirectService } from "../../../shared/services/RedirectService"
 import { query } from "../../../shared/utils/query"
+import { IChangePasswordRequest } from "../models/requests/IChangePasswordRequest"
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_API_URL }) as BaseQueryFn<
     string | FetchArgs,
@@ -88,7 +89,16 @@ export const authApi = createApi({
         createMailBox: builder.mutation<void, void>({
             query: () => query("/v1/auth/create-mail-box", "POST", true),
         }),
+
+        changePassword: builder.mutation<void, IChangePasswordRequest>({
+            query: (body) => query("/v1/auth/change-password", "POST", true, body),
+        }),
     }),
 })
 
-export const { useAuthorizationMutation, useRegistrationMutation, useCreateMailBoxMutation } = authApi
+export const {
+    useAuthorizationMutation,
+    useChangePasswordMutation,
+    useRegistrationMutation,
+    useCreateMailBoxMutation,
+} = authApi

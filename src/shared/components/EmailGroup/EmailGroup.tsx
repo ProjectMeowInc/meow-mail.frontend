@@ -2,18 +2,17 @@ import React from "react"
 import classes from "./emailGroup.module.css"
 import { useEmailGroup } from "./useEmailGroup"
 import EmailGroupItem from "./UI/EmailGroupItem/EmailGroupItem"
-
 import Down from "../../icons/chevron-down.svg?react"
 import Filter from "../../icons/filter.svg?react"
-import Preloader from "../Preloader/Preloader"
 import CreateEmailGroupModal from "./UI/CreateEmailGroupModal/CreateEmailGroupModal"
 import Cross from "../../icons/plus-sm.svg?react"
+import EmptyTag from "../EmptyTag/EmptyTag"
 
 const EmailGroup = () => {
     const { setIsOpen, isOpen, groups, setModalIsOpen, modalIsOpen } = useEmailGroup()
 
     if (!groups) {
-        return <Preloader />
+        return <EmptyTag />
     }
 
     return (
@@ -33,7 +32,7 @@ const EmailGroup = () => {
                     <Cross className={classes.icon} />
                 </div>
                 {groups.items.map((group) => (
-                    <EmailGroupItem key={group.id} id={group.id} name={group.name} constrains={group.constrains} />
+                    <EmailGroupItem key={group.id} id={group.id} name={group.name} />
                 ))}
             </div>
         </div>

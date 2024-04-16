@@ -3,9 +3,9 @@ export interface IGetEmailGroupsResponse {
         id: number
         name: string
         constrains: {
-            from: string
+            from: string[]
             subject: string
-            to: string
+            to: string[]
         }
     }[]
 }
