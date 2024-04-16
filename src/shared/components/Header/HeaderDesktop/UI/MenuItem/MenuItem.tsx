@@ -8,7 +8,7 @@ interface IMenuItemProps {
 
 const MenuItem: FC<PropsWithChildren<IMenuItemProps>> = ({ children, href }) => {
     return (
-        <NavLink to={href} className={({ isActive }) => (isActive ? classes.active : classes.none_active)}>
+        <NavLink to={href} className={({ isActive }) => (isActive ? classes.active : classes.none_active)} end>
             {children}
         </NavLink>
     )
