@@ -12,6 +12,7 @@ import AdminUserPage from "./pages/AdminUserPage/AdminUserPage"
 import "./index.css"
 import { useAppSelector } from "./store"
 import SettingsPage from "./pages/SettingsPage/SettingsPage"
+import SentEmailsPage from "./pages/SentEmailsPage/SentEmailsPage"
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,21 @@ const router = createBrowserRouter([
                     {
                         path: "settings",
                         element: <SettingsPage />,
+                    },
+
+                    {
+                        path: "sent",
+                        children: [
+                            {
+                                index: true,
+                                element: <SentEmailsPage />,
+                            },
+
+                            {
+                                path: ":mailId",
+                                element: <LettersPage />,
+                            },
+                        ],
                     },
                 ],
             },
