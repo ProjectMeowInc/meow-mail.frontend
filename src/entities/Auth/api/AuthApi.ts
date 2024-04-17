@@ -25,11 +25,7 @@ export const fetchBaseQueryWithReAuth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
     const result = await baseQuery(args, api, extraOptions)
 
-    if (result.error && result.error.status !== 401) {
-        return result
-    }
-
-    if (result && !result.error) {
+    if (!result.error || result.error.status !== 401) {
         return result
     }
 
@@ -38,13 +34,21 @@ export const fetchBaseQueryWithReAuth: BaseQueryFn<
     if (!refreshToken) {
         RedirectService.redirect("/")
         AlertService.error("Ошибка авторизации. Пожалуйста авторизуйтесь заново")
-        return result
     }
 
     const accessToken = TokenService.getAccessToken()
 
     if (accessToken && TokenService.isValidAccessToken(accessToken)) {
-        return result
+        return baseQuery(
+            {
+                ...(args as FetchArgs),
+                headers: {
+                    Authorization: accessToken,
+                },
+            },
+            api,
+            extraOptions,
+        )
     }
 
     const updateAuth = await baseQuery(
@@ -59,16 +63,27 @@ export const fetchBaseQueryWithReAuth: BaseQueryFn<
         extraOptions,
     )
 
-    if (updateAuth.data) {
-        const { refresh_token, access_token } = updateAuth.data as IUpdateAuthorizationResponse
-
-        TokenService.setAccessToken(access_token)
-        TokenService.setRefreshToken(refresh_token)
-
-        return baseQuery(args, api, extraOptions)
+    if (!updateAuth.data) {
+        RedirectService.redirect("/")
+        AlertService.error("Ошибка обновления токена. Пожалуйста переавторизутесь")
+        return updateAuth
     }
 
-    return baseQuery(args, api, extraOptions)
+    const { refresh_token, access_token } = updateAuth.data as IUpdateAuthorizationResponse
+
+    TokenService.setAccessToken(access_token)
+    TokenService.setRefreshToken(refresh_token)
+
+    return baseQuery(
+        {
+            ...(args as FetchArgs),
+            headers: {
+                Authorization: TokenService.getAccessToken() ?? undefined,
+            },
+        },
+        api,
+        extraOptions,
+    )
 }
 
 export const authApi = createApi({
