@@ -1,4 +1,3 @@
-import Cookies from "js-cookie"
 import { jwtDecode } from "jwt-decode"
 import { UserRoleType } from "../../entities/User/types/UserRoleType"
 
@@ -26,8 +25,7 @@ export class TokenService {
      * @param token токен доступа
      */
     public static setAccessToken(token: string) {
-        this.removeAccessToken()
-        Cookies.set("access_token", token)
+        localStorage.setItem("access_token", token)
     }
 
     /**
@@ -35,22 +33,21 @@ export class TokenService {
      * @param token токен обновления
      */
     public static setRefreshToken(token: string) {
-        this.removeRefreshToken()
-        Cookies.set("refresh_token", token)
+        localStorage.setItem("refresh_token", token)
     }
 
     /**
      * Метод для получения токена доступа
      */
     public static getAccessToken() {
-        return Cookies.get("access_token")
+        return localStorage.getItem("access_token")
     }
 
     /**
      * Метод для получения токена обновления
      */
     public static getRefreshToken() {
-        return Cookies.get("refresh_token")
+        return localStorage.getItem("refresh_token")
     }
 
     /**
@@ -65,13 +62,13 @@ export class TokenService {
      * Метод для удаления токена доступа
      */
     public static removeAccessToken() {
-        return Cookies.remove("access_token")
+        localStorage.removeItem("access_token")
     }
 
     /**
      * Метод для удаления токена обновления
      */
     public static removeRefreshToken() {
-        return Cookies.remove("refresh_token")
+        localStorage.removeItem("refresh_token")
     }
 }
