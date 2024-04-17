@@ -21,7 +21,7 @@ export const query = (
         result = {
             ...result,
             headers: {
-                Authorization: TokenService.getAccessToken(),
+                Authorization: TokenService.getAccessToken() ?? undefined,
             },
         }
     }
