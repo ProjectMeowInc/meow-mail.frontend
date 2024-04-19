@@ -45,7 +45,7 @@
     .wrapper {
         top: inherit;
         width: 50%;
-        height: 55%;
+        height: 65%;
         right: 10px;
         bottom: 15px;
         border-radius: 20px 0 40px;
@@ -66,8 +66,3 @@
     }
 }
 
-@media (min-width: 1600px) {
-    .wrapper {
-        width: 25%;
-    }
-}

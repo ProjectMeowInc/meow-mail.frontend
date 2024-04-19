@@ -4,10 +4,20 @@ import { SendEmailDto } from "../../../entities/Email/models/dto/SendEmailDto"
 import { IOnChangeEvent } from "../../events/IOnChangeEvent"
 import { AlertService } from "../../services/AlertService"
 import { isCorrectError } from "../../utils/hasData"
+import { EditorState } from "draft-js"
+import { convertToHTML } from "draft-convert"
 
 export const useSendEmailForm = (closeForm: () => void) => {
     const [sendEmail, { error, isSuccess }] = useSendEmailMutation()
     const [requestData, setRequestData] = useState<SendEmailDto>()
+
+    const [content, setContent] = useState<EditorState>(EditorState.createEmpty())
+    const [convertedContent, setConvertedContent] = useState<string>("")
+
+    useEffect(() => {
+        const html = convertToHTML(content.getCurrentContent())
+        setConvertedContent(html)
+    }, [content])
 
     useEffect(() => {
         if (isCorrectError(error)) {
@@ -39,7 +49,7 @@ export const useSendEmailForm = (closeForm: () => void) => {
             await sendEmail({
                 to: requestData.to,
                 subject: requestData.subject,
-                content: requestData.content,
+                content: convertedContent,
             })
         }
     }
@@ -47,5 +57,7 @@ export const useSendEmailForm = (closeForm: () => void) => {
     return {
         ChangeHandler,
         SubmitHandler,
+        setContent,
+        content,
     }
 }
