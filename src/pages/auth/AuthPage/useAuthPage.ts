@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react"
-import { useAuthorizationMutation, useCreateMailBoxMutation } from "../../../entities/Auth/api/AuthApi"
+import { useAuthorizationV2Mutation, useCreateMailBoxMutation } from "../../../entities/Auth/api/AuthApi"
 import { IOnChangeEvent } from "../../../shared/events/IOnChangeEvent"
 import { AuthorizationDto } from "../../../entities/Auth/dto/AuthorizationDto"
 import { AlertService } from "../../../shared/services/AlertService"
@@ -10,14 +10,16 @@ import { setUser } from "../../../entities/Auth/redusers/userSlice"
 import { isCorrectError } from "../../../shared/utils/hasData"
 
 export const useAuthPage = () => {
-    const [authorization, { data, error, isLoading }] = useAuthorizationMutation()
+    const [authorizationV2, { data, isLoading, error }] = useAuthorizationV2Mutation()
     const [requestData, setRequestData] = useState<AuthorizationDto>({})
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [createMailBox, { error: createMailBoxError }] = useCreateMailBoxMutation()
+    const [code, setCode] = useState<string>("")
+    const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
     useEffect(() => {
-        if (data) {
+        if (data && data.type === "Success") {
             const { access_token, refresh_token } = data
 
             TokenService.setAccessToken(access_token)
@@ -37,7 +39,11 @@ export const useAuthPage = () => {
 
             navigate("/my?page=1")
         }
-    }, [data, isLoading])
+
+        if (data && data.type === "RequireTwoFactor") {
+            setIsSuccess(true)
+        }
+    }, [data])
 
     useEffect(() => {
         if (isCorrectError(error)) {
@@ -72,16 +78,32 @@ export const useAuthPage = () => {
 
         if (requestData.login && requestData.password) {
             cleanUpStore()
-            await authorization({
+            await authorizationV2({
                 login: requestData.login,
                 password: requestData.password,
+                type: "Base",
+            })
+        }
+    }
+
+    const SubmitCodeHandler = (event: FormEvent) => {
+        event.preventDefault()
+
+        if (data && data.type === "RequireTwoFactor") {
+            authorizationV2({
+                code: code,
+                request_id: data.request_id,
+                type: "TwoFactor",
             })
         }
     }
 
     return {
+        isLoading,
         ChangeHandler,
         SubmitHandler,
-        isLoading,
+        setCode,
+        isSuccess,
+        SubmitCodeHandler,
     }
 }

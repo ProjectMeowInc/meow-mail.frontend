@@ -1,7 +1,5 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { BASE_API_URL } from "../../../consts"
-import { IAuthorizationResponse } from "../models/responses/IAuthorizationResponse"
-import { IAuthorizationRequest } from "../models/requests/IAuthorizationRequest"
 import { IRegistrationRequest } from "../models/requests/IRegistrationRequest"
 import { IBaseErrorResponse } from "../../../shared/models/IBaseErrorResponse"
 import { IValidationErrorResponse } from "../../../shared/models/IValidationErrorResponse"
@@ -11,6 +9,9 @@ import { IUpdateAuthorizationResponse } from "../models/responses/IUpdateAuthori
 import { RedirectService } from "../../../shared/services/RedirectService"
 import { query } from "../../../shared/utils/query"
 import { IChangePasswordRequest } from "../models/requests/IChangePasswordRequest"
+import { AuthorizationResponseV2Type } from "../models/responses/AuthorizationResponseV2Type"
+import { AuthorizationRequestV2Type } from "../models/requests/AuthorizationRequestV2Type"
+import { IConnectTelegramResponse } from "../models/responses/IConnectTelegramResponse"
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_API_URL }) as BaseQueryFn<
     string | FetchArgs,
@@ -93,8 +94,12 @@ export const authApi = createApi({
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
     endpoints: (builder) => ({
-        authorization: builder.mutation<IAuthorizationResponse, IAuthorizationRequest>({
-            query: (body) => query("/v1/auth/authorization", "POST", false, body),
+        authorizationV2: builder.mutation<AuthorizationResponseV2Type, AuthorizationRequestV2Type>({
+            query: (body) => query("/v2/auth/", "POST", false, body),
+        }),
+
+        connectTelegram: builder.mutation<IConnectTelegramResponse, void>({
+            query: () => query("/v1/auth/connect-telegram", "POST", true),
         }),
 
         registration: builder.mutation<void, IRegistrationRequest>({
@@ -112,8 +117,9 @@ export const authApi = createApi({
 })
 
 export const {
-    useAuthorizationMutation,
     useChangePasswordMutation,
     useRegistrationMutation,
     useCreateMailBoxMutation,
+    useAuthorizationV2Mutation,
+    useConnectTelegramMutation,
 } = authApi

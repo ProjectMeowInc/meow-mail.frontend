@@ -47,7 +47,7 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                             <p>Отправленные</p>
                         </MenuItem>
 
-                        {user?.role === "Root" ? <AdminDropDownMenu /> : <></>}
+                        {user?.role === "Root" || user?.role === "Administrator" ? <AdminDropDownMenu /> : <></>}
                     </div>
 
                     <EmailGroup />
