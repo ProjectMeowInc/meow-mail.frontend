@@ -3,13 +3,25 @@ import classes from "./settingWrapper.module.css"
 
 interface ISettingsWrapperProps {
     caption: string
+    flex?: boolean
 }
 
-const SettingsWrapper: FC<PropsWithChildren<ISettingsWrapperProps>> = ({ caption, children }) => {
+const SettingsWrapper: FC<PropsWithChildren<ISettingsWrapperProps>> = ({ caption, children, flex }) => {
     return (
         <div className={classes.wrapper}>
             <p className={classes.caption}>{caption}</p>
-            <div>{children}</div>
+            <div
+                className={classes.children}
+                style={
+                    flex
+                        ? {
+                              display: "flex",
+                          }
+                        : {}
+                }
+            >
+                {children}
+            </div>
         </div>
     )
 }
