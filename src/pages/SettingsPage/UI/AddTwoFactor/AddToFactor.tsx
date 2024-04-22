@@ -1,6 +1,5 @@
 import React from "react"
 import classes from "./addToFactor.module.css"
-import QRCode from "../../../../shared/images/QRCode.png"
 import Copy from "../../../../shared/icons/clipboard-copy.svg?react"
 import { useAddToFactor } from "./useAddToFactor"
 import Button from "../../../../shared/components/Button/Button"
@@ -26,7 +25,7 @@ const AddToFactor = () => {
                         и введите код ниже:
                     </p>
 
-                    <img className={classes.qr_code} src={QRCode} alt="" />
+                    <img className={classes.qr_code} src={"/src/shared/images/QRCode.png"} alt="" />
                     <div className={classes.code_item}>
                         <p className={classes.code}>{code}</p>
                         <Copy className={classes.icon} onClick={CopyHandler} />
