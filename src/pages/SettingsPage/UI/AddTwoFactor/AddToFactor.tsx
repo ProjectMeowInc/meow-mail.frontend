@@ -24,8 +24,6 @@ const AddToFactor = () => {
                         </a>{" "}
                         и введите код ниже:
                     </p>
-
-                    <img className={classes.qr_code} src={"/src/shared/images/QRCode.png"} alt="" />
                     <div className={classes.code_item}>
                         <p className={classes.code}>{code}</p>
                         <Copy className={classes.icon} onClick={CopyHandler} />
