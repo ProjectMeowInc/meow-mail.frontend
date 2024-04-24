@@ -12,6 +12,7 @@ import start from "../../../icons/star-white.svg"
 import sent from "../../../icons/paper-airplane-white.svg"
 import DefaultUserImage from "../../DefaultUserImage/DefaultUserImage"
 import AdminDropDownMenu from "../HeaderDesktop/UI/AdminDropDownMenu/AdminDropDownMenu"
+import EmailGroup from "../../EmailGroup/EmailGroup"
 
 interface IHeaderMobile {
     onClickSendButton: () => void
@@ -45,6 +46,8 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
                             </MenuItem>
 
                             {user?.role === "Root" || user?.role === "Administrator" ? <AdminDropDownMenu /> : <></>}
+
+                            <EmailGroup />
                         </div>
                         <Button onClick={() => navigate("settings")} type={2}>
                             Настройки
