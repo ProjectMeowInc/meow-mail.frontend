@@ -11,13 +11,14 @@ import mail from "../../../icons/mail-open-white.svg"
 import start from "../../../icons/star-white.svg"
 import sent from "../../../icons/paper-airplane-white.svg"
 import DefaultUserImage from "../../DefaultUserImage/DefaultUserImage"
+import AdminDropDownMenu from "../HeaderDesktop/UI/AdminDropDownMenu/AdminDropDownMenu"
 
 interface IHeaderMobile {
     onClickSendButton: () => void
 }
 
 const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
-    const { isActive, setIsActive, navigate, menuRef } = useHeaderMobile()
+    const { isActive, setIsActive, navigate, menuRef, user } = useHeaderMobile()
 
     return (
         <header className={classes.header_mobile} ref={menuRef}>
@@ -42,6 +43,8 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
                             <MenuItem icon={sent} href={""}>
                                 Отправленные
                             </MenuItem>
+
+                            {user?.role === "Root" || user?.role === "Administrator" ? <AdminDropDownMenu /> : <></>}
                         </div>
                         <Button onClick={() => navigate("settings")} type={2}>
                             Настройки

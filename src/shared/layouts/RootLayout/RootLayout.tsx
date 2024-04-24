@@ -22,7 +22,9 @@ const RootLayout = () => {
                 <>
                     <HeaderMobile onClickSendButton={() => setIsActiveSendForm(true)} />
                     <div className={classes.menu} />
-                    <Outlet />
+                    <div className={classes.outlet_mobile}>
+                        <Outlet />
+                    </div>
                     {isActiveSendForm && <SendEmailForm closeForm={() => setIsActiveSendForm(false)} />}
                 </>
             ) : (

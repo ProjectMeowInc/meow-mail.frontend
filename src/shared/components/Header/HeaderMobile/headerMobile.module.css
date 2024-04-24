@@ -1,13 +1,13 @@
 .header_mobile {
     width: 100%;
-    height: 80px;
+    height: 90px;
     background-color: var(--accent);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 25px;
     position: fixed;
-    z-index: 100;
+    z-index: 150;
 }
 
 .left_side {
