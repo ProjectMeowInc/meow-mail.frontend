@@ -13,8 +13,17 @@ import Left from "../../icons/chevron-left.svg?react"
 import Right from "../../icons/chevron-right.svg?react"
 
 const RootLayout = () => {
-    const { deviceType, user, setSubject, QuitHandler, isActiveSendForm, setIsActiveSendForm, mailsCount, MovePage } =
-        useRootLayout()
+    const {
+        deviceType,
+        user,
+        setSubject,
+        hideComponent,
+        QuitHandler,
+        isActiveSendForm,
+        setIsActiveSendForm,
+        mailsCount,
+        MovePage,
+    } = useRootLayout()
 
     return (
         <>
@@ -33,21 +42,28 @@ const RootLayout = () => {
                         <HeaderDesktop onClickSendButton={() => setIsActiveSendForm(true)} />
                         <div className={classes.outlet_wrapper}>
                             <div className={classes.search}>
-                                <Input
-                                    name={"search"}
-                                    style={{ width: "30%" }}
-                                    inputType={2}
-                                    icon={<Search />}
-                                    placeholder={"Начните вводить..."}
-                                    onChange={({ fieldValue }) => setSubject(fieldValue)}
-                                />
+                                {!hideComponent && (
+                                    <Input
+                                        name={"search"}
+                                        style={{ width: "30%" }}
+                                        inputType={2}
+                                        icon={<Search />}
+                                        placeholder={"Начните вводить..."}
+                                        onChange={({ fieldValue }) => setSubject(fieldValue)}
+                                    />
+                                )}
                                 <div className={classes.right_side}>
                                     <div className={classes.controls}>
-                                        <p className={classes.count}>1 - {mailsCount}</p>
-                                        <div>
-                                            <Left className={classes.icon} onClick={() => MovePage(-1)} />
-                                            <Right className={classes.icon} onClick={() => MovePage(1)} />
-                                        </div>
+                                        {!hideComponent && (
+                                            <>
+                                                <p className={classes.count}>1 - {mailsCount}</p>
+
+                                                <div>
+                                                    <Left className={classes.icon} onClick={() => MovePage(-1)} />
+                                                    <Right className={classes.icon} onClick={() => MovePage(1)} />
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                     <div className={classes.user}>
                                         <DefaultUserImage />
