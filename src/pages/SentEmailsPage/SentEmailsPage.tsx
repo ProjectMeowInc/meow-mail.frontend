@@ -12,7 +12,7 @@ const SentEmailsPage = () => {
 
     return (
         <div>
-            {emails.items.map((email) => (
+            {emails.map((email) => (
                 <Email
                     key={email.id}
                     id={email.id}

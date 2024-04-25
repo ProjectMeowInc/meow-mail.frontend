@@ -77,6 +77,8 @@ export const useAuthPage = () => {
         }
 
         if (requestData.login && requestData.password) {
+            TokenService.removeRefreshToken()
+            TokenService.removeAccessToken()
             cleanUpStore()
             await authorizationV2({
                 login: requestData.login,
