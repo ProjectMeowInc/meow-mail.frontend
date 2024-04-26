@@ -31,12 +31,12 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                     </div>
 
                     <div className={classes.menu_list}>
-                        <MenuItem href={"/my?page=1?is_received=true"}>
+                        <MenuItem href={"/my?page=1&is_received=true"}>
                             <Mail />
                             <p>Входящие</p>
                         </MenuItem>
 
-                        <MenuItem href={"sent?page=1?is_received=false"}>
+                        <MenuItem href={"sent?page=1&is_received=false"}>
                             <AirPlane />
                             <p>Отправленные</p>
                         </MenuItem>

@@ -16,7 +16,7 @@ const DefaultPage = "1"
 export const useRootLayout = () => {
     const location = useLocation()
     const { setSearchParams, getParamExcept } = useSearchParamsWrapper()
-    const pageStr = getParamExcept("page", ["0"]).unwrapOrElse(() => {
+    const pageStr = getParamExcept("page", ["0", "NaN"]).unwrapOrElse(() => {
         LogService.log(`Error get page STR. Use default value: ${DefaultPage}`, "ERROR")
         return DefaultPage
     })
@@ -25,7 +25,11 @@ export const useRootLayout = () => {
     const user = useAppSelector((state) => state.user.data)
     const [searchParams] = useSearchParams()
     const [subject, setSubject] = useState<string>("")
-    const { data: mails, error } = useGetEmailWithFilterQuery(
+    const {
+        data: mails,
+        error,
+        refetch,
+    } = useGetEmailWithFilterQuery(
         {
             pageNumber: pageNumber,
             subject: subject.length > 0 ? subject : undefined,
@@ -63,7 +67,7 @@ export const useRootLayout = () => {
     }, [error])
 
     useEffect(() => {
-        navigate(`?page=${pageNumber}`)
+        navigate(`?page=${pageNumber}&is_received=${searchParams.get("is_received")}`)
     }, [pageNumber])
 
     useEffect(() => {
@@ -71,6 +75,10 @@ export const useRootLayout = () => {
             return setSearchParams("page", pageNumber.toString())
         }
     }, [pageNumber])
+
+    useEffect(() => {
+        refetch()
+    }, [searchParams])
 
     const MovePage = (number: number) => {
         if (number === 1) {

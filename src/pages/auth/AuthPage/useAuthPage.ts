@@ -37,7 +37,7 @@ export const useAuthPage = () => {
 
             createMailBox().then()
 
-            navigate("/my?page=1?is_received=true")
+            navigate("/my?page=1&is_received=true")
         }
 
         if (data && data.type === "RequireTwoFactor") {
