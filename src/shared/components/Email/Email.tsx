@@ -6,7 +6,6 @@ import { EmailImage } from "../EmailImage/EmailImage"
 import { MailboxBadge } from "../MailboxBadge/MailboxBadge"
 import { MailboxType } from "../../../entities/Email/models/type/MailboxType"
 
-import Star from "../../icons/star.svg?react"
 import Trash from "../../icons/trash.svg?react"
 import Eye from "../../icons/eye.svg?react"
 import EyeOff from "../../icons/eye-off.svg?react"
@@ -33,7 +32,6 @@ const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
     return (
         <div className={classes.email_wrapper}>
             <div className={classes.block}>
-                <Star className={classes.email_icon_wrapper} />
                 <Trash className={classes.email_icon_wrapper} onClick={async () => DeleteHandler(id)} />
             </div>
             <div
@@ -46,8 +44,6 @@ const Email: FC<IEmailProps> = ({ id, subject, isRead, from, href }) => {
                 onTouchEnd={TouchEndHandler}
             >
                 <div className={classes.left_side}>
-                    {isDesktopDevice && <Star className={classes.icon} />}
-
                     <EmailImage from={from.address} />
 
                     <Link to={href} className={classes.email_info}>
