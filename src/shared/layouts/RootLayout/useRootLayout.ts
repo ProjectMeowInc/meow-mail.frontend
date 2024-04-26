@@ -73,10 +73,6 @@ export const useRootLayout = () => {
     }, [pageNumber])
 
     const MovePage = (number: number) => {
-        console.log(mails)
-        console.log(mails.page_count)
-        console.log(mails.count)
-
         if (number === 1) {
             if (mails && mails.page_count === 20 && mails.count <= mailsCount) {
                 setPageNumber((prevState) => prevState + 1)

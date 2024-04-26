@@ -38,9 +38,6 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
                             <MenuItem icon={mail} href={""}>
                                 Входящее
                             </MenuItem>
-                            <MenuItem icon={start} href={""}>
-                                Избранное
-                            </MenuItem>
                             <MenuItem icon={sent} href={""}>
                                 Отправленные
                             </MenuItem>

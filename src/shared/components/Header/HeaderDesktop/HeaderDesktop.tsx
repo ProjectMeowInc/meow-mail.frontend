@@ -37,11 +37,6 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                             <p>Входящие</p>
                         </MenuItem>
 
-                        <MenuItem href={"/favorites"}>
-                            <Star />
-                            <p>Избранные</p>
-                        </MenuItem>
-
                         <MenuItem href={"sent?page=1?is_received=false"}>
                             <AirPlane />
                             <p>Отправленные</p>
