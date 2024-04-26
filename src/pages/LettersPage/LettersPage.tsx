@@ -8,15 +8,20 @@ const LettersPage = () => {
 
     return (
         <div className={classes.wrapper}>
-            {storeMails.map((mail) => (
-                <Email
-                    key={mail.id}
-                    id={mail.id}
-                    href={`${mail.id}`}
-                    from={{ address: mail.from.mailbox, type: mail.from.type }}
-                    isRead={mail.is_read}
-                    subject={mail.subject}
-                />
+            {storeMails.map((group) => (
+                <div className={classes.group} key={group.date}>
+                    <p className={classes.date}>{group.date.toString()}</p>
+                    {group.items.map((mail) => (
+                        <Email
+                            key={mail.id}
+                            id={mail.id}
+                            href={`${mail.id}`}
+                            from={{ address: mail.from.mailbox, type: mail.from.type }}
+                            isRead={mail.is_read}
+                            subject={mail.subject}
+                        />
+                    ))}
+                </div>
             ))}
         </div>
     )
