@@ -37,7 +37,7 @@ export const useAuthPage = () => {
 
             createMailBox().then()
 
-            navigate("/my?page=1")
+            navigate("/my?page=1&is_received=true")
         }
 
         if (data && data.type === "RequireTwoFactor") {
@@ -77,6 +77,8 @@ export const useAuthPage = () => {
         }
 
         if (requestData.login && requestData.password) {
+            TokenService.removeRefreshToken()
+            TokenService.removeAccessToken()
             cleanUpStore()
             await authorizationV2({
                 login: requestData.login,

@@ -8,7 +8,6 @@ import { useHeaderMobile } from "./useHeaderMobile"
 import search from "../../../icons/search-white.svg"
 import pen from "../../../icons/pencil.svg"
 import mail from "../../../icons/mail-open-white.svg"
-import start from "../../../icons/star-white.svg"
 import sent from "../../../icons/paper-airplane-white.svg"
 import DefaultUserImage from "../../DefaultUserImage/DefaultUserImage"
 import AdminDropDownMenu from "../HeaderDesktop/UI/AdminDropDownMenu/AdminDropDownMenu"
@@ -37,9 +36,6 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
                         <div className={classes.menu_list}>
                             <MenuItem icon={mail} href={""}>
                                 Входящее
-                            </MenuItem>
-                            <MenuItem icon={start} href={""}>
-                                Избранное
                             </MenuItem>
                             <MenuItem icon={sent} href={""}>
                                 Отправленные
