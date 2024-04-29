@@ -10,7 +10,7 @@ const LettersPage = () => {
         <div className={classes.wrapper}>
             {storeMails.map((group) => (
                 <div className={classes.group} key={group.date}>
-                    <p className={classes.date}>{group.date.toString()}</p>
+                    <p className={classes.date}>{group.date}</p>
                     {group.items.map((mail) => (
                         <Email
                             key={mail.id}
