@@ -34,10 +34,10 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
 
                     <div className={isActive ? classes.menu__active : classes.menu}>
                         <div className={classes.menu_list}>
-                            <MenuItem icon={mail} href={""}>
+                            <MenuItem icon={mail} href={"/my?page=1&is_received=true"}>
                                 Входящее
                             </MenuItem>
-                            <MenuItem icon={sent} href={""}>
+                            <MenuItem icon={sent} href={"sent?page=1&is_received=false"}>
                                 Отправленные
                             </MenuItem>
 
