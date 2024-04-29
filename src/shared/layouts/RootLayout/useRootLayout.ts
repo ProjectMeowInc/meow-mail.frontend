@@ -10,6 +10,7 @@ import { isCorrectError } from "../../utils/hasData"
 import { useSearchParamsWrapper } from "../../hooks/useSearchParamsWrapper"
 import { LogService } from "../../services/LogService"
 import { TokenService } from "../../services/TokenService"
+import { nextPage, prevPage } from "../../../entities/Page/slices/pageSlice"
 
 const DefaultPage = "1"
 
@@ -41,19 +42,18 @@ export const useRootLayout = () => {
     )
     const dispatch = useAppDispatch()
     const [isActiveSendForm, setIsActiveSendForm] = useState<boolean>(false)
-    const [mailsCount, setMailCount] = useState<number>(0)
     const navigate = useNavigate()
     const [hideComponent, setHideComponents] = useState<boolean>(false)
+    const page = useAppSelector((state) => state.pageSlice)
 
     useEffect(() => {
         if (mails) {
             dispatch(setEmails(mails.items))
-            setMailCount(mails.page_count)
         }
     }, [mails])
 
     useEffect(() => {
-        if (location.pathname.match(/\/my\/([0-9]|admin)/)) {
+        if (location.pathname.match(/\/my\/([0-9])/)) {
             return setHideComponents(true)
         }
 
@@ -82,16 +82,26 @@ export const useRootLayout = () => {
 
     const MovePage = (number: number) => {
         if (number === 1) {
-            if (mails && mails.page_count === 20 && mails.count <= mailsCount) {
+            if (mails && mails.count === 20 && mails.count >= page.currentCount) {
                 setPageNumber((prevState) => prevState + 1)
-                setMailCount((prevState) => prevState + mails.page_count)
+                dispatch(
+                    nextPage({
+                        currentCount: mails.count,
+                        prevCount: 20,
+                    }),
+                )
             }
             return
         }
 
-        if (mails && mails.count === mailsCount && pageNumber !== 1) {
+        if (mails && mails && pageNumber !== 1) {
             setPageNumber((prevState) => prevState - 1)
-            setMailCount((prevState) => prevState - mails.page_count)
+            dispatch(
+                prevPage({
+                    currentCount: 20,
+                    prevCount: 20,
+                }),
+            )
         }
     }
 
@@ -108,9 +118,9 @@ export const useRootLayout = () => {
         setSubject,
         isActiveSendForm,
         setIsActiveSendForm,
-        mailsCount,
         MovePage,
         QuitHandler,
         hideComponent,
+        page,
     }
 }

@@ -9,8 +9,44 @@
     height: 100dvh;
     z-index: 100;
     overflow: scroll;
-    position: fixed;
     background-color: var(--thirth);
+}
+
+.prev_page_button {
+    border-radius: 5px;
+    border: 1px solid var(--second);
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    background-color: var(--second);
+    color: var(--accent);
+    font-size: 18px;
+    gap: 15px;
+}
+
+.next_page_button {
+    border-radius: 5px;
+    border: 1px solid var(--second);
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    color: var(--accent);
+    font-size: 18px;
+    gap: 15px;
+}
+
+.controls_mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    color: var(--second);
+    font-weight: 600;
+}
+
+.next_button {
+
 }
 
 .wrapper {

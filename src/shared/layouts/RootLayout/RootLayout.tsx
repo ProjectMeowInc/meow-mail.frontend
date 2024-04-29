@@ -4,7 +4,6 @@ import { useRootLayout } from "./useRootLayout"
 import HeaderMobile from "../../components/Header/HeaderMobile/HeaderMobile"
 import classes from "./rootLayout.module.css"
 import HeaderDesktop from "../../components/Header/HeaderDesktop/HeaderDesktop"
-import DefaultUserImage from "../../components/DefaultUserImage/DefaultUserImage"
 import { ClientService } from "../../services/ClientService"
 import Input from "../../components/Input/Input"
 import Search from "../../icons/search.svg?react"
@@ -21,8 +20,8 @@ const RootLayout = () => {
         QuitHandler,
         isActiveSendForm,
         setIsActiveSendForm,
-        mailsCount,
         MovePage,
+        page,
     } = useRootLayout()
 
     return (
@@ -33,6 +32,20 @@ const RootLayout = () => {
                     <div className={classes.menu} />
                     <div className={classes.outlet_mobile}>
                         <Outlet />
+
+                        {!hideComponent && (
+                            <div className={classes.controls_mobile}>
+                                <div className={classes.prev_page_button} onClick={() => MovePage(-1)}>
+                                    <Left className={classes.icon} />
+                                    <p>Назад</p>
+                                </div>
+                                {page.prevCount} - {page.currentCount}
+                                <div className={classes.next_page_button} onClick={() => MovePage(1)}>
+                                    <p>Вперед</p>
+                                    <Right className={classes.icon} />
+                                </div>
+                            </div>
+                        )}
                     </div>
                     {isActiveSendForm && <SendEmailForm closeForm={() => setIsActiveSendForm(false)} />}
                 </>
@@ -56,7 +69,9 @@ const RootLayout = () => {
                                     <div className={classes.controls}>
                                         {!hideComponent && (
                                             <>
-                                                <p className={classes.count}>1 - {mailsCount}</p>
+                                                <p className={classes.count}>
+                                                    {page.prevCount} - {page.currentCount}
+                                                </p>
 
                                                 <div>
                                                     <Left className={classes.icon} onClick={() => MovePage(-1)} />
@@ -66,7 +81,6 @@ const RootLayout = () => {
                                         )}
                                     </div>
                                     <div className={classes.user}>
-                                        <DefaultUserImage />
                                         <p>{user?.login}</p>
                                     </div>
                                     <p className={classes.quit} onClick={() => QuitHandler()}>
