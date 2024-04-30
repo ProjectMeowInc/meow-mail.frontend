@@ -1,0 +1,42 @@
+.prev_page_button {
+    border-radius: 5px;
+    border: 1px solid var(--second);
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    background-color: var(--second);
+    color: var(--accent);
+    font-size: 18px;
+    gap: 10px;
+}
+
+.next_page_button {
+    border-radius: 5px;
+    border: 1px solid var(--second);
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    color: var(--accent);
+    font-size: 18px;
+    gap: 10px;
+}
+
+.controls_mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    color: var(--second);
+    font-weight: 600;
+}
+
+.page {
+    font-size: 20px;
+}
+
+.icon {
+    stroke: var(--accent);
+    stroke-width: 2px;
+    cursor: pointer;
+}

@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    gap: 20px;
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.icons {
+    stroke: var(--accent);
+    stroke-width: 2px;
+    cursor: pointer;
+}

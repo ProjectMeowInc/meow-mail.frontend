@@ -6,6 +6,7 @@ import { LogService } from "../../shared/services/LogService"
 import { UserRoleType } from "../../entities/User/types/UserRoleType"
 import { IOnChangeEvent } from "../../shared/events/IOnChangeEvent"
 import { isCorrectError } from "../../shared/utils/hasData"
+import { ClientService } from "../../shared/services/ClientService"
 
 const DefaultPage = "1"
 
@@ -15,18 +16,24 @@ export const useAdminUserPage = () => {
         LogService.log(`Error get page STR. Use default value: ${DefaultPage}`, "ERROR")
         return DefaultPage
     })
-    const [pageNumber] = useState<number>(Number(pageStr))
+    const [page, setPage] = useState<number>(Number(pageStr))
 
     useEffect(() => {
-        if (!pageNumber) {
-            return setSearchParams("page", pageNumber.toString())
+        if (!page) {
+            return setSearchParams("page", page.toString())
         }
-    }, [pageNumber])
+    }, [page])
 
     const [updateUserRole, { isSuccess: isUpdateRoleSuccess, error: updateRoleError }] = useUpdateUserRoleByIdMutation()
-    const { data: users, error: getUserError } = useGetUserListQuery(pageNumber, {
+    const { data: users, error: getUserError } = useGetUserListQuery(page, {
         pollingInterval: 20000,
     })
+
+    const [prevCount, setPrevCount] = useState<number>(1)
+    const [currentCount, setCurrentCount] = useState<number>(20)
+
+    const deviceType = ClientService.getClientType()
+    const isMobileDevice = ClientService.isMobileDevice(deviceType)
 
     useEffect(() => {
         if (isCorrectError(getUserError)) {
@@ -53,18 +60,35 @@ export const useAdminUserPage = () => {
     }, [updateRoleError])
 
     const ChangeHandler = async ({ fieldValue }: IOnChangeEvent, userId: number) => {
-        console.log({
-            role: fieldValue as UserRoleType,
-            target: userId,
-        })
         updateUserRole({
             role: fieldValue as UserRoleType,
             target: userId,
         })
     }
 
+    const NextPageHandler = () => {
+        if (users && users.count === 20 && users.pages > page) {
+            setPage((prevPage) => prevPage + 1)
+            setCurrentCount((prevState) => prevState + 20)
+            setPrevCount((prevState) => prevState + 20)
+        }
+    }
+
+    const PrevPageHandler = () => {
+        if (page > 1) {
+            setPage((prevPage) => prevPage - 1)
+            setCurrentCount((prevState) => prevState - 20)
+            setPrevCount((prevState) => prevState - 20)
+        }
+    }
+
     return {
         users,
         ChangeHandler,
+        NextPageHandler,
+        PrevPageHandler,
+        isMobileDevice,
+        prevCount,
+        currentCount,
     }
 }
