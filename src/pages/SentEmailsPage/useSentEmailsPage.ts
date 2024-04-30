@@ -1,6 +1,3 @@
-import { useAppDispatch, useAppSelector } from "../../store"
-import { useFirstLoading } from "../../shared/hooks/useFirstLoading"
-import { resetState } from "../../entities/Page/slices/pageSlice"
 import { useSearchParamsWrapper } from "../../shared/hooks/useSearchParamsWrapper"
 import { LogService } from "../../shared/services/LogService"
 import { useEffect, useState } from "react"
