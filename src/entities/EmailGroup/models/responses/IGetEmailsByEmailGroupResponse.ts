@@ -3,6 +3,7 @@ import { MailboxType } from "../../../Email/models/type/MailboxType"
 export interface IGetEmailsByEmailGroupResponse {
     count: number
     page: number
+    page_count: number
     items: {
         content: string
         date_time: number

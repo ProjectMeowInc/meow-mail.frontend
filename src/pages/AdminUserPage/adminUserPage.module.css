@@ -1,9 +1,19 @@
 .wrapper {
     width: 100%;
     height: 100%;
-    padding: 10px;
+    background-color: var(--thirth);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    background-color: var(--thirth);
+    gap: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.users {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
