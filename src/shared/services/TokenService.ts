@@ -21,6 +21,21 @@ export class TokenService {
     }
 
     /**
+     * Метод для установки токена 2-факторной аунтентификации
+     * @param token токен 2-факторной аунтентификации
+     */
+    public static set2FAToken(token: string) {
+        localStorage.setItem("2FAToken", token)
+    }
+
+    /**
+     * Метод для получения токена 2-факторной аунтентификации
+     */
+    public static get2FAToken(): string | null {
+        return localStorage.getItem("2FAToken")
+    }
+
+    /**
      * Метод для установки токена доступа в куки
      * @param token токен доступа
      */
