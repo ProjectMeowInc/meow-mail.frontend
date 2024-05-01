@@ -12,6 +12,8 @@ import { IChangePasswordRequest } from "../models/requests/IChangePasswordReques
 import { AuthorizationResponseV2Type } from "../models/responses/AuthorizationResponseV2Type"
 import { AuthorizationRequestV2Type } from "../models/requests/AuthorizationRequestV2Type"
 import { IConnectTelegramResponse } from "../models/responses/IConnectTelegramResponse"
+import { Get2FATokenRequestType } from "../models/requests/Get2FATokenRequestType"
+import { Get2FATokenResponseType } from "../models/responses/Get2FATokenResponseType"
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_API_URL }) as BaseQueryFn<
     string | FetchArgs,
@@ -111,7 +113,16 @@ export const authApi = createApi({
         }),
 
         changePassword: builder.mutation<void, IChangePasswordRequest>({
-            query: (body) => query("/v1/auth/change-password", "POST", true, body),
+            query: (body) =>
+                query("/v2/auth/change-password", "POST", false, body, undefined, {
+                    headers: {
+                        Authorization: TokenService.get2FAToken() ?? undefined,
+                    },
+                }),
+        }),
+
+        get2FAToken: builder.mutation<Get2FATokenResponseType, Get2FATokenRequestType>({
+            query: (body) => query("/v2/auth/two-factor", "POST", true, body),
         }),
     }),
 })
@@ -122,4 +133,5 @@ export const {
     useCreateMailBoxMutation,
     useAuthorizationV2Mutation,
     useConnectTelegramMutation,
+    useGet2FATokenMutation,
 } = authApi

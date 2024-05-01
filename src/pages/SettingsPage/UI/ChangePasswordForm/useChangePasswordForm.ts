@@ -1,9 +1,9 @@
-import { useChangePasswordMutation } from "../../../../entities/Auth/api/AuthApi"
+import { useChangePasswordMutation, useGet2FATokenMutation } from "../../../../entities/Auth/api/AuthApi"
 import { FormEvent, useEffect, useState } from "react"
 import { AlertService } from "../../../../shared/services/AlertService"
 import { IOnChangeEvent } from "../../../../shared/events/IOnChangeEvent"
-import { LogService } from "../../../../shared/services/LogService"
 import { isCorrectError } from "../../../../shared/utils/hasData"
+import { TokenService } from "../../../../shared/services/TokenService"
 
 interface IFormData {
     old_password: string
@@ -17,7 +17,12 @@ export const useChangePasswordForm = () => {
         confirm_password: "",
         old_password: "",
     })
+
+    const [get2FAToken] = useGet2FATokenMutation()
     const [changePassword, { error, isSuccess }] = useChangePasswordMutation()
+
+    const [verifyCode, setVerifyCode] = useState<string>("")
+    const [need2FA, setNeed2FA] = useState<boolean>(false)
 
     useEffect(() => {
         if (isSuccess) {
@@ -45,14 +50,68 @@ export const useChangePasswordForm = () => {
             return AlertService.error("Пароли не совпадают")
         }
 
-        await changePassword({
-            old_password: formData.old_password,
-            new_password: formData.new_password,
+        const result = await get2FAToken({
+            type: "RequestCode",
         })
+
+        if (!("data" in result)) {
+            if (isCorrectError(result.error)) {
+                return AlertService.error(result.error.data.message)
+            }
+
+            return AlertService.error("Ошибка")
+        }
+
+        if (result.data.type === "Success") {
+            const { token } = result.data
+
+            TokenService.set2FAToken(token)
+
+            await changePassword({
+                old_password: formData.old_password,
+                new_password: formData.new_password,
+            })
+            return
+        } else {
+            setNeed2FA(true)
+        }
+    }
+
+    const Submit2FAHandler = async (event: FormEvent) => {
+        event.preventDefault()
+
+        const result = await get2FAToken({
+            type: "SendVerifyCode",
+            code: verifyCode,
+        })
+
+        if (!("data" in result)) {
+            if (isCorrectError(result.error)) {
+                return AlertService.error(result.error.data.message)
+            }
+
+            return AlertService.error("Ошибка")
+        }
+
+        if (result.data.type === "Success") {
+            const { token } = result.data
+
+            TokenService.set2FAToken(token)
+
+            await changePassword({
+                old_password: formData.old_password,
+                new_password: formData.new_password,
+            })
+
+            setNeed2FA(false)
+        }
     }
 
     return {
         ChangeHandler,
         SubmitHandler,
+        Submit2FAHandler,
+        setVerifyCode,
+        need2FA,
     }
 }

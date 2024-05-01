@@ -24,6 +24,9 @@ const AddToFactor = () => {
                         </a>{" "}
                         и введите код ниже:
                     </p>
+
+                    <div className={classes.qr_code}></div>
+
                     <div className={classes.code_item}>
                         <p className={classes.code}>{code}</p>
                         <Copy className={classes.icon} onClick={CopyHandler} />
