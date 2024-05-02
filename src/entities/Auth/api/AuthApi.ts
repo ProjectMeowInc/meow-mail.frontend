@@ -14,6 +14,7 @@ import { AuthorizationRequestV2Type } from "../models/requests/AuthorizationRequ
 import { IConnectTelegramResponse } from "../models/responses/IConnectTelegramResponse"
 import { Get2FATokenRequestType } from "../models/requests/Get2FATokenRequestType"
 import { Get2FATokenResponseType } from "../models/responses/Get2FATokenResponseType"
+import { IGetInformationAboutUserResponse } from "../models/responses/IGetInformationAboutUserResponse"
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_API_URL }) as BaseQueryFn<
     string | FetchArgs,
@@ -124,6 +125,10 @@ export const authApi = createApi({
         get2FAToken: builder.mutation<Get2FATokenResponseType, Get2FATokenRequestType>({
             query: (body) => query("/v2/auth/two-factor", "POST", true, body),
         }),
+
+        getInformationAboutUser: builder.query<IGetInformationAboutUserResponse, void>({
+            query: () => query("/v2/auth/my", "GET", true),
+        }),
     }),
 })
 
@@ -134,4 +139,5 @@ export const {
     useAuthorizationV2Mutation,
     useConnectTelegramMutation,
     useGet2FATokenMutation,
+    useLazyGetInformationAboutUserQuery,
 } = authApi

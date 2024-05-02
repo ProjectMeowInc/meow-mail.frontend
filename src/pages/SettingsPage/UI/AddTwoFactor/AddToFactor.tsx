@@ -5,11 +5,17 @@ import { useAddToFactor } from "./useAddToFactor"
 import Button from "../../../../shared/components/Button/Button"
 
 const AddToFactor = () => {
-    const { CopyHandler, ClickHandler, code } = useAddToFactor()
+    const { CopyHandler, ClickHandler, code, user } = useAddToFactor()
 
     return (
         <div className={classes.wrapper}>
             <p className={classes.caption}>Подключить двухэтапную аунтентификацию</p>
+            {user?.contains_two_factor && (
+                <p>
+                    У вас подключена двухэтапная аунтентификация к этому акаунту. Если телеграмм аккаунт был утерян
+                    переводключите двухэтапную аунтентификаци.
+                </p>
+            )}
             {code ? (
                 <>
                     <p className={classes.description}>

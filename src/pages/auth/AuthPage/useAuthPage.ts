@@ -1,5 +1,9 @@
 import { FormEvent, useEffect, useState } from "react"
-import { useAuthorizationV2Mutation, useCreateMailBoxMutation } from "../../../entities/Auth/api/AuthApi"
+import {
+    useAuthorizationV2Mutation,
+    useCreateMailBoxMutation,
+    useLazyGetInformationAboutUserQuery,
+} from "../../../entities/Auth/api/AuthApi"
 import { IOnChangeEvent } from "../../../shared/events/IOnChangeEvent"
 import { AuthorizationDto } from "../../../entities/Auth/dto/AuthorizationDto"
 import { AlertService } from "../../../shared/services/AlertService"
@@ -17,6 +21,7 @@ export const useAuthPage = () => {
     const [createMailBox, { error: createMailBoxError }] = useCreateMailBoxMutation()
     const [code, setCode] = useState<string>("")
     const [isSuccess, setIsSuccess] = useState<boolean>(false)
+    const [getInformation] = useLazyGetInformationAboutUserQuery()
 
     useEffect(() => {
         if (data && data.type === "Success") {
@@ -27,15 +32,25 @@ export const useAuthPage = () => {
 
             const { id, login, role } = TokenService.parseAccessToken(access_token)
 
-            dispatch(
-                setUser({
-                    id,
-                    login,
-                    role,
-                }),
-            )
+            getInformation().then((result) => {
+                if (result.data) {
+                    const { contains_mailbox, contains_two_factor } = result.data.user
 
-            createMailBox().then()
+                    dispatch(
+                        setUser({
+                            id,
+                            login,
+                            role,
+                            contains_mailbox,
+                            contains_two_factor,
+                        }),
+                    )
+
+                    if (!contains_mailbox) {
+                        createMailBox().then()
+                    }
+                }
+            })
 
             navigate("/my?page=1&is_received=true")
         }

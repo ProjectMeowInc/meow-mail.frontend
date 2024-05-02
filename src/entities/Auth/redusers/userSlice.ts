@@ -5,6 +5,8 @@ interface IUser {
     id: number
     login: string
     role: UserRoleType
+    contains_mailbox: boolean
+    contains_two_factor: boolean
 }
 
 type SliceState = {
