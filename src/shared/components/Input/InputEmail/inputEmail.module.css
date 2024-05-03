@@ -3,12 +3,15 @@
     gap: 10px;
     border-bottom: 1px solid var(--accent);
     padding: 10px 0;
+    color: var(--white);
 }
 
 .input {
     border: none;
     width: 80%;
     font-size: 16px;
+    background-color: var(--third);
+    color: var(--accent);
 }
 
 .input:focus {
