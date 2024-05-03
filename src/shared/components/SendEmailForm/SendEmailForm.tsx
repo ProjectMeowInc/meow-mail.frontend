@@ -5,6 +5,7 @@ import Close from "../../icons/plus-sm.svg?react"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
 import { useSendEmailForm } from "./useSendEmailForm"
+import { Editor } from "mate-ts"
 
 interface ISendEmailFormProps {
     closeForm: () => void
@@ -40,14 +41,7 @@ const SendEmailForm: FC<ISendEmailFormProps> = ({ closeForm }) => {
                         onChange={ChangeHandler}
                     />
 
-                    <Input
-                        type={"text"}
-                        name={"content"}
-                        inputType={3}
-                        placeholder={"Начните вводить текст"}
-                        fieldName={"Текст"}
-                        onChange={ChangeHandler}
-                    />
+                    <Editor submitHandler={() => {}} />
                 </div>
 
                 <Button styles={{ width: "40%" }} type={1}>
