@@ -77,7 +77,7 @@ const router = createBrowserRouter([
 
                             {
                                 path: ":mailId",
-                                element: <LettersPage />,
+                                element: <LetterPage />,
                             },
                         ],
                     },

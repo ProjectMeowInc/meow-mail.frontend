@@ -1,13 +1,21 @@
-.wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@media (min-width: 0) {
+    .wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media (min-width: 425px) {
+    .wrapper {
+        width: 375px;
+    }
 }
 
 .info {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
     gap: 5px;
 }
 

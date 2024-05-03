@@ -9,12 +9,14 @@ export const query = (
     withAuth: boolean,
     body?: object,
     params?: object,
+    config?: object,
 ): FetchArgs => {
     let result: FetchArgs = {
         url,
         method,
         body,
         params,
+        ...config,
     }
 
     if (withAuth) {

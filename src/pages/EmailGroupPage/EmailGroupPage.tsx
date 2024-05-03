@@ -2,26 +2,55 @@ import React from "react"
 import { useEmailGroupPage } from "./useEmailGroupPage"
 import Preloader from "../../shared/components/Preloader/Preloader"
 import Email from "../../shared/components/Email/Email"
+import PaginationControls from "../UI/PaginationControls/PaginationControls"
+import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
+import classes from "./emailGroupPage.module.css"
 
 const EmailGroupPage = () => {
-    const { mails } = useEmailGroupPage()
+    const { groupedEmails, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice } =
+        useEmailGroupPage()
 
-    if (!mails) {
+    if (!groupedEmails) {
         return <Preloader />
     }
 
     return (
-        <div>
-            {mails.items.map((mail) => (
-                <Email
-                    key={mail.id}
-                    id={mail.id}
-                    isRead={mail.is_read}
-                    subject={mail.subject}
-                    from={{ address: mail.from.mailbox, type: mail.from.type }}
-                    href={`/my/${mail.id}`}
-                />
+        <div className={classes.wrapper}>
+            <div className={classes.controls}>
+                {!isMobileDevice && (
+                    <PaginationControls
+                        previousValue={prevCount}
+                        currentValue={currentCount}
+                        goPrevPage={PrevPageHandler}
+                        goNextPage={NextPageHandler}
+                    />
+                )}
+            </div>
+
+            {groupedEmails.map((group) => (
+                <div className={classes.group} key={group.date}>
+                    <p className={classes.date}>{group.date}</p>
+                    {group.items.map((mail) => (
+                        <Email
+                            key={mail.id}
+                            id={mail.id}
+                            href={`${mail.id}`}
+                            from={{ address: mail.from.mailbox, type: mail.from.type }}
+                            isRead={mail.is_read}
+                            subject={mail.subject}
+                        />
+                    ))}
+                </div>
             ))}
+
+            {isMobileDevice && (
+                <MobilePaginationControls
+                    currentValue={currentCount}
+                    goPrevPage={PrevPageHandler}
+                    goNextPage={NextPageHandler}
+                    previousValue={prevCount}
+                />
+            )}
         </div>
     )
 }

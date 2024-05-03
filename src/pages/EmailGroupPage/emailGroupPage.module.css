@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.date {
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--second);
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+}

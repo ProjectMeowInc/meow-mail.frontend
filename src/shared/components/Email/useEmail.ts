@@ -56,10 +56,10 @@ export const useEmail = () => {
             return
         }
 
-        if (touchStart > touchEnd) {
-            setMoveToucheX(-screen.width * 0.15)
-        } else {
+        if (touchStart < touchEnd) {
             setMoveToucheX(screen.width * 0.15)
+        } else {
+            setMoveToucheX(0)
         }
     }
 

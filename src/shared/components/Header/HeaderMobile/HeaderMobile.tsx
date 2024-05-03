@@ -8,16 +8,17 @@ import { useHeaderMobile } from "./useHeaderMobile"
 import search from "../../../icons/search-white.svg"
 import pen from "../../../icons/pencil.svg"
 import mail from "../../../icons/mail-open-white.svg"
-import start from "../../../icons/star-white.svg"
 import sent from "../../../icons/paper-airplane-white.svg"
 import DefaultUserImage from "../../DefaultUserImage/DefaultUserImage"
+import AdminDropDownMenu from "../HeaderDesktop/UI/AdminDropDownMenu/AdminDropDownMenu"
+import EmailGroup from "../../EmailGroup/EmailGroup"
 
 interface IHeaderMobile {
     onClickSendButton: () => void
 }
 
 const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
-    const { isActive, setIsActive, navigate, menuRef } = useHeaderMobile()
+    const { isActive, setIsActive, navigate, menuRef, user } = useHeaderMobile()
 
     return (
         <header className={classes.header_mobile} ref={menuRef}>
@@ -33,15 +34,16 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
 
                     <div className={isActive ? classes.menu__active : classes.menu}>
                         <div className={classes.menu_list}>
-                            <MenuItem icon={mail} href={""}>
+                            <MenuItem icon={mail} href={"/my?page=1&is_received=true"}>
                                 Входящее
                             </MenuItem>
-                            <MenuItem icon={start} href={""}>
-                                Избранное
-                            </MenuItem>
-                            <MenuItem icon={sent} href={""}>
+                            <MenuItem icon={sent} href={"sent?page=1&is_received=false"}>
                                 Отправленные
                             </MenuItem>
+
+                            {user?.role === "Root" || user?.role === "Administrator" ? <AdminDropDownMenu /> : <></>}
+
+                            <EmailGroup />
                         </div>
                         <Button onClick={() => navigate("settings")} type={2}>
                             Настройки

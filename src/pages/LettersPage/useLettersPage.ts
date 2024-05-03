@@ -1,51 +1,46 @@
-import { useEffect, useState } from "react"
 import { useGetEmailWithFilterQuery } from "../../entities/Email/api/emailApi"
+import { useEffect, useState } from "react"
+import { isCorrectError } from "../../shared/utils/hasData"
 import { AlertService } from "../../shared/services/AlertService"
-import { useAppDispatch, useAppSelector } from "../../store"
-import { setEmails } from "../../entities/Email/slices/emailSlice"
 import { useSearchParamsWrapper } from "../../shared/hooks/useSearchParamsWrapper"
 import { LogService } from "../../shared/services/LogService"
-import { isCorrectError } from "../../shared/utils/hasData"
-
-const DefaultPage = "1"
+import { FormatterService, IGroupedEmails } from "../../shared/services/FormatterService"
+import { ClientService } from "../../shared/services/ClientService"
 
 export const useLettersPage = () => {
     const { setSearchParams, getParamExcept } = useSearchParamsWrapper()
-    const pageStr = getParamExcept("page", ["0"]).unwrapOrElse(() => {
-        LogService.log(`Error get page STR. Use default value: ${DefaultPage}`, "ERROR")
-        return DefaultPage
+    const pageString = getParamExcept("page", ["0"]).unwrapOrElse(() => {
+        LogService.log("Page must be bigger then 0", "DEBUG")
+        return "1"
     })
+    const [page, setPage] = useState<number>(Number(pageString))
 
-    const [pageNumber] = useState<number>(Number(pageStr))
+    const [groupedEmails, setGroupedEmails] = useState<IGroupedEmails[] | null>(null)
 
-    const {
-        data: mails,
-        error,
-        isLoading,
-    } = useGetEmailWithFilterQuery(
+    const [prevCount, setPrevCount] = useState<number>(1)
+    const [currentCount, setCurrentCount] = useState<number>(20)
+
+    const deviceType = ClientService.getClientType()
+    const isMobileDevice = ClientService.isMobileDevice(deviceType)
+
+    const [subject, setSubject] = useState<string>("")
+
+    const { data: emails, error } = useGetEmailWithFilterQuery(
         {
-            pageNumber,
+            pageNumber: page,
             is_received: true,
+            subject: subject.length > 0 ? subject : undefined,
         },
         {
             pollingInterval: 20000,
         },
     )
 
-    const dispatch = useAppDispatch()
-    const storeMails = useAppSelector((state) => state.emailSlice)
-
     useEffect(() => {
-        if (!pageNumber) {
-            return setSearchParams("page", pageNumber.toString())
+        if (!page) {
+            setSearchParams("page", page.toString())
         }
-    }, [pageNumber])
-
-    useEffect(() => {
-        if (mails) {
-            dispatch(setEmails(mails.items))
-        }
-    }, [mails])
+    }, [page])
 
     useEffect(() => {
         if (isCorrectError(error)) {
@@ -53,8 +48,35 @@ export const useLettersPage = () => {
         }
     }, [error])
 
+    useEffect(() => {
+        if (emails) {
+            setGroupedEmails(FormatterService.sortEmailsByDate(emails.items))
+        }
+    }, [emails])
+
+    const NextPageHandler = () => {
+        if (emails && emails.count === 20 && emails.page_count > page) {
+            setPage((prevPage) => prevPage + 1)
+            setCurrentCount((prevState) => prevState + 20)
+            setPrevCount((prevState) => prevState + 20)
+        }
+    }
+
+    const PrevPageHandler = () => {
+        if (page > 1) {
+            setPage((prevPage) => prevPage - 1)
+            setCurrentCount((prevState) => prevState - 20)
+            setPrevCount((prevState) => prevState - 20)
+        }
+    }
+
     return {
-        isLoading,
-        storeMails,
+        groupedEmails,
+        NextPageHandler,
+        prevCount,
+        currentCount,
+        PrevPageHandler,
+        isMobileDevice,
+        setSubject,
     }
 }

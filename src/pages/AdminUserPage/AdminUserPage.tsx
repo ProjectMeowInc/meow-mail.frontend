@@ -2,19 +2,45 @@ import React from "react"
 import { useAdminUserPage } from "./useAdminUserPage"
 import Preloader from "../../shared/components/Preloader/Preloader"
 import UserItem from "./UI/UserItem/UserItem"
+import classes from "./adminUserPage.module.css"
+import PaginationControls from "../UI/PaginationControls/PaginationControls"
+import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
 
 const AdminUserPage = () => {
-    const { users, ChangeHandler } = useAdminUserPage()
+    const { users, ChangeHandler, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice } =
+        useAdminUserPage()
 
     if (!users) {
         return <Preloader />
     }
 
     return (
-        <div>
-            {users.items.map((user) => (
-                <UserItem key={user.id} id={user.id} onChange={ChangeHandler} role={user.role} login={user.login} />
-            ))}
+        <div className={classes.wrapper}>
+            <div className={classes.header}>
+                {!isMobileDevice && (
+                    <PaginationControls
+                        previousValue={prevCount}
+                        currentValue={currentCount}
+                        goPrevPage={PrevPageHandler}
+                        goNextPage={NextPageHandler}
+                    />
+                )}
+            </div>
+
+            <div className={classes.users}>
+                {users.items.map((user) => (
+                    <UserItem key={user.id} id={user.id} onChange={ChangeHandler} role={user.role} login={user.login} />
+                ))}
+            </div>
+
+            {isMobileDevice && (
+                <MobilePaginationControls
+                    currentValue={currentCount}
+                    goPrevPage={PrevPageHandler}
+                    goNextPage={NextPageHandler}
+                    previousValue={prevCount}
+                />
+            )}
         </div>
     )
 }

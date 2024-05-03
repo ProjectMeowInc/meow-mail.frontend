@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
+import { useAppSelector } from "../../../../store"
 
 export const useHeaderMobile = () => {
     const [isActive, setIsActive] = useState<boolean>(false)
     const navigate = useNavigate()
     const menuRef = useRef<HTMLDivElement | null>(null)
+    const user = useAppSelector((state) => state.user.data)
 
     useEffect(() => {
         if (isActive) {
@@ -42,5 +44,6 @@ export const useHeaderMobile = () => {
         setIsActive,
         navigate,
         menuRef,
+        user,
     }
 }

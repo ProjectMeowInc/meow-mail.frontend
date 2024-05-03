@@ -1,6 +1,6 @@
 .wrapper {
     position: absolute;
-    width: 100%;
+    width: 100dvw;
     height: 100dvh;
     z-index: 200;
     left: 0;
@@ -32,6 +32,42 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+@media (min-width: 0) and (max-width: 425px) {
+    .modal {
+        width: 90%;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 767px) {
+    .modal {
+        width: 75%;
+    }
+}
+
+@media (min-width: 767px) {
+    .modal {
+        width: 45%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .modal {
+        width: 30%;
+    }
+}
+
+@media (min-width: 1500px) {
+    .modal {
+        width: 25%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .modal {
+        width: 20%;
+    }
 }
 
 .form {

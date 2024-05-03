@@ -4,7 +4,6 @@ import MenuItem from "./UI/MenuItem/MenuItem"
 import classes from "./headerDesktop.module.css"
 
 import Mail from "../../../icons/mail-open.svg?react"
-import Star from "../../../icons/star.svg?react"
 import AirPlane from "../../../icons/paper-airplane.svg?react"
 import EmailGroup from "../../EmailGroup/EmailGroup"
 import AdminDropDownMenu from "./UI/AdminDropDownMenu/AdminDropDownMenu"
@@ -32,22 +31,17 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                     </div>
 
                     <div className={classes.menu_list}>
-                        <MenuItem href={"/my?page=1"}>
+                        <MenuItem href={"/my?page=1&is_received=true"}>
                             <Mail />
                             <p>Входящие</p>
                         </MenuItem>
 
-                        <MenuItem href={"/favorites"}>
-                            <Star />
-                            <p>Избранные</p>
-                        </MenuItem>
-
-                        <MenuItem href={"sent?page=1"}>
+                        <MenuItem href={"sent?page=1&is_received=false"}>
                             <AirPlane />
                             <p>Отправленные</p>
                         </MenuItem>
 
-                        {user?.role === "Root" ? <AdminDropDownMenu /> : <></>}
+                        {user?.role === "Root" || user?.role === "Administrator" ? <AdminDropDownMenu /> : <></>}
                     </div>
 
                     <EmailGroup />

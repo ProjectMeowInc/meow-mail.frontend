@@ -1,12 +1,23 @@
-@media (min-width: 0) {
-    .wrapper {
-        width: 95%;
-        margin: 0 auto;
-    }
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-@media (min-width: 1440px) {
-    .wrapper {
-        width: 100%;
-    }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.date {
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--second);
 }

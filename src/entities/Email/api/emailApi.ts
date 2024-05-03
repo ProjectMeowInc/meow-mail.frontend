@@ -1,6 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react"
 import { fetchBaseQueryWithReAuth } from "../../Auth/api/AuthApi"
-import { IGetAllEmailResponse } from "../models/responses/IGetAllEmailResponse"
 import { IGetAllEmailWIthFilterRequest } from "../models/requests/IGetAllEmailWIthFilterRequest"
 import { IGetAllEmailWithFilterResponse } from "../models/responses/IGetAllEmailWithFilterResponse"
 import { IUpdateEmailStatusRequest } from "../models/requests/IUpdateEmailStatusRequest"
@@ -18,14 +17,6 @@ export const emailApi = createApi({
     refetchOnReconnect: true,
     refetchOnFocus: true,
     endpoints: (build) => ({
-        getAllEmail: build.query<IGetAllEmailResponse, number>({
-            query: (pageNumber) => query(`/v1/email/my?page=${pageNumber}`, "GET", true),
-            providesTags: (result) =>
-                result
-                    ? [...result.items.map(({ id }) => ({ type: EmailType, id })), { type: EmailType, id: "LIST" }]
-                    : [{ type: EmailType, id: "LIST" }],
-        }),
-
         getEmailWithFilter: build.query<IGetAllEmailWithFilterResponse, IGetAllEmailWIthFilterRequest>({
             query: ({ pageNumber, subject, is_received }) =>
                 query("/v1/email/filter", "GET", true, undefined, {
@@ -79,7 +70,6 @@ export const emailApi = createApi({
 })
 
 export const {
-    useGetAllEmailQuery,
     useGetEmailWithFilterQuery,
     useUpdateEmailStatusMutation,
     useSendEmailMutation,

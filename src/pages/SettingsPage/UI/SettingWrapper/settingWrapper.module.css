@@ -1,6 +1,13 @@
 .wrapper {
     padding: 20px;
-    width: 25dvw;
+    width: 100%;
+}
+
+.children {
+    padding-top: 20px;
+    align-items: flex-start;
+    gap: 50px;
+    flex-wrap: wrap;
 }
 
 .caption {
