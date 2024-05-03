@@ -3,9 +3,16 @@ import classes from "./sendEmailForm.module.css"
 
 import Close from "../../icons/plus-sm.svg?react"
 import Input from "../Input/Input"
-import Button from "../Button/Button"
 import { useSendEmailForm } from "./useSendEmailForm"
 import { Editor } from "mate-ts"
+import "../../../../node_modules/mate-ts/dist/style.css"
+
+import Bold from "../../icons/editor/bold.png"
+import Italic from "../../icons/editor/italic.png"
+import Strike from "../../icons/editor/strikethrough.png"
+import Numeric from "../../icons/editor/numbered list.png"
+import Bullet from "../../icons/editor/bulleted list.png"
+import Quote from "../../icons/editor/block quote.png"
 
 interface ISendEmailFormProps {
     closeForm: () => void
@@ -21,7 +28,7 @@ const SendEmailForm: FC<ISendEmailFormProps> = ({ closeForm }) => {
                 <Close className={classes.icon} onClick={closeForm} />
             </div>
 
-            <form className={classes.form} onSubmit={SubmitHandler}>
+            <form className={classes.form} onSubmit={(e) => e.preventDefault()}>
                 <div className={classes.fields}>
                     <Input
                         type={"email"}
@@ -41,12 +48,23 @@ const SendEmailForm: FC<ISendEmailFormProps> = ({ closeForm }) => {
                         onChange={ChangeHandler}
                     />
 
-                    <Editor submitHandler={() => {}} />
+                    <Editor
+                        submitHandler={SubmitHandler}
+                        placeholder={"Введите ваше сообщение"}
+                        styles={{
+                            accentColor: "var(--accent)",
+                            backgroundColor: "var(--third)",
+                        }}
+                        icons={{
+                            strikeIconHref: Strike,
+                            boldIconHref: Bold,
+                            italicIconHref: Italic,
+                            markedListHref: Bullet,
+                            numericListHref: Numeric,
+                            quoteHref: Quote,
+                        }}
+                    />
                 </div>
-
-                <Button styles={{ width: "40%" }} type={1}>
-                    Отправить
-                </Button>
             </form>
         </div>
     )
