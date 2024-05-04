@@ -5,7 +5,6 @@ import MenuItem from "./UI/MenuItem/MenuItem"
 import Button from "../../Button/Button"
 import { useHeaderMobile } from "./useHeaderMobile"
 
-import search from "../../../icons/search-white.svg"
 import pen from "../../../icons/pencil.svg"
 import mail from "../../../icons/mail-open-white.svg"
 import sent from "../../../icons/paper-airplane-white.svg"
