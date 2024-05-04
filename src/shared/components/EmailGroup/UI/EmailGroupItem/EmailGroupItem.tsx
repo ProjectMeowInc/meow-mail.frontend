@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 interface IEmailGroupItemProps {
     id: number
     name: string
+    onClick?: () => void
 }
 
 const EmailGroupItem: FC<IEmailGroupItemProps> = ({ id, name }) => {

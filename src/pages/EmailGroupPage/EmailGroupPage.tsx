@@ -5,6 +5,7 @@ import Email from "../../shared/components/Email/Email"
 import PaginationControls from "../UI/PaginationControls/PaginationControls"
 import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
 import classes from "./emailGroupPage.module.css"
+import EmptyInboxPlaceholder from "../UI/EmptyInboxPlaceholder/EmptyInboxPlaceholder"
 
 const EmailGroupPage = () => {
     const { groupedEmails, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice } =
@@ -17,7 +18,7 @@ const EmailGroupPage = () => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.controls}>
-                {!isMobileDevice && (
+                {!isMobileDevice && groupedEmails.length !== 0 && (
                     <PaginationControls
                         previousValue={prevCount}
                         currentValue={currentCount}
@@ -26,6 +27,8 @@ const EmailGroupPage = () => {
                     />
                 )}
             </div>
+
+            {groupedEmails.length === 0 && <EmptyInboxPlaceholder />}
 
             {groupedEmails.map((group) => (
                 <div className={classes.group} key={group.date}>
@@ -43,7 +46,7 @@ const EmailGroupPage = () => {
                 </div>
             ))}
 
-            {isMobileDevice && (
+            {isMobileDevice && groupedEmails.length !== 0 && (
                 <MobilePaginationControls
                     currentValue={currentCount}
                     goPrevPage={PrevPageHandler}

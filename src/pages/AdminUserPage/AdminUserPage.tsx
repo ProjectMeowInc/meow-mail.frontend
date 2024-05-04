@@ -5,6 +5,7 @@ import UserItem from "./UI/UserItem/UserItem"
 import classes from "./adminUserPage.module.css"
 import PaginationControls from "../UI/PaginationControls/PaginationControls"
 import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
+import EmptyInboxPlaceholder from "../UI/EmptyInboxPlaceholder/EmptyInboxPlaceholder"
 
 const AdminUserPage = () => {
     const { users, ChangeHandler, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice } =
@@ -17,7 +18,7 @@ const AdminUserPage = () => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.header}>
-                {!isMobileDevice && (
+                {!isMobileDevice && users.items.length !== 0 && (
                     <PaginationControls
                         previousValue={prevCount}
                         currentValue={currentCount}
@@ -33,7 +34,9 @@ const AdminUserPage = () => {
                 ))}
             </div>
 
-            {isMobileDevice && (
+            {users.items.length === 0 && <EmptyInboxPlaceholder />}
+
+            {isMobileDevice && users.items.length !== 0 && (
                 <MobilePaginationControls
                     currentValue={currentCount}
                     goPrevPage={PrevPageHandler}

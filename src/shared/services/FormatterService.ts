@@ -39,11 +39,13 @@ export class FormatterService {
             return acc
         }, {})
 
-        return Object.keys(groups).map((date) => {
-            return {
-                date,
-                items: groups[date],
-            }
-        })
+        return Object.keys(groups)
+            .map((date) => {
+                return {
+                    date,
+                    items: groups[date],
+                }
+            })
+            .reverse()
     }
 }

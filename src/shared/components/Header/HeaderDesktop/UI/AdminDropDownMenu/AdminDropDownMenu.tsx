@@ -1,11 +1,15 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import classes from "./adminDropDownMenu.module.css"
 
 import Chevron from "../../../../../icons/chevron-down.svg?react"
 import Light from "../../../../../icons/light.svg?react"
 import AdminDropDownMenuItem from "./UI/AdminDropDownMenuItem/AdminDropDownMenuItem"
 
-const AdminDropDownMenu = () => {
+interface IProps {
+    onClick?: () => void
+}
+
+const AdminDropDownMenu: FC<IProps> = ({ onClick }) => {
     const [isActive, setIsActive] = useState<boolean>(false)
 
     return (
@@ -19,7 +23,9 @@ const AdminDropDownMenu = () => {
             </div>
 
             <div className={isActive ? classes.menu_active : classes.menu}>
-                <AdminDropDownMenuItem href={"admin/users?page=1"}>Пользователи</AdminDropDownMenuItem>
+                <AdminDropDownMenuItem href={"admin/users?page=1"} onClick={onClick}>
+                    Пользователи
+                </AdminDropDownMenuItem>
             </div>
         </div>
     )

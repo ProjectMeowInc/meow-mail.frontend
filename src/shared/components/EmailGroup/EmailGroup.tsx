@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import classes from "./emailGroup.module.css"
 import { useEmailGroup } from "./useEmailGroup"
 import EmailGroupItem from "./UI/EmailGroupItem/EmailGroupItem"
@@ -8,7 +8,11 @@ import CreateEmailGroupModal from "./UI/CreateEmailGroupModal/CreateEmailGroupMo
 import Cross from "../../icons/plus-sm.svg?react"
 import EmptyTag from "../EmptyTag/EmptyTag"
 
-const EmailGroup = () => {
+interface IProps {
+    onClick?: () => void
+}
+
+const EmailGroup: FC<IProps> = ({ onClick }) => {
     const { setIsOpen, isOpen, groups, setModalIsOpen, modalIsOpen } = useEmailGroup()
 
     if (!groups) {
@@ -32,7 +36,7 @@ const EmailGroup = () => {
                     <Cross className={classes.icon} />
                 </div>
                 {groups.items.map((group) => (
-                    <EmailGroupItem key={group.id} id={group.id} name={group.name} />
+                    <EmailGroupItem onClick={onClick} key={group.id} id={group.id} name={group.name} />
                 ))}
             </div>
         </div>
