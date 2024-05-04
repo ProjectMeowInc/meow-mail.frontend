@@ -33,6 +33,7 @@
     font-size: 22px;
     width: 90%;
     overflow: hidden;
+    cursor: pointer;
     text-overflow: ellipsis;
 }
 

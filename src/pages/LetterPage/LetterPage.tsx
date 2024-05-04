@@ -7,7 +7,6 @@ import { RedirectService } from "../../shared/services/RedirectService"
 
 import Arrow from "../../shared/icons/arrow-sm-up.svg?react"
 import Trash from "../../shared/icons/trash.svg?react"
-import Star from "../../shared/icons/star.svg?react"
 import { MailboxBadge } from "../../shared/components/MailboxBadge/MailboxBadge"
 import Preloader from "../../shared/components/Preloader/Preloader"
 
@@ -26,7 +25,6 @@ const LetterPage = () => {
 
                 <div className={classes.right_side}>
                     <Trash onClick={async () => DeleteHandler()} className={classes.icon} />
-                    <Star className={classes.icon} />
                 </div>
             </div>
             <h1 className={classes.email_subject}>{mail.subject}</h1>
@@ -43,7 +41,19 @@ const LetterPage = () => {
                     <p className={classes.recipient_letter}>Кому: {mail.to.mailbox}</p>
                 </div>
             </div>
-            <div className={classes.email_content} dangerouslySetInnerHTML={{ __html: mail.content }} />
+            <div
+                className={classes.email_content}
+                dangerouslySetInnerHTML={{
+                    __html: `<style>
+                                .content * {
+                                    color: var(--white);
+                                    background-color: var(--thirth);
+                                    font-size: 18px;
+                                }
+                            </style>
+                            <div class="content">${mail.content}</div>`,
+                }}
+            />
         </div>
     )
 }

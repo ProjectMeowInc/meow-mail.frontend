@@ -48,6 +48,7 @@
     font-size: 20px;
     line-height: 200%;
     color: var(--white);
+    background-color: var(--thirth);
 }
 
 .icons {

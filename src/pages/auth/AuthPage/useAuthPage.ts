@@ -43,6 +43,7 @@ export const useAuthPage = () => {
                             role,
                             contains_mailbox,
                             contains_two_factor,
+                            mailbox: result.data.mailbox.address,
                         }),
                     )
 

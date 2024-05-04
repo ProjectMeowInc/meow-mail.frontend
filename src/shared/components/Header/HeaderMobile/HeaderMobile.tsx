@@ -34,14 +34,26 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
 
                     <div className={isActive ? classes.menu__active : classes.menu}>
                         <div className={classes.menu_list}>
-                            <MenuItem icon={mail} href={"/my?page=1&is_received=true"}>
+                            <MenuItem
+                                icon={mail}
+                                href={"/my?page=1&is_received=true"}
+                                onClick={() => setIsActive(false)}
+                            >
                                 Входящее
                             </MenuItem>
-                            <MenuItem icon={sent} href={"sent?page=1&is_received=false"}>
+                            <MenuItem
+                                icon={sent}
+                                href={"sent?page=1&is_received=false"}
+                                onClick={() => setIsActive(false)}
+                            >
                                 Отправленные
                             </MenuItem>
 
-                            {user?.role === "Root" || user?.role === "Administrator" ? <AdminDropDownMenu /> : <></>}
+                            {user?.role === "Root" || user?.role === "Administrator" ? (
+                                <AdminDropDownMenu onClick={() => setIsActive(false)} />
+                            ) : (
+                                <></>
+                            )}
 
                             <EmailGroup />
                         </div>
@@ -53,7 +65,6 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
             </div>
 
             <div className={classes.right_side}>
-                <img src={search} alt={"search icon"} />
                 <img onClick={onClickSendButton} src={pen} alt={"pen icon"} />
 
                 <DefaultUserImage />

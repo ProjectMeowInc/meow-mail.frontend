@@ -1,0 +1,15 @@
+.cat__wrapper {
+    width: 100%;
+    min-height: 70dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.cat {
+    width: 300px;
+}

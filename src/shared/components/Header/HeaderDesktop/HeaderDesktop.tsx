@@ -14,7 +14,7 @@ interface IHeaderDesktopProps {
 }
 
 const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
-    const { user, navigate } = useHeaderDesktop()
+    const { user, navigate, CopyHandler } = useHeaderDesktop()
 
     return (
         <header className={classes.header}>
@@ -25,8 +25,8 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                     </Button>
                     <div className={classes.current_mail_info}>
                         <p>Текущая почта</p>
-                        <p title={`${user?.login}@projectmeow.ru`} className={classes.current_mail}>
-                            {user?.login}@projectmeow.ru
+                        <p title={user?.mailbox} className={classes.current_mail} onClick={CopyHandler}>
+                            {user?.mailbox}
                         </p>
                     </div>
 

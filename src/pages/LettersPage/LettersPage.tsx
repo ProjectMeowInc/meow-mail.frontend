@@ -7,6 +7,7 @@ import Search from "../../shared/icons/search.svg?react"
 import Preloader from "../../shared/components/Preloader/Preloader"
 import PaginationControls from "../UI/PaginationControls/PaginationControls"
 import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
+import Cat from "../UI/Cat/Cat"
 
 const LettersPage = () => {
     const { groupedEmails, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice, setSubject } =
@@ -31,7 +32,7 @@ const LettersPage = () => {
                     onChange={({ fieldValue }) => setSubject(fieldValue)}
                 />
 
-                {!isMobileDevice && (
+                {!isMobileDevice && groupedEmails.length !== 0 && (
                     <PaginationControls
                         previousValue={prevCount}
                         currentValue={currentCount}
@@ -40,6 +41,8 @@ const LettersPage = () => {
                     />
                 )}
             </div>
+
+            {groupedEmails.length === 0 && <Cat />}
 
             {groupedEmails.map((group) => (
                 <div className={classes.group} key={group.date}>
@@ -57,7 +60,7 @@ const LettersPage = () => {
                 </div>
             ))}
 
-            {isMobileDevice && (
+            {isMobileDevice && groupedEmails.length !== 0 && (
                 <MobilePaginationControls
                     currentValue={currentCount}
                     goPrevPage={PrevPageHandler}
