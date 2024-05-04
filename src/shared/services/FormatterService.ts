@@ -43,7 +43,7 @@ export class FormatterService {
             .map((date) => {
                 return {
                     date,
-                    items: groups[date],
+                    items: groups[date].reverse(),
                 }
             })
             .reverse()
