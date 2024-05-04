@@ -8,7 +8,7 @@ import PaginationControls from "../UI/PaginationControls/PaginationControls"
 import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
 
 import Search from "../../shared/icons/search.svg?react"
-import Cat from "../UI/Cat/Cat"
+import EmptyInboxPlaceholder from "../UI/EmptyInboxPlaceholder/EmptyInboxPlaceholder"
 
 const SentEmailsPage = () => {
     const { groupedEmails, setSubject, NextPageHandler, PrevPageHandler, prevCount, currentCount, isMobileDevice } =
@@ -43,7 +43,7 @@ const SentEmailsPage = () => {
                 )}
             </div>
 
-            {groupedEmails.length === 0 && <Cat />}
+            {groupedEmails.length === 0 && <EmptyInboxPlaceholder />}
 
             {groupedEmails.map((group) => (
                 <div className={classes.group} key={group.date}>

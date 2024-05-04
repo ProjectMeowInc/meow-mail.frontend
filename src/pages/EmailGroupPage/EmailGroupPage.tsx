@@ -5,7 +5,7 @@ import Email from "../../shared/components/Email/Email"
 import PaginationControls from "../UI/PaginationControls/PaginationControls"
 import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
 import classes from "./emailGroupPage.module.css"
-import Cat from "../UI/Cat/Cat"
+import EmptyInboxPlaceholder from "../UI/EmptyInboxPlaceholder/EmptyInboxPlaceholder"
 
 const EmailGroupPage = () => {
     const { groupedEmails, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice } =
@@ -28,7 +28,7 @@ const EmailGroupPage = () => {
                 )}
             </div>
 
-            {groupedEmails.length === 0 && <Cat />}
+            {groupedEmails.length === 0 && <EmptyInboxPlaceholder />}
 
             {groupedEmails.map((group) => (
                 <div className={classes.group} key={group.date}>

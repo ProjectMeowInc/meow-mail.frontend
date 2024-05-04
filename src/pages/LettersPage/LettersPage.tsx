@@ -7,7 +7,7 @@ import Search from "../../shared/icons/search.svg?react"
 import Preloader from "../../shared/components/Preloader/Preloader"
 import PaginationControls from "../UI/PaginationControls/PaginationControls"
 import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
-import Cat from "../UI/Cat/Cat"
+import EmptyInboxPlaceholder from "../UI/EmptyInboxPlaceholder/EmptyInboxPlaceholder"
 
 const LettersPage = () => {
     const { groupedEmails, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice, setSubject } =
@@ -42,7 +42,7 @@ const LettersPage = () => {
                 )}
             </div>
 
-            {groupedEmails.length === 0 && <Cat />}
+            {groupedEmails.length === 0 && <EmptyInboxPlaceholder />}
 
             {groupedEmails.map((group) => (
                 <div className={classes.group} key={group.date}>

@@ -5,7 +5,7 @@ import UserItem from "./UI/UserItem/UserItem"
 import classes from "./adminUserPage.module.css"
 import PaginationControls from "../UI/PaginationControls/PaginationControls"
 import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
-import Cat from "../UI/Cat/Cat"
+import EmptyInboxPlaceholder from "../UI/EmptyInboxPlaceholder/EmptyInboxPlaceholder"
 
 const AdminUserPage = () => {
     const { users, ChangeHandler, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice } =
@@ -34,7 +34,7 @@ const AdminUserPage = () => {
                 ))}
             </div>
 
-            {users.items.length === 0 && <Cat />}
+            {users.items.length === 0 && <EmptyInboxPlaceholder />}
 
             {isMobileDevice && users.items.length !== 0 && (
                 <MobilePaginationControls

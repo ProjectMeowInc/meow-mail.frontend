@@ -1,9 +1,9 @@
 import React from "react"
-import classes from "./cat.module.css"
+import classes from "./emptyInboxPlaceholder.module.css"
 
 import CatImage from "../../../shared/images/cat.png"
 
-const Cat = () => {
+const EmptyInboxPlaceholder = () => {
     return (
         <div className={classes.cat__wrapper}>
             <img src={CatImage} className={classes.cat} alt={"cool cat"} />
@@ -12,4 +12,4 @@ const Cat = () => {
     )
 }
 
-export default Cat
+export default EmptyInboxPlaceholder
