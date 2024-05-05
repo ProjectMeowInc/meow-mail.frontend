@@ -8,7 +8,6 @@ import { useHeaderMobile } from "./useHeaderMobile"
 import pen from "../../../icons/pencil.svg"
 import mail from "../../../icons/mail-open-white.svg"
 import sent from "../../../icons/paper-airplane-white.svg"
-import DefaultUserImage from "../../DefaultUserImage/DefaultUserImage"
 import AdminDropDownMenu from "../HeaderDesktop/UI/AdminDropDownMenu/AdminDropDownMenu"
 import EmailGroup from "../../EmailGroup/EmailGroup"
 
@@ -17,7 +16,7 @@ interface IHeaderMobile {
 }
 
 const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
-    const { isActive, setIsActive, navigate, menuRef, user } = useHeaderMobile()
+    const { isActive, setIsActive, navigate, menuRef, user, QuitHandler } = useHeaderMobile()
 
     return (
         <header className={classes.header_mobile} ref={menuRef}>
@@ -66,7 +65,7 @@ const HeaderMobile: FC<IHeaderMobile> = ({ onClickSendButton }) => {
             <div className={classes.right_side}>
                 <img onClick={onClickSendButton} src={pen} alt={"pen icon"} />
 
-                <DefaultUserImage />
+                <p onClick={QuitHandler}>Выйти</p>
             </div>
         </header>
     )

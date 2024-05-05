@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
-import { useAppSelector } from "../../../../store"
+import { cleanUpStore, useAppSelector } from "../../../../store"
+import { TokenService } from "../../../services/TokenService"
 
 export const useHeaderMobile = () => {
     const [isActive, setIsActive] = useState<boolean>(false)
@@ -39,11 +40,19 @@ export const useHeaderMobile = () => {
         }
     }, [isActive, setIsActive])
 
+    const QuitHandler = () => {
+        TokenService.removeRefreshToken()
+        TokenService.removeAccessToken()
+        cleanUpStore()
+        navigate("/")
+    }
+
     return {
         isActive,
         setIsActive,
         navigate,
         menuRef,
         user,
+        QuitHandler,
     }
 }
