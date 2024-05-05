@@ -9,6 +9,7 @@ import { EmailGroup, EmailType } from "../../../consts"
 import { IGetEmailsByEmailGroupResponse } from "../../EmailGroup/models/responses/IGetEmailsByEmailGroupResponse"
 import { IGetEmailByEmailGroupRequest } from "../../EmailGroup/models/requests/IGetEmailByEmailGroupRequest"
 import { query } from "../../../shared/utils/query"
+import { encode } from "js-base64"
 
 export const emailApi = createApi({
     reducerPath: "emailApi",
@@ -21,8 +22,9 @@ export const emailApi = createApi({
             query: ({ pageNumber, subject, is_received }) =>
                 query("/v1/email/filter", "GET", true, undefined, {
                     page: pageNumber,
-                    subject,
+                    subject: encode(subject ?? ""),
                     is_received,
+                    is_base64: true,
                 }),
             providesTags: (result) =>
                 result
