@@ -12,6 +12,9 @@ import { cleanUpStore, useAppDispatch } from "../../../store"
 import { useNavigate } from "react-router-dom"
 import { setUser } from "../../../entities/Auth/redusers/userSlice"
 import { isCorrectError } from "../../../shared/utils/hasData"
+import { useFirstLoading } from "../../../shared/hooks/useFirstLoading"
+import { AuthService } from "../../../shared/services/AuthService"
+import { RedirectService } from "../../../shared/services/RedirectService"
 
 export const useAuthPage = () => {
     const [authorizationV2, { data, isLoading, error }] = useAuthorizationV2Mutation()
@@ -22,6 +25,17 @@ export const useAuthPage = () => {
     const [code, setCode] = useState<string>("")
     const [isSuccess, setIsSuccess] = useState<boolean>(false)
     const [getInformation] = useLazyGetInformationAboutUserQuery()
+
+    useFirstLoading(() => {
+        // if we already try fast auth
+        if (AuthService.isTryFastAuth()) {
+            return
+        }
+
+        // set try auth status and try to fast auth
+        AuthService.setTryFastAuth()
+        RedirectService.redirect("/my")
+    })
 
     useEffect(() => {
         if (data && data.type === "Success") {
