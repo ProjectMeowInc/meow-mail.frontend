@@ -8,15 +8,17 @@ interface IUserItemProps {
     id: number
     role: UserRoleType
     login: string
+    mailbox?: string
     onChange: (data: IOnChangeEvent, userId: number) => void
 }
 
-const UserItem: FC<IUserItemProps> = ({ role, login, onChange, id }) => {
+const UserItem: FC<IUserItemProps> = ({ role, login, onChange, id, mailbox }) => {
     const { sortedRoleArray } = useUserItem(role)
 
     return (
         <div className={classes.wrapper}>
             <p className={classes.login}>{login}</p>
+            <p className={classes.mailbox}>{mailbox}</p>
             <select
                 className={classes.select}
                 name={"role"}

@@ -30,7 +30,14 @@ const AdminUserPage = () => {
 
             <div className={classes.users}>
                 {users.items.map((user) => (
-                    <UserItem key={user.id} id={user.id} onChange={ChangeHandler} role={user.role} login={user.login} />
+                    <UserItem
+                        key={user.id}
+                        id={user.id}
+                        onChange={ChangeHandler}
+                        role={user.role}
+                        login={user.login}
+                        mailbox={user.mailbox?.address}
+                    />
                 ))}
             </div>
 
