@@ -16,6 +16,10 @@
         width: 40%;
         text-overflow: ellipsis;
     }
+
+    .mailbox {
+        display: none;
+    }
 }
 
 .login {

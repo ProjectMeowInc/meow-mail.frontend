@@ -6,6 +6,10 @@ export interface IGetUserListResponse {
         id: number
         login: string
         role: UserRoleType
+        mailbox?: {
+            id: number
+            address: string
+        }
     }[]
     pages: number
 }
