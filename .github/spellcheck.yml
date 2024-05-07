@@ -1,0 +1,4 @@
+matrix:
+    - name: All
+      aspell:
+          lang: en
