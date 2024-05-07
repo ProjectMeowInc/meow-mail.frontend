@@ -1,24 +1,24 @@
 import React from "react"
-import classes from "./addToFactor.module.css"
+import classes from "./addTwoFactor.module.css"
 import Copy from "../../../../shared/icons/clipboard-copy.svg?react"
-import { useAddToFactor } from "./useAddToFactor"
+import { useAddTwoFactor } from "./useAddTwoFactor"
 import Button from "../../../../shared/components/Button/Button"
 
-const AddToFactor = () => {
-    const { CopyHandler, ClickHandler, code, user } = useAddToFactor()
+const AddTwoFactor = () => {
+    const { CopyHandler, ClickHandler, code, user } = useAddTwoFactor()
 
     return (
         <div className={classes.wrapper}>
-            <p className={classes.caption}>Подключить двухэтапную аунтентификацию</p>
+            <p className={classes.caption}>Подключить двухэтапную аутентификацию</p>
             {user?.contains_two_factor && (
                 <p>
                     У вас подключена двухэтапная аунтентификация к этому акаунту. Если телеграмм аккаунт был утерян
-                    переводключите двухэтапную аунтентификаци.
+                    переподключите двухэтапную аунтентификаци.
                 </p>
             )}
             {code ? (
                 <>
-                    <p className={classes.description}>
+                    <p>
                         Отсканируйте QR-код с помощью камеры, или перейдите в мессенджер по{" "}
                         <a
                             className={classes.link}
@@ -45,4 +45,4 @@ const AddToFactor = () => {
     )
 }
 
-export default AddToFactor
+export default AddTwoFactor
