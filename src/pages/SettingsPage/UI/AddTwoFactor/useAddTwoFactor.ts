@@ -4,7 +4,7 @@ import { isCorrectError } from "../../../../shared/utils/hasData"
 import { AlertService } from "../../../../shared/services/AlertService"
 import { useAppSelector } from "../../../../store"
 
-export const useAddToFactor = () => {
+export const useAddTwoFactor = () => {
     const [connectTelegram, { error, data }] = useConnectTelegramMutation()
     const user = useAppSelector((state) => state.user.data)
 

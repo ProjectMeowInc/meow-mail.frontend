@@ -2,7 +2,7 @@ import React from "react"
 import SettingsWrapper from "./UI/SettingWrapper/SettingsWrapper"
 import ChangePasswordForm from "./UI/ChangePasswordForm/ChangePasswordForm"
 import ChangeTheme from "./UI/ChangeTheme/ChangeTheme"
-import AddToFactor from "./UI/AddTwoFactor/AddToFactor"
+import AddTwoFactor from "./UI/AddTwoFactor/AddTwoFactor"
 
 const SettingsPage = () => {
     return (
@@ -13,7 +13,7 @@ const SettingsPage = () => {
 
             <SettingsWrapper caption={"Настройки аккаунта"} flex={true}>
                 <ChangePasswordForm />
-                <AddToFactor />
+                <AddTwoFactor />
             </SettingsWrapper>
         </div>
     )
