@@ -29,7 +29,7 @@ export const useRegistrationPage = () => {
     useEffect(() => {
         if (isSuccess) {
             AlertService.success("Вы успешно зарегистрировались. Теперь можете авторизоваться")
-            navigate("/registration")
+            navigate("/")
             return
         }
     }, [isSuccess])
