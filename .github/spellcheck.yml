@@ -1,4 +1,11 @@
 matrix:
-    - name: All
+    - name: Code
       aspell:
           lang: en
+      sources:
+          - "**/*"
+    - name: "Russian"
+      aspell:
+          lang: ru
+      sources:
+          - "**/*"
