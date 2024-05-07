@@ -1,6 +1,4 @@
-import React from "react"
 import { useLetterPage } from "./useLetterPage"
-import DefaultUserImage from "../../shared/components/DefaultUserImage/DefaultUserImage"
 import classes from "./letterPage.module.css"
 import { FormatterService } from "../../shared/services/FormatterService"
 import { RedirectService } from "../../shared/services/RedirectService"
@@ -9,6 +7,7 @@ import Arrow from "../../shared/icons/arrow-sm-up.svg?react"
 import Trash from "../../shared/icons/trash.svg?react"
 import { MailboxBadge } from "../../shared/components/MailboxBadge/MailboxBadge"
 import Preloader from "../../shared/components/Preloader/Preloader"
+import { EmailImage } from "../../shared/components/EmailImage/EmailImage"
 
 const LetterPage = () => {
     const { mail, DeleteHandler } = useLetterPage()
@@ -29,7 +28,7 @@ const LetterPage = () => {
             </div>
             <h1 className={classes.email_subject}>{mail.subject}</h1>
             <div className={classes.email_info}>
-                <DefaultUserImage />
+                <EmailImage from={mail.from.mailbox} />
                 <div>
                     <div className={classes.email_sender_info}>
                         <div className={classes.email_sender}>
