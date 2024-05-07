@@ -8,11 +8,13 @@ import { IBaseErrorResponse } from "../../../shared/models/IBaseErrorResponse"
 import { IValidationErrorResponse } from "../../../shared/models/IValidationErrorResponse"
 import { SerializedError } from "@reduxjs/toolkit"
 import { isCorrectError } from "../../../shared/utils/hasData"
+import { useNavigate } from "react-router-dom"
 
 export const useRegistrationPage = () => {
-    const [registration, { isLoading, error }] = useRegistrationMutation()
+    const [registration, { isLoading, error, isSuccess }] = useRegistrationMutation()
     const [requestData, setRequestData] = useState<RegistrationDto>({})
     const [inputErrors, setInputErrors] = useState<IInputError[] | undefined>(undefined)
+    const navigate = useNavigate()
 
     const IsValidationError = (
         error: IBaseErrorResponse | IValidationErrorResponse | SerializedError | undefined,
@@ -23,6 +25,14 @@ export const useRegistrationPage = () => {
 
         return false
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            AlertService.success("Вы успешно зарегистрировались. Теперь можете авторизоваться")
+            navigate("/registration")
+            return
+        }
+    }, [isSuccess])
 
     useEffect(() => {
         if (IsValidationError(error)) {
