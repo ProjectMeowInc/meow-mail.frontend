@@ -2,11 +2,11 @@ name: Spellcheck
 on: push
 jobs:
   build:
-name: Spellcheck
-  runs-on: ubuntu-latest
-  steps:
-    - uses: taiki-e/checkout-action@v1
+    name: Spellcheck
+      runs-on: ubuntu-latest
+      steps:
+        - uses: taiki-e/checkout-action@v1
 
-    - uses: crate-ci/typos@master
-      with:
-        files: .put path to configuration file here
+        - uses: crate-ci/typos@master
+          with:
+            files: .put path to configuration file here
