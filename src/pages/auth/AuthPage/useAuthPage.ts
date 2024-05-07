@@ -46,6 +46,8 @@ export const useAuthPage = () => {
 
             const { id, login, role } = TokenService.parseAccessToken(access_token)
 
+            createMailBox().then()
+
             getInformation().then((result) => {
                 if (result.data) {
                     const { contains_mailbox, contains_two_factor } = result.data.user
@@ -60,10 +62,6 @@ export const useAuthPage = () => {
                             mailbox: result.data.mailbox.address,
                         }),
                     )
-
-                    if (!contains_mailbox) {
-                        createMailBox().then()
-                    }
                 }
             })
 

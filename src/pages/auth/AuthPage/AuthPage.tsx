@@ -21,12 +21,6 @@ const AuthPage = () => {
 
                 <div className={classes.links}>
                     <div className={classes.modal_item}>
-                        <p>Вы забыли пароль?</p>
-                        <Link className={classes.link} to={""}>
-                            Восстановить
-                        </Link>
-                    </div>
-                    <div className={classes.modal_item}>
                         <p>Ещё нет аккаунта?</p>
                         <Link className={classes.link} to={"/registration"}>
                             Создать
