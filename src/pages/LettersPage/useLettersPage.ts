@@ -15,6 +15,12 @@ export const useLettersPage = () => {
     })
     const [page, setPage] = useState<number>(Number(pageString))
 
+    useEffect(() => {
+        if (!page) {
+            setSearchParams("page", page.toString())
+        }
+    }, [page])
+
     const [groupedEmails, setGroupedEmails] = useState<IGroupedEmails[] | null>(null)
 
     const [prevCount, setPrevCount] = useState<number>(1)
@@ -29,18 +35,12 @@ export const useLettersPage = () => {
         {
             pageNumber: page,
             is_received: true,
-            subject: subject.length > 0 ? subject : undefined,
+            subject: subject,
         },
         {
             pollingInterval: 20000,
         },
     )
-
-    useEffect(() => {
-        if (!page) {
-            setSearchParams("page", page.toString())
-        }
-    }, [page])
 
     useEffect(() => {
         if (isCorrectError(error)) {
