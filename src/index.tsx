@@ -14,6 +14,6 @@ root.render(
         <PersistGate persistor={persistor}>
             <App />
         </PersistGate>
-        <ToastContainer />
+        <ToastContainer position="bottom-right" />
     </Provider>,
 )
