@@ -54,7 +54,7 @@ export const useChangePasswordForm = () => {
             type: "RequestCode",
         })
 
-        if (!("data" in result)) {
+        if (!result.data) {
             if (isCorrectError(result.error)) {
                 return AlertService.error(result.error.data.message)
             }
@@ -85,7 +85,7 @@ export const useChangePasswordForm = () => {
             code: verifyCode,
         })
 
-        if (!("data" in result)) {
+        if (!result.data) {
             if (isCorrectError(result.error)) {
                 return AlertService.error(result.error.data.message)
             }
