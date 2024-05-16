@@ -14,7 +14,7 @@ import { setUser } from "../../../entities/Auth/redusers/userSlice"
 import { isCorrectError } from "../../../shared/utils/hasData"
 import { useFirstLoading } from "../../../shared/hooks/useFirstLoading"
 import { AuthService } from "../../../shared/services/AuthService"
-import { RedirectService } from "../../../shared/services/RedirectService"
+import { useEffectAsync } from "../../../shared/hooks/useEffectAsync"
 
 export const useAuthPage = () => {
     const [authorizationV2, { data, isLoading, error }] = useAuthorizationV2Mutation()
@@ -34,36 +34,42 @@ export const useAuthPage = () => {
 
         // set try auth status and try to fast auth
         AuthService.setTryFastAuth()
-        RedirectService.redirect("/my")
+        navigate("/my?page=1&is_received=true")
     })
 
-    useEffect(() => {
+    useEffectAsync(async () => {
         if (data && data.type === "Success") {
             const { access_token, refresh_token } = data
 
             TokenService.setAccessToken(access_token)
             TokenService.setRefreshToken(refresh_token)
 
-            const { id, login, role } = TokenService.parseAccessToken(access_token)
+            await createMailBox()
 
-            createMailBox().then()
+            const getInformationResult = await getInformation()
 
-            getInformation().then((result) => {
-                if (result.data) {
-                    const { contains_mailbox, contains_two_factor } = result.data.user
+            if (isCorrectError(getInformationResult.error)) {
+                return AlertService.error(getInformationResult.error.data.message)
+            }
 
-                    dispatch(
-                        setUser({
-                            id,
-                            login,
-                            role,
-                            contains_mailbox,
-                            contains_two_factor,
-                            mailbox: result.data.mailbox.address,
-                        }),
-                    )
-                }
-            })
+            if (getInformationResult.data) {
+                const { id, login, role } = TokenService.parseAccessToken(TokenService.getAccessToken() ?? "")
+                const {
+                    user: { contains_two_factor, contains_mailbox },
+                    mailbox: { address },
+                } = getInformationResult.data
+
+                dispatch(
+                    setUser({
+                        id,
+                        login,
+                        role,
+                        contains_mailbox,
+                        contains_two_factor,
+                        mailbox: address,
+                    }),
+                )
+            }
 
             navigate("/my?page=1&is_received=true")
         }
