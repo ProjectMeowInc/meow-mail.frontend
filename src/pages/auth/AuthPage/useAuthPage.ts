@@ -88,8 +88,8 @@ export const useAuthPage = () => {
             }
         }
 
-        if (data && data.type === "Success") {
-            const { access_token, refresh_token } = data
+        if (result.data && result.data.type === "Success") {
+            const { access_token, refresh_token } = result.data
 
             TokenService.setAccessToken(access_token)
             TokenService.setRefreshToken(refresh_token)
