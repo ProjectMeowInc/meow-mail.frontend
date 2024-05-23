@@ -84,5 +84,5 @@ export const {
     useGetEmailByIdQuery,
     useDeleteEmailByIdMutation,
     useGetEmailsByEmailGroupQuery,
-    useGetEmailStatisticQuery
+    useGetEmailStatisticQuery,
 } = emailApi
