@@ -14,7 +14,7 @@ const TwoFactorAuth: FC<ITwoFactorAuthProps> = ({ submitHandler, changeHandler }
             <Input
                 onChange={(event) => changeHandler(event.fieldValue)}
                 name={"code"}
-                placeholder={"Введите сод из телеграмма"}
+                placeholder={"Введите код из телеграмма"}
                 inputType={1}
                 type={"text"}
                 required={true}
