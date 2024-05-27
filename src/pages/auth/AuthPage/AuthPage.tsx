@@ -6,15 +6,15 @@ import { useAuthPage } from "./useAuthPage"
 import TwoFactorAuth from "./UI/TwoFactorAuth/TwoFactorAuth"
 
 const AuthPage = () => {
-    const { ChangeHandler, SubmitHandler, isLoading, isSuccess, SubmitCodeHandler, setCode } = useAuthPage()
+    const { ChangeHandler, SubmitHandler, isLoading, state, setCode } = useAuthPage()
 
     return (
         <div className={classes.wrapper}>
             <h1 className={classes.logo}>MeowMail</h1>
             <div className={classes.modal}>
                 <p className={classes.caption}>Вход через логин и пароль</p>
-                {isSuccess ? (
-                    <TwoFactorAuth submitHandler={SubmitCodeHandler} changeHandler={(code) => setCode(code)} />
+                {state.type === "TwoFactor" ? (
+                    <TwoFactorAuth submitHandler={SubmitHandler} changeHandler={ChangeHandler} />
                 ) : (
                     <Form isLoading={isLoading} onSubmit={SubmitHandler} onChange={ChangeHandler} />
                 )}

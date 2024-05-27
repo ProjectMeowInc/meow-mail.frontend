@@ -37,6 +37,16 @@
     text-overflow: ellipsis;
 }
 
+.received {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.received_count {
+    font-weight: 700;
+}
+
 @media (min-width: 768px) {
     .header {
         width: 30%;

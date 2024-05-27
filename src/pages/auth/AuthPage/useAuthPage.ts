@@ -15,15 +15,31 @@ import { isCorrectError } from "../../../shared/utils/hasData"
 import { useFirstLoading } from "../../../shared/hooks/useFirstLoading"
 import { AuthService } from "../../../shared/services/AuthService"
 
+type AuthPageState = {
+    login: string
+    password: string
+    type: "Base"
+} | {
+    type: "TwoFactor"
+    code: string
+    request_id: string
+}
+| {
+    type: "Success"
+}
+
 export const useAuthPage = () => {
-    const [authorizationV2, { data, isLoading, error }] = useAuthorizationV2Mutation()
-    const [requestData, setRequestData] = useState<AuthorizationDto>({})
+    const [authorizationV2, { isLoading, error }] = useAuthorizationV2Mutation()
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [createMailBox, { error: createMailBoxError }] = useCreateMailBoxMutation()
     const [code, setCode] = useState<string>("")
-    const [isSuccess, setIsSuccess] = useState<boolean>(false)
     const [getInformation] = useLazyGetInformationAboutUserQuery()
+    const [state, setState] = useState<AuthPageState>({
+        type: "Base",
+        login: "",
+        password: ""
+    })
 
     useFirstLoading(() => {
         // if we already try fast auth
@@ -54,139 +70,134 @@ export const useAuthPage = () => {
     }, [createMailBoxError])
 
     const ChangeHandler = ({ fieldName, fieldValue }: IOnChangeEvent) => {
-        setRequestData((prevState) => ({
-            ...prevState,
-            [fieldName]: fieldValue,
-        }))
+
+        switch (state.type) {
+            case "Base": 
+                setState((prevState) => ({
+                    ...prevState,
+                    [fieldName]: fieldValue,
+                }))
+                break;
+
+            case "TwoFactor": {
+                setState((prevState) => ({
+                    ...prevState,
+                    [fieldName]: fieldValue
+                }))
+            }
+        }
+
     }
 
-    const SubmitHandler = async (e: FormEvent) => {
-        e.preventDefault()
-
-        if (!requestData) {
-            return AlertService.error("Поля не могут быть пустыми")
-        }
-
-        if (!requestData.login || !requestData.password) {
-            return AlertService.error("Поля не могут быть пустыми")
-        }
-
+    const cleanUp = () => {
         TokenService.removeRefreshToken()
         TokenService.removeAccessToken()
 
         cleanUpStore()
-
-        const result = await authorizationV2({
-            login: requestData.login,
-            password: requestData.password,
-            type: "Base",
-        })
-
-        if (!result.data) {
-            if (isCorrectError(result.error)) {
-                return AlertService.error(result.error.data.message)
-            }
-        }
-
-        if (result.data && result.data.type === "Success") {
-            const { access_token, refresh_token } = result.data
-
-            TokenService.setAccessToken(access_token)
-            TokenService.setRefreshToken(refresh_token)
-
-            await createMailBox()
-
-            const getInformationResult = await getInformation()
-
-            if (isCorrectError(getInformationResult.error)) {
-                return AlertService.error(getInformationResult.error.data.message)
-            }
-
-            if (getInformationResult.data) {
-                const { id, login, role } = TokenService.parseAccessToken(TokenService.getAccessToken() ?? "")
-                const {
-                    user: { contains_two_factor, contains_mailbox },
-                    mailbox: { address },
-                } = getInformationResult.data
-
-                dispatch(
-                    setUser({
-                        id,
-                        login,
-                        role,
-                        contains_mailbox,
-                        contains_two_factor,
-                        mailbox: address,
-                    }),
-                )
-            }
-
-            navigate("/my?page=1&is_received=true")
-        } else {
-            setIsSuccess(true)
-        }
     }
 
-    const SubmitCodeHandler = async (event: FormEvent) => {
-        event.preventDefault()
+    const SubmitHandler = async (e: FormEvent) => {
+        e.preventDefault()
+        cleanUp()
 
-        if (!data) {
-            return
-        }
+        switch(state.type) {
+            case "Base": 
+                const result = await authorizationV2(state)
 
-        if (data.type === "RequireTwoFactor") {
-            const result = await authorizationV2({
-                code: code,
-                request_id: data.request_id,
-                type: "TwoFactor",
-            })
-
-            if (!result.data) {
                 if (isCorrectError(result.error)) {
                     return AlertService.error(result.error.data.message)
                 }
 
-                return AlertService.error("Ошибка")
-            }
-
-            if (result.data.type === "Success") {
-                const { access_token, refresh_token } = result.data
-
-                TokenService.setAccessToken(access_token)
-                TokenService.setRefreshToken(refresh_token)
-
-                await createMailBox()
-
-                const getInformationResult = await getInformation()
-
-                if (isCorrectError(getInformationResult.error)) {
-                    return AlertService.error(getInformationResult.error.data.message)
+                if (!result.data) {
+                    return
                 }
 
-                if (!getInformationResult.data) {
-                    return AlertService.error("Ошибка")
+                if (result.data.type === "Success") {
+                    const {access_token, refresh_token  } = result.data
+
+                    TokenService.setAccessToken(access_token)
+                    TokenService.setRefreshToken(refresh_token)
+
+                    const getInformationResult = await getInformation()
+                    const {id, login, role} = TokenService.parseAccessToken(access_token)
+
+                    await createMailBox();
+
+                    if (getInformationResult.data) {
+
+                        const {mailbox: {address}, user: {contains_mailbox, contains_two_factor}} = getInformationResult.data
+
+                        dispatch(setUser({
+                            id,
+                            login,
+                            role,
+                            contains_mailbox,
+                            contains_two_factor,
+                            mailbox: address
+                        }))
+                    }
+
+                    setState({
+                        type: "Success"
+                    })
+
+                    navigate("/my?page=1&is_received=true")
+                }
+                
+                if (result.data.type === "RequireTwoFactor") {
+                    setState({
+                        type: "TwoFactor",
+                        request_id: result.data.request_id,
+                        code,
+                    })
+                }
+                break;
+
+            case "TwoFactor": 
+                const twoFactorResult = await authorizationV2(state)
+
+                if (isCorrectError(twoFactorResult.error)) {
+                    return AlertService.error(twoFactorResult.error.data.message)
                 }
 
-                const { id, login, role } = TokenService.parseAccessToken(TokenService.getAccessToken() ?? "")
-                const {
-                    user: { contains_two_factor, contains_mailbox },
-                    mailbox: { address },
-                } = getInformationResult.data
+                if (!twoFactorResult.data) {
+                    return
+                }
 
-                dispatch(
-                    setUser({
-                        id,
-                        login,
-                        role,
-                        contains_mailbox,
-                        contains_two_factor,
-                        mailbox: address,
-                    }),
-                )
-            }
+                if (twoFactorResult.data.type === "Success") {
+                    const {access_token, refresh_token  } = twoFactorResult.data
 
-            navigate("/my?page=1&is_received=true")
-        }
+                    TokenService.setAccessToken(access_token)
+                    TokenService.setRefreshToken(refresh_token)
+
+                    const getInformationResult = await getInformation()
+                    const {id, login, role} = TokenService.parseAccessToken(access_token)
+
+                    await createMailBox();
+
+                    if (getInformationResult.data) {
+
+                        const {mailbox: {address}, user: {contains_mailbox, contains_two_factor}} = getInformationResult.data
+
+                        dispatch(setUser({
+                            id,
+                            login,
+                            role,
+                            contains_mailbox,
+                            contains_two_factor,
+                            mailbox: address
+                        }))
+                    }
+
+                    setState({
+                        type: "Success"
+                    })
+
+                    navigate("/my?page=1&is_received=true")
+                }
+
+            break;
+        } 
     }
 
     return {
@@ -194,7 +205,6 @@ export const useAuthPage = () => {
         ChangeHandler,
         SubmitHandler,
         setCode,
-        isSuccess,
-        SubmitCodeHandler,
+        state
     }
 }

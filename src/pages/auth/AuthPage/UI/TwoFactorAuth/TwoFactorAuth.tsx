@@ -2,17 +2,18 @@ import React, { FC, FormEvent } from "react"
 import Button from "../../../../../shared/components/Button/Button"
 import Input from "../../../../../shared/components/Input/Input"
 import classes from "./twoFactorAuth.module.css"
+import { IOnChangeEvent } from "../../../../../shared/events/IOnChangeEvent"
 
 interface ITwoFactorAuthProps {
     submitHandler: (event: FormEvent) => void
-    changeHandler: (ctx: string) => void
+    changeHandler: (data: IOnChangeEvent) => void
 }
 
 const TwoFactorAuth: FC<ITwoFactorAuthProps> = ({ submitHandler, changeHandler }) => {
     return (
         <form onSubmit={submitHandler} className={classes.form}>
             <Input
-                onChange={(event) => changeHandler(event.fieldValue)}
+                onChange={changeHandler}
                 name={"code"}
                 placeholder={"Введите код из телеграмма"}
                 inputType={1}

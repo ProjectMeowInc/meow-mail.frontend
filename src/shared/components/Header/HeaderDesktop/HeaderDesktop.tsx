@@ -14,7 +14,7 @@ interface IHeaderDesktopProps {
 }
 
 const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
-    const { user, navigate, CopyHandler } = useHeaderDesktop()
+    const { user, navigate, CopyHandler, data } = useHeaderDesktop()
 
     return (
         <header className={classes.header}>
@@ -33,7 +33,14 @@ const HeaderDesktop: FC<IHeaderDesktopProps> = ({ onClickSendButton }) => {
                     <div className={classes.menu_list}>
                         <MenuItem href={"/my?page=1&is_received=true"}>
                             <Mail />
-                            <p>Входящие</p>
+                            <div className={classes.received}>
+                                <p>Входящие</p>
+                                <p className={classes.received_count}>
+                                    {data && data.received_unread_email_count !== 0
+                                        ? data.received_unread_email_count
+                                        : ""}
+                                </p>
+                            </div>
                         </MenuItem>
 
                         <MenuItem href={"sent?page=1&is_received=false"}>

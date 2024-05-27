@@ -10,6 +10,7 @@ import { IGetEmailsByEmailGroupResponse } from "../../EmailGroup/models/response
 import { IGetEmailByEmailGroupRequest } from "../../EmailGroup/models/requests/IGetEmailByEmailGroupRequest"
 import { query } from "../../../shared/utils/query"
 import { encode } from "js-base64"
+import { IGetEmailStatisticsResponse } from "../models/responses/IGetEmailStatistic"
 
 export const emailApi = createApi({
     reducerPath: "emailApi",
@@ -61,6 +62,11 @@ export const emailApi = createApi({
             query: (emailId: number) => query(`/v1/email/${emailId}`, "GET", true),
         }),
 
+        getEmailStatistic: build.query<IGetEmailStatisticsResponse, void>({
+            query: () => query("/v1/email/statistic/", "GET", true),
+            providesTags: [{ type: EmailType, id: "LIST" }],
+        }),
+
         deleteEmailById: build.mutation<void, number>({
             query: (emailId: number) => query(`/v1/email/${emailId}`, "DELETE", true),
             invalidatesTags: [
@@ -78,4 +84,5 @@ export const {
     useGetEmailByIdQuery,
     useDeleteEmailByIdMutation,
     useGetEmailsByEmailGroupQuery,
+    useGetEmailStatisticQuery,
 } = emailApi
