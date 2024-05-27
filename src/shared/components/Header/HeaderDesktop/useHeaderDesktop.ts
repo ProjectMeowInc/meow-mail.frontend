@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { AlertService } from "../../../services/AlertService"
 import { useGetEmailStatisticQuery } from "../../../../entities/Email/api/emailApi"
 import { useRef } from "react"
+import { DEFAULT_TITLE } from "../../../../consts"
 
 export const useHeaderDesktop = () => {
     const { data, currentData } = useGetEmailStatisticQuery(undefined, {
@@ -19,13 +20,12 @@ export const useHeaderDesktop = () => {
 
     window.onblur = () => {
         intervalRef.current = setInterval(() => {
-            const defaultTitle = "MeowMail"
             const newTitle =
                 currentData && currentData.received_unread_email_count > 0
-                    ? `(${currentData.received_unread_email_count}) не прочитанных | MeowMail`
-                    : "MeowMail"
+                    ? `(${currentData.received_unread_email_count}) не прочитанных | ${DEFAULT_TITLE}`
+                    : DEFAULT_TITLE
 
-            document.title = document.title !== defaultTitle ? defaultTitle : newTitle
+            document.title = document.title !== DEFAULT_TITLE ? DEFAULT_TITLE : newTitle
         }, 1500)
     }
 
@@ -33,7 +33,7 @@ export const useHeaderDesktop = () => {
         if (!intervalRef.current) {
             return
         }
-        document.title = "MeowMail"
+        document.title = DEFAULT_TITLE
         clearInterval(intervalRef.current)
         intervalRef.current = null
     }
