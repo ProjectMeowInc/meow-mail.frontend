@@ -19,13 +19,13 @@ export const useHeaderDesktop = () => {
 
     window.onblur = () => {
         intervalRef.current = setInterval(() => {
-            const oldTitle = "MeowMail"
+            const defaultTitle = "MeowMail"
             const newTitle =
                 currentData && currentData.received_unread_email_count > 0
                     ? `(${currentData.received_unread_email_count}) не прочитанных | MeowMail`
                     : "MeowMail"
 
-            document.title = document.title !== oldTitle ? oldTitle : newTitle
+            document.title = document.title !== defaultTitle ? defaultTitle : newTitle
         }, 1500)
     }
 
