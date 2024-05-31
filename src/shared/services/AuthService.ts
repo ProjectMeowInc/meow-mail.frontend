@@ -1,3 +1,5 @@
+import { TokenService } from "./TokenService"
+
 interface IFastAuthData {
     tryDate: Date
 }
@@ -6,6 +8,12 @@ const StorageKey = "___fast_auth"
 
 export class AuthService {
     public static isTryFastAuth(): boolean {
+        const accessToken = TokenService.getAccessToken()
+
+        if (!accessToken || TokenService.isValidAccessToken(accessToken)) {
+            return true
+        }
+
         const item = sessionStorage.getItem(StorageKey)
         if (!item) {
             return false
