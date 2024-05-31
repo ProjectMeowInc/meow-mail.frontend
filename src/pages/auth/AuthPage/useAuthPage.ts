@@ -5,7 +5,6 @@ import {
     useLazyGetInformationAboutUserQuery,
 } from "../../../entities/Auth/api/AuthApi"
 import { IOnChangeEvent } from "../../../shared/events/IOnChangeEvent"
-import { AuthorizationDto } from "../../../entities/Auth/dto/AuthorizationDto"
 import { AlertService } from "../../../shared/services/AlertService"
 import { TokenService } from "../../../shared/services/TokenService"
 import { cleanUpStore, useAppDispatch } from "../../../store"
@@ -15,18 +14,20 @@ import { isCorrectError } from "../../../shared/utils/hasData"
 import { useFirstLoading } from "../../../shared/hooks/useFirstLoading"
 import { AuthService } from "../../../shared/services/AuthService"
 
-type AuthPageState = {
-    login: string
-    password: string
-    type: "Base"
-} | {
-    type: "TwoFactor"
-    code: string
-    request_id: string
-}
-| {
-    type: "Success"
-}
+type AuthPageState =
+    | {
+          login: string
+          password: string
+          type: "Base"
+      }
+    | {
+          type: "TwoFactor"
+          code: string
+          request_id: string
+      }
+    | {
+          type: "Success"
+      }
 
 export const useAuthPage = () => {
     const [authorizationV2, { isLoading, error }] = useAuthorizationV2Mutation()
@@ -38,7 +39,7 @@ export const useAuthPage = () => {
     const [state, setState] = useState<AuthPageState>({
         type: "Base",
         login: "",
-        password: ""
+        password: "",
     })
 
     useFirstLoading(() => {
@@ -70,23 +71,21 @@ export const useAuthPage = () => {
     }, [createMailBoxError])
 
     const ChangeHandler = ({ fieldName, fieldValue }: IOnChangeEvent) => {
-
         switch (state.type) {
-            case "Base": 
+            case "Base":
                 setState((prevState) => ({
                     ...prevState,
                     [fieldName]: fieldValue,
                 }))
-                break;
+                break
 
             case "TwoFactor": {
                 setState((prevState) => ({
                     ...prevState,
-                    [fieldName]: fieldValue
+                    [fieldName]: fieldValue,
                 }))
             }
         }
-
     }
 
     const cleanUp = () => {
@@ -100,8 +99,8 @@ export const useAuthPage = () => {
         e.preventDefault()
         cleanUp()
 
-        switch(state.type) {
-            case "Base": 
+        switch (state.type) {
+            case "Base":
                 const result = await authorizationV2(state)
 
                 if (isCorrectError(result.error)) {
@@ -113,37 +112,41 @@ export const useAuthPage = () => {
                 }
 
                 if (result.data.type === "Success") {
-                    const {access_token, refresh_token  } = result.data
+                    const { access_token, refresh_token } = result.data
 
                     TokenService.setAccessToken(access_token)
                     TokenService.setRefreshToken(refresh_token)
 
                     const getInformationResult = await getInformation()
-                    const {id, login, role} = TokenService.parseAccessToken(access_token)
+                    const { id, login, role } = TokenService.parseAccessToken(access_token)
 
-                    await createMailBox();
+                    await createMailBox()
 
                     if (getInformationResult.data) {
+                        const {
+                            mailbox: { address },
+                            user: { contains_mailbox, contains_two_factor },
+                        } = getInformationResult.data
 
-                        const {mailbox: {address}, user: {contains_mailbox, contains_two_factor}} = getInformationResult.data
-
-                        dispatch(setUser({
-                            id,
-                            login,
-                            role,
-                            contains_mailbox,
-                            contains_two_factor,
-                            mailbox: address
-                        }))
+                        dispatch(
+                            setUser({
+                                id,
+                                login,
+                                role,
+                                contains_mailbox,
+                                contains_two_factor,
+                                mailbox: address,
+                            }),
+                        )
                     }
 
                     setState({
-                        type: "Success"
+                        type: "Success",
                     })
 
                     navigate("/my?page=1&is_received=true")
                 }
-                
+
                 if (result.data.type === "RequireTwoFactor") {
                     setState({
                         type: "TwoFactor",
@@ -151,9 +154,9 @@ export const useAuthPage = () => {
                         code,
                     })
                 }
-                break;
+                break
 
-            case "TwoFactor": 
+            case "TwoFactor":
                 const twoFactorResult = await authorizationV2(state)
 
                 if (isCorrectError(twoFactorResult.error)) {
@@ -165,39 +168,43 @@ export const useAuthPage = () => {
                 }
 
                 if (twoFactorResult.data.type === "Success") {
-                    const {access_token, refresh_token  } = twoFactorResult.data
+                    const { access_token, refresh_token } = twoFactorResult.data
 
                     TokenService.setAccessToken(access_token)
                     TokenService.setRefreshToken(refresh_token)
 
                     const getInformationResult = await getInformation()
-                    const {id, login, role} = TokenService.parseAccessToken(access_token)
+                    const { id, login, role } = TokenService.parseAccessToken(access_token)
 
-                    await createMailBox();
+                    await createMailBox()
 
                     if (getInformationResult.data) {
+                        const {
+                            mailbox: { address },
+                            user: { contains_mailbox, contains_two_factor },
+                        } = getInformationResult.data
 
-                        const {mailbox: {address}, user: {contains_mailbox, contains_two_factor}} = getInformationResult.data
-
-                        dispatch(setUser({
-                            id,
-                            login,
-                            role,
-                            contains_mailbox,
-                            contains_two_factor,
-                            mailbox: address
-                        }))
+                        dispatch(
+                            setUser({
+                                id,
+                                login,
+                                role,
+                                contains_mailbox,
+                                contains_two_factor,
+                                mailbox: address,
+                            }),
+                        )
                     }
 
                     setState({
-                        type: "Success"
+                        type: "Success",
                     })
 
                     navigate("/my?page=1&is_received=true")
                 }
 
-            break;
-        } 
+                break
+        }
     }
 
     return {
@@ -205,6 +212,6 @@ export const useAuthPage = () => {
         ChangeHandler,
         SubmitHandler,
         setCode,
-        state
+        state,
     }
 }
