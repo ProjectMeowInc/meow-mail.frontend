@@ -1,15 +1,14 @@
-import React from "react"
-import { useAdminUserPage } from "./useAdminUserPage"
-import Preloader from "../../shared/components/Preloader/Preloader"
+import { useUserListPage } from "./useUserListPage"
 import UserItem from "./UI/UserItem/UserItem"
-import classes from "./adminUserPage.module.css"
-import PaginationControls from "../UI/PaginationControls/PaginationControls"
-import MobilePaginationControls from "../UI/MobilePaginationControls/MobilePaginationControls"
-import EmptyInboxPlaceholder from "../UI/EmptyInboxPlaceholder/EmptyInboxPlaceholder"
+import classes from "./userListPage.module.css"
+import Preloader from "../../../shared/components/Preloader/Preloader"
+import PaginationControls from "../../UI/PaginationControls/PaginationControls"
+import EmptyInboxPlaceholder from "../../UI/EmptyInboxPlaceholder/EmptyInboxPlaceholder"
+import MobilePaginationControls from "../../UI/MobilePaginationControls/MobilePaginationControls"
 
-const AdminUserPage = () => {
+const UserListPage = () => {
     const { users, ChangeHandler, PrevPageHandler, NextPageHandler, prevCount, currentCount, isMobileDevice } =
-        useAdminUserPage()
+        useUserListPage()
 
     if (!users) {
         return <Preloader />
@@ -55,4 +54,4 @@ const AdminUserPage = () => {
     )
 }
 
-export default AdminUserPage
+export default UserListPage

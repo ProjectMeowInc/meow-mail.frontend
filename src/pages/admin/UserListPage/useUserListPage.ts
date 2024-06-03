@@ -1,16 +1,16 @@
-import { useGetUserListQuery, useUpdateUserRoleByIdMutation } from "../../entities/User/api/userApi"
 import { useEffect, useState } from "react"
-import { AlertService } from "../../shared/services/AlertService"
-import { useSearchParamsWrapper } from "../../shared/hooks/useSearchParamsWrapper"
-import { LogService } from "../../shared/services/LogService"
-import { UserRoleType } from "../../entities/User/types/UserRoleType"
-import { IOnChangeEvent } from "../../shared/events/IOnChangeEvent"
-import { isCorrectError } from "../../shared/utils/hasData"
-import { ClientService } from "../../shared/services/ClientService"
+import { useSearchParamsWrapper } from "../../../shared/hooks/useSearchParamsWrapper"
+import { LogService } from "../../../shared/services/LogService"
+import { ClientService } from "../../../shared/services/ClientService"
+import { isCorrectError } from "../../../shared/utils/hasData"
+import { AlertService } from "../../../shared/services/AlertService"
+import { UserRoleType } from "../../../entities/User/types/UserRoleType"
+import { IOnChangeEvent } from "../../../shared/events/IOnChangeEvent"
+import { useGetUserListQuery } from "../../../entities/User/api/userApi"
 
 const DefaultPage = "1"
 
-export const useAdminUserPage = () => {
+export const useUserListPage = () => {
     const { setSearchParams, getParamExcept } = useSearchParamsWrapper()
     const pageStr = getParamExcept("page", ["0"]).unwrapOrElse(() => {
         LogService.log(`Error get page STR. Use default value: ${DefaultPage}`, "ERROR")
