@@ -6,7 +6,7 @@ import { isCorrectError } from "../../../shared/utils/hasData"
 import { AlertService } from "../../../shared/services/AlertService"
 import { UserRoleType } from "../../../entities/User/types/UserRoleType"
 import { IOnChangeEvent } from "../../../shared/events/IOnChangeEvent"
-import { useGetUserListQuery } from "../../../entities/User/api/userApi"
+import { useGetUserListQuery, useUpdateUserRoleByIdMutation } from "../../../entities/User/api/userApi"
 
 const DefaultPage = "1"
 
