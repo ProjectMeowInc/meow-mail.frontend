@@ -13,5 +13,7 @@ export const MailboxBadge: FC<IMailboxBadgeProps> = ({ type }) => {
             return <></>
         case "TechnicalAlert":
             return <AlertBadge />
+        case "DmarcRecordReceiver":
+            return <></>
     }
 }

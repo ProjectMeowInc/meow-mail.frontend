@@ -1,1 +1,1 @@
-export type MailboxType = "Default" | "TechnicalAlert"
+export type MailboxType = "Default" | "TechnicalAlert" | "DmarcRecordReceiver"
