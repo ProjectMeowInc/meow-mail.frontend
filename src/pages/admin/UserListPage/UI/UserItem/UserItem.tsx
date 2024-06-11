@@ -1,8 +1,8 @@
 import React, { FC } from "react"
-import { UserRoleType } from "../../../../entities/User/types/UserRoleType"
 import classes from "./userItem.module.css"
 import { useUserItem } from "./useUserItem"
-import { IOnChangeEvent } from "../../../../shared/events/IOnChangeEvent"
+import { IOnChangeEvent } from "../../../../../shared/events/IOnChangeEvent"
+import { UserRoleType } from "../../../../../entities/User/types/UserRoleType"
 
 interface IUserItemProps {
     id: number
