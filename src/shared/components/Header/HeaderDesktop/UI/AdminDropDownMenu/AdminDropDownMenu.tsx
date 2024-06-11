@@ -26,6 +26,8 @@ const AdminDropDownMenu: FC<IProps> = ({ onClick }) => {
                 <AdminDropDownMenuItem href={"admin/users?page=1"} onClick={onClick}>
                     Пользователи
                 </AdminDropDownMenuItem>
+
+                <AdminDropDownMenuItem href={"admin/dmarc-reports"}>Репорты Dmarc</AdminDropDownMenuItem>
             </div>
         </div>
     )

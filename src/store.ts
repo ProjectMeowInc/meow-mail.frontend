@@ -8,6 +8,7 @@ import { emailApi } from "./entities/Email/api/emailApi"
 import { emailGroupApi } from "./entities/EmailGroup/api/EmailGroupApi"
 import { userApi } from "./entities/User/api/userApi"
 import { themeSlice } from "./entities/Theme/slices/themeSlice"
+import { adminApi } from "./entities/Admin/api/adminApi"
 
 export const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
     [emailGroupApi.reducerPath]: emailGroupApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [themeSlice.reducerPath]: themeSlice.reducer,
+    [adminApi.reducerPath]: adminApi.reducer,
 })
 
 const persistConfig = {
@@ -37,7 +39,8 @@ export const store = configureStore({
             .concat(authApi.middleware)
             .concat(emailApi.middleware)
             .concat(emailGroupApi.middleware)
-            .concat(userApi.middleware),
+            .concat(userApi.middleware)
+            .concat(adminApi.middleware),
 })
 
 export const persistor = persistStore(store)

@@ -13,6 +13,7 @@ import { useAppSelector } from "./store"
 import SettingsPage from "./pages/SettingsPage/SettingsPage"
 import SentEmailsPage from "./pages/SentEmailsPage/SentEmailsPage"
 import UserListPage from "./pages/admin/UserListPage/UserListPage"
+import DmarcReportPage from "./pages/admin/DmarcReportPage/DmarcReportPage"
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
                             {
                                 path: "users",
                                 element: <UserListPage />,
+                            },
+
+                            {
+                                path: "dmarc-reports",
+                                element: <DmarcReportPage />,
                             },
                         ],
                     },
