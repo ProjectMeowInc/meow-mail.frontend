@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { BASE_API_URL } from "../../../../../consts"
 import { TokenService } from "../../../../../shared/services/TokenService"
+import { downloadFile } from "../../../../../shared/utils/downloadFile"
 
 export const useDmarcItem = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -17,16 +18,6 @@ export const useDmarcItem = () => {
                 downloadFile(url, `${new Date().toUTCString()}.${fileId.split(".").pop()}`)
                 window.URL.revokeObjectURL(url)
             })
-    }
-
-    function downloadFile(url: string, fileName: string) {
-        const a = document.createElement("a")
-        a.href = url
-        a.download = fileName
-        a.style.display = "none"
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
     }
 
     return {
