@@ -1,0 +1,36 @@
+.dmarc {
+    padding: 10px;
+    background-color: var(--third);
+    cursor: pointer;
+    color: var(--second);
+    border-radius: 20px;
+    transition: .2s all;
+    font-size: 18px;
+    user-select: none;
+}
+
+.dmarc:hover {
+    background-color: var(--accent);
+}
+
+.caption {
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.caption_item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.content_active {
+    margin-top: 20px;
+}
+
+.content {
+    display: none;
+}
