@@ -11,6 +11,7 @@ import { IGetEmailByEmailGroupRequest } from "../../EmailGroup/models/requests/I
 import { query } from "../../../shared/utils/query"
 import { encode } from "js-base64"
 import { IGetEmailStatisticsResponse } from "../models/responses/IGetEmailStatistic"
+import { IGetEmailAttachments } from "../models/responses/IGetEmailAttachments"
 
 export const emailApi = createApi({
     reducerPath: "emailApi",
@@ -74,6 +75,11 @@ export const emailApi = createApi({
                 { type: EmailGroup, id: "LIST" },
             ],
         }),
+
+        getEmailAttachments: build.query<IGetEmailAttachments, number>({
+            query: (emailId) => query(`/v1/email/${emailId}/attachments`, "GET", true),
+            providesTags: [{ type: EmailType, id: "LIST" }],
+        }),
     }),
 })
 
@@ -85,4 +91,5 @@ export const {
     useDeleteEmailByIdMutation,
     useGetEmailsByEmailGroupQuery,
     useGetEmailStatisticQuery,
+    useGetEmailAttachmentsQuery,
 } = emailApi

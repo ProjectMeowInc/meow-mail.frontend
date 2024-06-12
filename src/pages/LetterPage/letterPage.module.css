@@ -3,7 +3,7 @@
     width: 95%;
     display: flex;
     flex-direction: column;
-    gap: 45px;
+    gap: 30px;
 }
 
 .email_subject {
@@ -63,4 +63,49 @@
 .right_side {
     display: flex;
     gap: 20px;
+}
+
+.caption {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--second);
+}
+
+.files {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.images {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.img {
+    max-width: 200px;
+    border-radius: 10px;
+}
+
+@media (min-width: 0) {
+    .files {
+        justify-content: center;
+    }
+
+    .images {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .files {
+        justify-content: flex-start;
+    }
+
+    .images {
+        justify-content: flex-start;
+    }
 }
