@@ -1,0 +1,41 @@
+.document {
+    background-color: var(--accent);
+    border-radius: 10px;
+    width: 175px;
+    padding: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+}
+
+.name {
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.caption {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.extension_wrapper {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--third);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.extension {
+    font-weight: 600;
+    font-size: 40px;
+    color: var(--accent);
+}

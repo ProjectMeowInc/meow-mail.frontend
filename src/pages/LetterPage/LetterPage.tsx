@@ -1,3 +1,4 @@
+import React from "react"
 import { useLetterPage } from "./useLetterPage"
 import classes from "./letterPage.module.css"
 import { FormatterService } from "../../shared/services/FormatterService"
@@ -8,9 +9,11 @@ import Trash from "../../shared/icons/trash.svg?react"
 import { MailboxBadge } from "../../shared/components/MailboxBadge/MailboxBadge"
 import Preloader from "../../shared/components/Preloader/Preloader"
 import { EmailImage } from "../../shared/components/EmailImage/EmailImage"
+import FilePreview from "../../shared/components/FilePreview/FilePreview"
+import { BASE_API_URL } from "../../consts"
 
 const LetterPage = () => {
-    const { mail, DeleteHandler } = useLetterPage()
+    const { mail, DeleteHandler, images, files, DownloadHandler } = useLetterPage()
 
     // todo: fix this later
     if (!mail) {
@@ -44,15 +47,49 @@ const LetterPage = () => {
                 className={classes.email_content}
                 dangerouslySetInnerHTML={{
                     __html: `<style>
+
+                                .content {
+                                    word-break: break-all;
+                                }
                                 .content * {
                                     color: var(--white);
                                     background-color: var(--thirth);
                                     font-size: 18px;
                                 }
                             </style>
-                            <div class="content">${mail.content}</div>`,
+                            <div class="content">${mail.content.split("&nbsp;").join("")}</div>`,
                 }}
             />
+
+            <div className={classes.images}>
+                {images.map((image) => (
+                    <a
+                        key={image.download_key}
+                        target={"_blank"}
+                        href={BASE_API_URL + `v1/email/download/${image.download_key}`}
+                    >
+                        <img
+                            className={classes.img}
+                            src={BASE_API_URL + `v1/email/download/${image.download_key}`}
+                            alt=""
+                        />
+                    </a>
+                ))}
+            </div>
+
+            <div>
+                {files.length > 0 && <p className={classes.caption}>Прикрепленные файлы</p>}
+                <div className={classes.files}>
+                    {files.map((file) => (
+                        <FilePreview
+                            name={file.name}
+                            key={file.download_key}
+                            ext={file.ext}
+                            onClick={async () => await DownloadHandler(file.download_key, file.name)}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
